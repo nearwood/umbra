@@ -1,13 +1,86 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.row {
+  display: flex;
+  flex-flow: row;
+}
+
+.col {
+  display: flex;
+  flex-flow: column;
+}
+
+#board {
+  background-color: bisque;
+  max-width: 66%;
+}
+
+#rest {
+  min-height: 50%; 
+  background-color: darkgoldenrod;
+}
+
+.right {
+  min-height: 50%;
+  background-color: darkseagreen;
+  flex: 1;
+}
+
+#shipSection {
+  min-width: 50%;
+  min-height: 100px;
+}
+
+#techTree {
+  min-width: 50%;
+  min-height: 100px;
+}
+
+.tech {
+  justify-content: space-around;
+}
+
+.techCell {
+  background-color: darkturquoise;
+  margin: 2px;
+  border: 1px solid black;
+  min-width: 48px;
+  min-height: 48px;
+}
+
+.cubeCell {
+  margin: 2px;
+  border: 1px solid black;
+  min-width: 24px;
+  min-height: 24px;
+}
+
+#money .cubeCell {
+  background-color: goldenrod;
+}
+
+#science .cubeCell {
+  background-color: lightpink;
+}
+
+#materials .cubeCell {
+  background-color: brown;
+}
+
+#actions {
+  justify-content: space-around;
+}
+
+.actionCell {
+  margin: 2px;
+  border: 1px solid black;
+  min-width: 32px;
+  min-height: 32px;
+}
+
+#rep {
+  min-width: 50px;
+  min-height: 100px;
 }
