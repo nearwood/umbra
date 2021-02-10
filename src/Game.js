@@ -9,8 +9,22 @@ const resetHasPassed = (numPlayers, obj) => {
   return o;
 }
 
+const generateSector = (q, r) => {
+  let s = q - r;
+  return {
+    pos: { q, r, s }
+  };
+}
+
+let map = [
+  generateSector(0, 0),
+  generateSector(0, 1)
+];
+
+let galacticCenter = { pos: { q: 0, r: 0, s: 0 } }
+
 export const Umbra = {
-  setup: (ctx) => ({ maxRounds: 9, currentRound: 1, hasPassed: resetHasPassed(ctx.numPlayers), shipsAvailableForCombat: 0 }),
+  setup: (ctx) => ({ map, maxRounds: 9, currentRound: 1, hasPassed: resetHasPassed(ctx.numPlayers), shipsAvailableForCombat: 0 }),
 
   phases: {
     action: {

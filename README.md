@@ -24,5 +24,7 @@ Livestreamed development: https://www.twitch.tv/blozup
 
 https://github.com/Hellenic/react-hexgrid/
 
+https://github.com/icculusc/react-hex-engine
+
 https://github.com/flauwekeul/honeycomb
 
