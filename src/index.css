@@ -12,7 +12,7 @@ body {
   flex-flow: column;
 }
 
-#board {
+.board {
   background-color: bisque;
   max-width: 66%;
 }
@@ -33,16 +33,16 @@ body {
   min-height: 100px;
 }
 
-#techTree {
+#researchTree, #techTree {
   min-width: 50%;
   min-height: 100px;
 }
 
-.tech {
+.tech, .research {
   justify-content: space-around;
 }
 
-.techCell {
+.techCell, .researchCell {
   background-color: darkturquoise;
   margin: 2px;
   border: 1px solid black;
@@ -83,4 +83,8 @@ body {
 #rep {
   min-width: 50px;
   min-height: 100px;
+}
+
+#rounds .highlight {
+  background-color: purple;
 }
