@@ -10,7 +10,7 @@ const resetHasPassed = (numPlayers, obj) => {
 }
 
 export const Umbra = {
-  setup: (ctx) => ({ hasPassed: resetHasPassed(ctx.numPlayers), shipsAvailableForCombat: 0 }),
+  setup: (ctx) => ({ maxRounds: 9, currentRound: 1, hasPassed: resetHasPassed(ctx.numPlayers), shipsAvailableForCombat: 0 }),
 
   phases: {
     action: {
@@ -44,8 +44,13 @@ export const Umbra = {
         }
       },
       endIf: G => Object.values(G.hasPassed).every(p => p),
-      onEnd: (G, ctx) => (resetHasPassed(ctx.numPlayers, G.hasPassed), G),
+      onEnd: (G, ctx) => (resetHasPassed(ctx.numPlayers, G.hasPassed), G.currentRound += 1, G),
       next: 'action'
+    }
+  },
+  endIf: (G, ctx) => {
+    if (G.currentRound > G.maxRounds) {
+      return { winner: 'whoever has the most points' };
     }
   }
 };

@@ -1,3 +1,14 @@
+import classNames from 'classnames';
+
+const RoundIndicators = ({ maxRounds, currentRound }) => {
+  let indicators = [];
+  for (let r = 1; r <= maxRounds; ++r) {
+
+    indicators.push(<div key={r} className={classNames('actionCell', { highlight: currentRound === r })}>{r}</div>);
+  }
+  return indicators;
+}
+
 export const SupplyBoard = ({ props }) => {
   const { G, ctx } = props;
 
@@ -6,15 +17,7 @@ export const SupplyBoard = ({ props }) => {
       <div className='col'>
         <div id='rounds' className='row'>
           <div>Round:</div>
-          <div className='actionCell highlight'>1</div>
-          <div className='actionCell'>2</div>
-          <div className='actionCell'>3</div>
-          <div className='actionCell'>4</div>
-          <div className='actionCell'>5</div>
-          <div className='actionCell'>6</div>
-          <div className='actionCell'>7</div>
-          <div className='actionCell'>8</div>
-          <div className='actionCell'>9</div>
+          <RoundIndicators maxRounds={G.maxRounds} currentRound={G.currentRound} />
         </div>
         <div id='researchTree' className='col'>
           <div className='research row'>
@@ -46,9 +49,8 @@ export const SupplyBoard = ({ props }) => {
           </div>
         </div>
       </div>
-      <div classname='col' id='spareParts'>
+      <div className='col' id='spareParts'>
         Spare parts
-        <hr />
         <div>Phase: {ctx.phase}</div>
         <div>Current Player: {ctx.currentPlayer}</div>
       </div>
