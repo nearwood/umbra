@@ -48,6 +48,41 @@ export const SupplyBoard = ({ props }) => {
             <div className='researchCell' />
           </div>
         </div>
+        <div className='row shipParts'>
+          <div className='col'>
+            <div className='row'>
+              <div className='partsCell' />
+              <div className='partsCell' />
+            </div>
+            <div className='row'>
+              <div className='partsCell' />
+              <div className='partsCell' />
+            </div>
+            <div className='row'>
+              <div className='partsCell' />
+            </div>
+          </div>
+          <div className='col'>
+            <div className='row'>
+              <div className='partsCell' />
+              <div className='partsCell' />
+              <div className='partsCell' />
+              <div className='partsCell' />
+            </div>
+            <div className='row'>
+              <div className='partsCell' />
+              <div className='partsCell' />
+              <div className='partsCell' />
+              <div className='partsCell' />
+            </div>
+            <div className='row'>
+              <div className='partsCell' />
+              <div className='partsCell' />
+              <div className='partsCell' />
+              <div className='partsCell' />
+            </div>
+          </div>
+        </div>
       </div>
       <div className='col' id='spareParts'>
         Spare parts

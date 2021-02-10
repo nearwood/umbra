@@ -80,6 +80,23 @@ body {
   min-height: 32px;
 }
 
+.shipParts {
+  justify-content: space-between;
+  background-color: indianred;
+}
+
+.shipParts .row {
+  justify-content: space-between;
+}
+
+.partsCell {
+  margin: 2px;
+  border: 1px solid black;
+  min-width: 48px;
+  min-height: 48px;
+  background-color: gray;
+}
+
 #rep {
   min-width: 50px;
   min-height: 100px;
