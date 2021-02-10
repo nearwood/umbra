@@ -15,10 +15,11 @@ const sectorDistance = (s1, s2) => {
   const a = s1.pos;
   const b = s2.pos;
   return (Math.abs(a.q - b.q) + Math.abs(a.r - b.r) + Math.abs(a.s - b.s)) / 2
+  // return (Math.pow(Math.sqrt(a.q - b.q), 2) + Math.pow(Math.sqrt(a.r - b.r), 2) + Math.pow((a.s - b.s), 2));
 }
 
 const generateSector = (q, r) => {
-  let s = q - r;
+  let s = -q - r;
   let sector = {
     pos: { q, r, s },
   };
