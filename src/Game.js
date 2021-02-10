@@ -17,8 +17,32 @@ const generateSector = (q, r) => {
 }
 
 let map = [
+  //Galactive Center 
   generateSector(0, 0),
-  generateSector(0, 1)
+
+  //Inner Sectors
+  generateSector(0, -1),
+  generateSector(1, -1),
+  generateSector(1, 0),
+  generateSector(0, 1),
+  generateSector(-1, 1),
+  generateSector(-1, 0),
+
+  //Middle Sectors
+  generateSector(0, -2),
+  generateSector(1, -2),
+  generateSector(2, -2),
+  generateSector(2, -1),
+  generateSector(2, 0),
+  generateSector(1, 1),
+  generateSector(0, 2),
+  generateSector(-1, 2),
+  generateSector(-2, 2),
+  generateSector(-2, 1),
+  generateSector(-2, 0),
+  generateSector(-1, -1),
+
+  //Outer Sectors (in play determined by num players)
 ];
 
 let galacticCenter = { pos: { q: 0, r: 0, s: 0 } }
