@@ -114,9 +114,9 @@ svg {
 
 }
 svg g {
-  fill: #3F51B5;
+  /* fill: rgb(71, 62, 197); */
   /* fill-opacity: 0.6; */
-  fill-opacity: 1;
+  /* fill-opacity: 1; */
 }
 /* svg g:hover {
   fill-opacity: 1;
@@ -143,4 +143,21 @@ svg path {
   stroke-opacity: 0.3;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+.ring0 {
+  fill: white;
+}
+
+.ring1 {
+  fill: lightcoral
+  /* fill-opacity: .4; */
+}
+
+.ring2 {
+  fill: lightblue;
+}
+
+.ring3 {
+  fill: lightgreen;
 }

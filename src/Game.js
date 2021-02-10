@@ -9,11 +9,24 @@ const resetHasPassed = (numPlayers, obj) => {
   return o;
 }
 
+let galacticCenter = { pos: { q: 0, r: 0, s: 0 } }
+
+const sectorDistance = (s1, s2) => {
+  const a = s1.pos;
+  const b = s2.pos;
+  return (Math.abs(a.q - b.q) + Math.abs(a.r - b.r) + Math.abs(a.s - b.s)) / 2
+}
+
 const generateSector = (q, r) => {
   let s = q - r;
-  return {
-    pos: { q, r, s }
+  let sector = {
+    pos: { q, r, s },
   };
+
+  let d = sectorDistance(sector, galacticCenter);
+  sector.ring = Math.min(d, 3);
+
+  return sector;
 }
 
 let map = [
@@ -21,12 +34,12 @@ let map = [
   generateSector(0, 0),
 
   //Inner Sectors
-  generateSector(0, -1),
-  generateSector(1, -1),
-  generateSector(1, 0),
-  generateSector(0, 1),
-  generateSector(-1, 1),
-  generateSector(-1, 0),
+  generateSector(0, -1,),
+  generateSector(1, -1,),
+  generateSector(1, 0,),
+  generateSector(0, 1,),
+  generateSector(-1, 1,),
+  generateSector(-1, 0,),
 
   //Middle Sectors
   generateSector(0, -2),
@@ -45,7 +58,6 @@ let map = [
   //Outer Sectors (in play determined by num players)
 ];
 
-let galacticCenter = { pos: { q: 0, r: 0, s: 0 } }
 
 export const Umbra = {
   setup: (ctx) => ({ map, maxRounds: 9, currentRound: 1, hasPassed: resetHasPassed(ctx.numPlayers), shipsAvailableForCombat: 0 }),
