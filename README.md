@@ -20,3 +20,9 @@ Livestreamed development: https://www.twitch.tv/blozup
 1. Explore/Research
 1. Influence
 1. Production
+
+
+https://github.com/Hellenic/react-hexgrid/
+
+https://github.com/flauwekeul/honeycomb
+
