@@ -104,7 +104,30 @@ export const Umbra = {
     if (G.currentRound > G.maxRounds) {
       return { winner: 'whoever has the most points' };
     }
-  }
+  },
+  ai: {
+    enumerate: (G, ctx) => {
+      let moves = [];
+      switch (ctx.phase) {
+        case 'action':
+          moves.push({ move: 'pass' });
+          break;
+
+        case 'combat':
+          moves.push({ move: 'engage' });
+          break;
+
+        case 'upkeep':
+          moves.push({ move: 'pass' });
+          break;
+
+        default:
+          break;
+      }
+
+      return moves;
+    },
+  },
 };
 
 /**

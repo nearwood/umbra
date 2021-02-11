@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import GameClient from './GameClient';
+import Lobby from './Lobby';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {process.env.REACT_APP_MULTIPLAYER_HOST ? <Lobby /> : <GameClient />}
   </React.StrictMode>,
   document.getElementById('root')
 );
