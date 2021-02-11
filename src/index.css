@@ -135,7 +135,7 @@ svg g polygon {
 svg g text {
   font-size: 0.3em;
   fill: #000000;
-  fill-opacity: 1;
+  fill-opacity: .5;
 }
 
 svg path {
