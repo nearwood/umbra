@@ -1,5 +1,7 @@
 import { Client } from 'boardgame.io/react';
-import { SocketIO } from 'boardgame.io/multiplayer'
+import { SocketIO } from 'boardgame.io/multiplayer';
+
+import { Lobby } from 'boardgame.io/react';
 
 import { Umbra } from './Game';
 import { PlayerBoard } from './PlayerBoard';
@@ -16,11 +18,25 @@ const GameBoard = (props) => (
   </div>
 );
 
-const App = Client({
-  game: Umbra,
-  board: GameBoard,
-  multiplayer: process.env.REACT_APP_MULTIPLAYER_HOST ? SocketIO({ server: process.env.REACT_APP_MULTIPLAYER_HOST }) : undefined
-});
+const App = () => {
+  if (process.env.REACT_APP_MULTIPLAYER_HOST) {
+    return (
+      <Lobby
+        gameServer={`http://${window.location.hostname}:8080`}
+        lobbyServer={`http://${window.location.hostname}:8080`}
+        gameComponents={[
+          { game: Umbra, board: GameBoard }
+        ]}
+      />
+    );
+  } else {
+    return Client({
+      game: Umbra,
+      board: GameBoard,
+      multiplayer: process.env.REACT_APP_MULTIPLAYER_HOST ? SocketIO({ server: process.env.REACT_APP_MULTIPLAYER_HOST }) : undefined
+    });
+  }
+}
 
 
 export default App;

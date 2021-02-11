@@ -146,18 +146,18 @@ svg path {
 }
 
 .ring0 {
-  fill: white;
+  fill: lightcoral
 }
 
 .ring1 {
-  fill: lightcoral
+  fill: lightblue;
   /* fill-opacity: .4; */
 }
 
 .ring2 {
-  fill: lightblue;
+  fill: lightgreen;
 }
 
 .ring3 {
-  fill: lightgreen;
+  fill: white;
 }

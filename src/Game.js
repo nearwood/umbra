@@ -60,8 +60,10 @@ let map = [
 
 
 export const Umbra = {
+  name: 'Umbra',
   setup: (ctx) => ({ map, maxRounds: 9, currentRound: 1, hasPassed: resetHasPassed(ctx.numPlayers), shipsAvailableForCombat: 0 }),
-
+  minPlayers: 1,
+  maxPlayers: 6,
   phases: {
     action: {
       start: true,
