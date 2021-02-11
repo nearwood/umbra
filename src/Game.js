@@ -1,3 +1,5 @@
+import { INVALID_MOVE } from "boardgame.io/core";
+import { GalacticCenter } from "./sectors";
 
 const resetHasPassed = (numPlayers, obj) => {
   const o = obj || {};
@@ -9,7 +11,6 @@ const resetHasPassed = (numPlayers, obj) => {
   return o;
 }
 
-let galacticCenter = { pos: { q: 0, r: 0, s: 0 } }
 
 const sectorDistance = (s1, s2) => {
   const a = s1.pos;
@@ -23,7 +24,7 @@ const generateSector = (q, r) => {
     pos: { q, r, s },
   };
 
-  let d = sectorDistance(sector, galacticCenter);
+  let d = sectorDistance(sector, GalacticCenter);
   sector.ring = Math.min(d, 3);
 
   return sector;
@@ -58,12 +59,45 @@ let map = [
   //Outer Sectors (in play determined by num players)
 ];
 
+const createPlayerData = (numPlayers) => {
+  let d = {};
+  for (let i = 0; i < numPlayers; ++i) {
+    d[i] = {
+      money: 0,
+      science: 0,
+      materials: 0
+    };
+  }
+
+  return d;
+}
 
 export const Umbra = {
   name: 'Umbra',
-  setup: (ctx) => ({ map, maxRounds: 9, currentRound: 1, hasPassed: resetHasPassed(ctx.numPlayers), shipsAvailableForCombat: 0 }),
+  setup: (ctx) => ({
+    map,
+    maxRounds: 9,
+    currentRound: 1,
+    data: createPlayerData(ctx.numPlayers),
+    hasPassed: resetHasPassed(ctx.numPlayers),
+    shipsAvailableForCombat: 0
+  }),
   minPlayers: 1,
   maxPlayers: 6,
+  moves: {
+    /** Trade 2x `from` type for 1x `to` type.
+     * Trade can happen "at any time" (?).
+     * Will probably want to limit this so the bot isn't wasting everyone's time.
+    */
+    trade: (G, ctx, from, to) => {
+      if (G.resources[ctx.currentPlayer][from]) {
+        G.resources[ctx.currentPlayer][from] -= 2;
+        G.resources[ctx.currentPlayer][to] += 1;
+      } else {
+        return INVALID_MOVE;
+      }
+    }
+  },
   phases: {
     action: {
       start: true,
