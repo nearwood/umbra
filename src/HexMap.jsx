@@ -19,8 +19,8 @@ export const HexMap = ({ props }) => {
         <Layout size={{ x: 10, y: 10 }} flat={true} spacing={1.1} origin={{ x: 0, y: 0 }}>
           {Array.isArray(G.map) && G.map.map(s =>
             <Hexagon q={s.pos.q} r={s.pos.r} s={s.pos.s} className={`ring${s.ring}`}>
-              {/* <Text>{`${s.pos.q}, ${s.pos.r}, ${s.pos.s}`}</Text> */}
-              <Text>{ringText(s.ring)}</Text>
+              <Text>{`${s.pos.q}, ${s.pos.r}, ${s.pos.s}`}</Text>
+              {/* <Text>{ringText(s.ring)}</Text> */}
             </Hexagon>
           )}
         </Layout>

@@ -1,5 +1,5 @@
 import { INVALID_MOVE } from "boardgame.io/core";
-import { GalacticCenter } from "./sectors";
+import { GalacticCenter, StartingSectors } from "./sectors";
 
 const resetHasPassed = (numPlayers, obj) => {
   const o = obj || {};
@@ -26,38 +26,104 @@ const generateSector = (q, r) => {
 
   let d = sectorDistance(sector, GalacticCenter);
   sector.ring = Math.min(d, 3);
+  sector.tile = null;
 
   return sector;
 }
 
-let map = [
-  //Galactive Center 
-  generateSector(0, 0),
+const isPos = (sector, q, r, s) => sector.pos.q === q && sector.pos.r === r && sector.pos.s === s;
 
-  //Inner Sectors
-  generateSector(0, -1,),
-  generateSector(1, -1,),
-  generateSector(1, 0,),
-  generateSector(0, 1,),
-  generateSector(-1, 1,),
-  generateSector(-1, 0,),
+const placeTile = (map, tileId, [q, r, s]) => {
+  // console.log(tileId, q, r, s);
 
-  //Middle Sectors
-  generateSector(0, -2),
-  generateSector(1, -2),
-  generateSector(2, -2),
-  generateSector(2, -1),
-  generateSector(2, 0),
-  generateSector(1, 1),
-  generateSector(0, 2),
-  generateSector(-1, 2),
-  generateSector(-2, 2),
-  generateSector(-2, 1),
-  generateSector(-2, 0),
-  generateSector(-1, -1),
+  let sector = map.find(sector => isPos(sector, q, r, s));
+  if (sector) {
+    sector.tile = StartingSectors.find(t => t.id === tileId);
+  } else {
+    console.warn("Sector not found: ", [q, r, s]);
+  }
+  //sector.tile.pos ?
+  return sector?.tile !== null;
+}
 
-  //Outer Sectors (in play determined by num players)
-];
+//Uncaught TypeError: "tile" is read-only
+// const EmptyMap = [
+//   generateSector(0, 0),
+
+//   //Inner Sectors
+//   generateSector(0, -1),
+//   generateSector(1, -1),
+//   generateSector(1, 0),
+//   generateSector(0, 1),
+//   generateSector(-1, 1),
+//   generateSector(-1, 0),
+
+//   //Middle Sectors
+//   generateSector(0, -2),
+//   generateSector(1, -2),
+//   generateSector(2, -2),
+//   generateSector(2, -1),
+//   generateSector(2, 0),
+//   generateSector(1, 1),
+//   generateSector(0, 2),
+//   generateSector(-1, 2),
+//   generateSector(-2, 2),
+//   generateSector(-2, 1),
+//   generateSector(-2, 0),
+//   generateSector(-1, -1),
+
+//   //Outer Sectors (in play determined by num players)
+//   //...
+// ];
+
+/**
+ * Each player chooses a starting hex (and playerboard),
+ * and places the hex in the spot closes to them.
+ * @param {number} numPlayers 
+ */
+const generateMap = (numPlayers) => {
+  let map = [
+    //Galactive Center 
+    generateSector(0, 0),
+
+    //Inner Sectors
+    generateSector(0, -1),
+    generateSector(1, -1),
+    generateSector(1, 0),
+    generateSector(0, 1),
+    generateSector(-1, 1),
+    generateSector(-1, 0),
+
+    //Middle Sectors
+    generateSector(0, -2),
+    generateSector(1, -2),
+    generateSector(2, -2),
+    generateSector(2, -1),
+    generateSector(2, 0),
+    generateSector(1, 1),
+    generateSector(0, 2),
+    generateSector(-1, 2),
+    generateSector(-2, 2),
+    generateSector(-2, 1),
+    generateSector(-2, 0),
+    generateSector(-1, -1),
+
+    //Outer Sectors (in play determined by num players)
+    //...
+  ];
+
+  switch (numPlayers) {
+    default:
+      throw new Error("Invalid numPlayers");
+    case 1: //eg. AI?
+    case 2:
+      placeTile(map, '221', [0, -2, 2]);
+      placeTile(map, '222', [0, 2, -2]);
+      break;
+  }
+
+  return map;
+};
 
 const createPlayerData = (numPlayers) => {
   let d = {};
@@ -70,12 +136,12 @@ const createPlayerData = (numPlayers) => {
   }
 
   return d;
-}
+};
 
 export const Umbra = {
   name: 'Umbra',
   setup: (ctx) => ({
-    map,
+    map: generateMap(ctx.numPlayers), //TODO will phase to pick race
     maxRounds: 9,
     currentRound: 1,
     data: createPlayerData(ctx.numPlayers),

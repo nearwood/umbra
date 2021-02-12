@@ -38,6 +38,7 @@ export const getStartingWormholes = () => ({
  * Could be interesting to allow any/all aliens.
  * Odd IDs are human, even are alien.
  * 6 sectors (pairs, so 12 total)
+ * TODO Consider renaming -- not sure how legit copying the name/id is
  */
 export const StartingSectors = [
   {
@@ -57,7 +58,7 @@ export const StartingSectors = [
     ],
     wormholes: getStartingWormholes(),
   }, {
-    homeOf: 'eridani',
+    homeOf: '5dot blob',
     name: 'EPSILON ERIDANI', id: '222',
     pos: null,
     influence: null,
@@ -68,7 +69,142 @@ export const StartingSectors = [
       { pink: { squares: 1, advanced: 1 } },
     ],
     wormholes: getStartingWormholes(),
-  }
+  }, {
+    homeOf: 'human',
+    name: 'ALTAIR', id: '223',
+    human: true,
+    pos: null,
+    influence: null,
+    vp: 3,
+    artifact: true,
+    planets: [
+      { orange: { squares: 1, advanced: 1 } },
+      { pink: { squares: 1, advanced: 1 } },
+      { brown: { squares: 1 } },
+    ],
+    wormholes: getStartingWormholes(),
+  }, {
+    homeOf: 'delta^5',
+    name: 'BETA HYDRI', id: '224',
+    pos: null,
+    influence: null,
+    vp: 3,
+    artifact: true,
+    planets: [
+      { orange: { squares: 1 } },
+      { pink: { squares: 1, advanced: 1 } },
+      { brown: { advanced: 1 } },
+    ],
+    wormholes: getStartingWormholes(),
+  }, {
+    homeOf: 'human',
+    name: 'ETA CASSIOPEIAE', id: '225',
+    human: true,
+    pos: null,
+    influence: null,
+    vp: 3,
+    artifact: true,
+    planets: [
+      { orange: { squares: 1, advanced: 1 } },
+      { pink: { squares: 1, advanced: 1 } },
+      { brown: { squares: 1 } },
+    ],
+    wormholes: getStartingWormholes(),
+  }, {
+    homeOf: 'flower',
+    name: 'S1 CYGNI', id: '226',
+    pos: null,
+    influence: null,
+    vp: 3,
+    artifact: true,
+    planets: [
+      { orange: { squares: 1 } },
+      { pink: { squares: 1 } },
+      { brown: { squares: 1 } },
+    ],
+    wormholes: getStartingWormholes(),
+  }, {
+    homeOf: 'human',
+    name: 'SIRIUS', id: '227',
+    human: true,
+    pos: null,
+    influence: null,
+    vp: 3,
+    artifact: true,
+    planets: [
+      { orange: { squares: 1, advanced: 1 } },
+      { pink: { squares: 1, advanced: 1 } },
+      { brown: { squares: 1 } },
+    ],
+    wormholes: getStartingWormholes(),
+  }, {
+    homeOf: 'batwing',
+    name: 'SIGMA DRACONIS', id: '228',
+    pos: null,
+    influence: null,
+    vp: 3,
+    artifact: true,
+    planets: [
+      { orange: { squares: 1 } },
+      { pink: { squares: 1 } },
+      { brown: { advanced: 1 } },
+    ],
+    wormholes: getStartingWormholes(),
+  }, {
+    homeOf: 'human',
+    name: 'TAU CETI', id: '229',
+    human: true,
+    pos: null,
+    influence: null,
+    vp: 3,
+    artifact: true,
+    planets: [
+      { orange: { squares: 1, advanced: 1 } },
+      { pink: { squares: 1, advanced: 1 } },
+      { brown: { squares: 1 } },
+    ],
+    wormholes: getStartingWormholes(),
+  }, {
+    homeOf: 'homeworld mothership',
+    name: 'LAMBDA AURIGAE', id: '230',
+    pos: null,
+    influence: null,
+    vp: 3,
+    artifact: true,
+    planets: [
+      { orange: { squares: 1, advanced: 1 } },
+      { pink: { squares: 1 } },
+      { brown: { advanced: 1 } },
+    ],
+    wormholes: getStartingWormholes(),
+  }, {
+    homeOf: 'human',
+    name: 'DELTA PAVONIS', id: '231',
+    human: true,
+    pos: null,
+    influence: null,
+    vp: 3,
+    artifact: true,
+    planets: [
+      { orange: { squares: 1, advanced: 1 } },
+      { pink: { squares: 1, advanced: 1 } },
+      { brown: { squares: 1 } },
+    ],
+    wormholes: getStartingWormholes(),
+  }, {
+    homeOf: 'kanji',
+    name: 'RIGEL', id: '232',
+    pos: null,
+    influence: null,
+    vp: 3,
+    artifact: true,
+    planets: [
+      { orange: { advanced: 1 } },
+      { pink: { squares: 1 } },
+      { brown: { squares: 1, advanced: 1 } },
+    ],
+    wormholes: getStartingWormholes(),
+  },
 ];
 
 /** 8 */
