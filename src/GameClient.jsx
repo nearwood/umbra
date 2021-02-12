@@ -17,6 +17,7 @@ export const GameBoard = (props) => (
 );
 
 const GameClient = Client({
+  numPlayers: 2,
   game: Umbra,
   board: GameBoard,
   multiplayer: process.env.REACT_APP_MULTIPLAYER_HOST ? SocketIO({ server: process.env.REACT_APP_MULTIPLAYER_HOST }) : undefined

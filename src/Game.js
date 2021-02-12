@@ -34,13 +34,15 @@ const generateSector = (q, r) => {
 const isPos = (sector, q, r, s) => sector.pos.q === q && sector.pos.r === r && sector.pos.s === s;
 
 const placeTile = (map, tileId, [q, r, s]) => {
-  // console.log(tileId, q, r, s);
-
   let sector = map.find(sector => isPos(sector, q, r, s));
-  if (sector) {
-    sector.tile = StartingSectors.find(t => t.id === tileId);
+
+  let desiredTile = StartingSectors.find(t => t.id === tileId);
+  // if !desireTile, search innerTiles, outerTiles...
+
+  if (sector && desiredTile) {
+    sector.tile = desiredTile;
   } else {
-    console.warn("Sector not found: ", [q, r, s]);
+    console.warn("Sector/Tile not found: ", tileId, [q, r, s]);
   }
   //sector.tile.pos ?
   return sector?.tile !== null;
@@ -112,6 +114,9 @@ const generateMap = (numPlayers) => {
     //...
   ];
 
+  const gcSector = map.find(sector => isPos(sector, 0, 0, 0));
+  gcSector.tile = GalacticCenter;
+
   switch (numPlayers) {
     default:
       throw new Error("Invalid numPlayers");
@@ -119,6 +124,32 @@ const generateMap = (numPlayers) => {
     case 2:
       placeTile(map, '221', [0, -2, 2]);
       placeTile(map, '222', [0, 2, -2]);
+      break;
+    case 3:
+      placeTile(map, '221', [0, -2, 2]);
+      placeTile(map, '222', [2, 0, -2]);
+      placeTile(map, '223', [-2, 2, 0]);
+      break;
+    case 4:
+      placeTile(map, '221', [-2, 0, 2]);
+      placeTile(map, '222', [2, -2, 0]);
+      placeTile(map, '223', [2, 0, -2]);
+      placeTile(map, '224', [-2, 2, 0]);
+      break;
+    case 5:
+      placeTile(map, '221', [-2, 0, 2]);
+      placeTile(map, '222', [2, -2, 0]);
+      placeTile(map, '223', [2, 0, -2]);
+      placeTile(map, '224', [-2, 2, 0]);
+      placeTile(map, '225', [0, -2, 2]);
+      break;
+    case 6:
+      placeTile(map, '221', [-2, 0, 2]);
+      placeTile(map, '222', [2, -2, 0]);
+      placeTile(map, '223', [2, 0, -2]);
+      placeTile(map, '224', [-2, 2, 0]);
+      placeTile(map, '225', [0, -2, 2]);
+      placeTile(map, '226', [0, 2, -2]);
       break;
   }
 
@@ -141,7 +172,7 @@ const createPlayerData = (numPlayers) => {
 export const Umbra = {
   name: 'Umbra',
   setup: (ctx) => ({
-    map: generateMap(ctx.numPlayers), //TODO will phase to pick race
+    map: generateMap(ctx.numPlayers), //TODO will need phase to pick race
     maxRounds: 9,
     currentRound: 1,
     data: createPlayerData(ctx.numPlayers),

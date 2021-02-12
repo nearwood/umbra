@@ -114,11 +114,11 @@ svg {
 
 }
 
-svg g {
+svg g.empty {
   fill-opacity: 0.1;
 }
 
-svg g:hover {
+svg g.empty:hover {
   fill-opacity: 1;
 }
 
@@ -132,10 +132,36 @@ svg g polygon {
   transition: fill-opacity .2s;
 }
 
+svg g circle.wormhole {
+  fill: silver;
+}
+
+svg g circle.influence {
+  fill: silver;
+  fill-opacity: .1;
+  stroke: tomato;
+  stroke-width: .5;
+}
+
+svg g circle.influence.green {
+  fill: greenyellow;
+  fill-opacity: 1;
+}
+
 svg g text {
   font-size: 0.3em;
-  fill: #000000;
   fill-opacity: .5;
+}
+
+svg g.filled text {
+  fill: chartreuse;
+  fill-opacity: 1;
+  stroke: white;
+  stroke-width: .25;
+}
+
+svg g.empty text {
+  fill: #000000;
 }
 
 svg path {
