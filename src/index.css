@@ -78,6 +78,13 @@ body {
   border: 1px solid black;
   min-width: 32px;
   min-height: 32px;
+  color: black;
+}
+
+.actionCell:not(.empty) {
+  background-color: hotpink;
+  color: #00000000
+
 }
 
 .shipParts {
@@ -110,9 +117,6 @@ body {
 
 
 
-svg {
-
-}
 
 svg g.empty {
   fill-opacity: 0.1;
@@ -144,7 +148,7 @@ svg g circle.influence {
 }
 
 svg g circle.influence.green {
-  fill: greenyellow;
+  fill: tomato;
   fill-opacity: 1;
 }
 

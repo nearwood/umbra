@@ -1,3 +1,31 @@
+import classNames from 'classnames';
+
+
+const renderInfluenceCells = (G, ctx) => {
+  let cells = [];
+  const upkeepCostMap = {
+    '1': 30,
+    '2': 25,
+    '3': 21,
+    '4': 17,
+    '5': 13,
+    '6': 10,
+    '7': 7,
+    '8': 5,
+    '9': 3,
+    '10': 2,
+    '11': 1,
+    '12': 0,
+    '13': 0,
+  };
+  for (let i = 1; i <= G.maxInfluence; ++i) {
+    let f = G.data[ctx.currentPlayer].influence;
+    cells.push(<div className={classNames('actionCell', { empty: i >= f })}>{upkeepCostMap[i]}</div>);
+  }
+
+  return cells;
+}
+
 export const PlayerBoard = ({ props }) => {
   const { G, ctx } = props;
 
@@ -93,19 +121,7 @@ export const PlayerBoard = ({ props }) => {
             </div>
           </div>
           <div id='actions' className='row'>
-            <div className='actionCell' />
-            <div className='actionCell' />
-            <div className='actionCell' />
-            <div className='actionCell' />
-            <div className='actionCell' />
-            <div className='actionCell' />
-            <div className='actionCell' />
-            <div className='actionCell' />
-            <div className='actionCell' />
-            <div className='actionCell' />
-            <div className='actionCell' />
-            <div className='actionCell' />
-            <div className='actionCell' />
+            {renderInfluenceCells(G, ctx)}
           </div>
         </div>
       </div>

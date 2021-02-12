@@ -48,6 +48,17 @@ const placeTile = (map, tileId, [q, r, s]) => {
   return sector?.tile !== null;
 }
 
+const placeInfluence = (map, tileId, player) => {
+  //TODO decrement from player board?
+  let sector = map.find(sector => sector?.tile?.id === tileId);
+  if (sector) {
+    //TODO Clone tile???
+    //sector.tile.influence = player;
+  } else {
+    throw Error("No such sector tile");
+  }
+}
+
 //Uncaught TypeError: "tile" is read-only
 // const EmptyMap = [
 //   generateSector(0, 0),
@@ -123,7 +134,9 @@ const generateMap = (numPlayers) => {
     case 1: //eg. AI?
     case 2:
       placeTile(map, '221', [0, -2, 2]);
+      placeInfluence(map, '221', "0");
       placeTile(map, '222', [0, 2, -2]);
+      placeInfluence(map, '222', "1");
       break;
     case 3:
       placeTile(map, '221', [0, -2, 2]);
@@ -162,7 +175,8 @@ const createPlayerData = (numPlayers) => {
     d[i] = {
       money: 0,
       science: 0,
-      materials: 0
+      materials: 0,
+      influence: 13
     };
   }
 
@@ -177,7 +191,8 @@ export const Umbra = {
     currentRound: 1,
     data: createPlayerData(ctx.numPlayers),
     hasPassed: resetHasPassed(ctx.numPlayers),
-    shipsAvailableForCombat: 0
+    shipsAvailableForCombat: 0,
+    maxInfluence: 13
   }),
   minPlayers: 1,
   maxPlayers: 6,

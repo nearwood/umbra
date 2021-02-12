@@ -28,7 +28,7 @@ const renderWormholes = (tile) => {
       case "bl": return <circle cx="-7" cy="4" r={wormholeRadius} className="wormhole" />;
       case "tl": return <circle cx="-7" cy="-4" r={wormholeRadius} className="wormhole" />;
     }
-  })
+  });
 };
 
 const renderInfluence = (tile) => {
