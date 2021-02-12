@@ -1,7 +1,7 @@
 
 
 /** The protypical sector hex for reference. */
-export const GalacticCenter = {
+export const GalacticCenter = () => ({
   name: 'GC', id: '001', // cosmetic
   pos: { q: 0, r: 0, s: 0 }, //fixed for this specific sector
   influence: true,
@@ -21,7 +21,7 @@ export const GalacticCenter = {
     bl: true,
     tl: true
   }
-};
+});
 
 /** All starting sectors have the same wormhole configuration. */
 export const getStartingWormholes = () => ({
@@ -40,7 +40,7 @@ export const getStartingWormholes = () => ({
  * 6 sectors (pairs, so 12 total)
  * TODO Consider renaming -- not sure how legit copying the name/id is
  */
-export const StartingSectors = [
+export const StartingSectors = () => [
   {
     homeOf: 'human',
     name: 'PROCYON', id: '221',
@@ -208,10 +208,10 @@ export const StartingSectors = [
 ];
 
 /** 8 */
-export const InnerSectors = [];
+export const InnerSectors = () => [];
 
 /** 11 */
-export const MiddleSectors = [];
+export const MiddleSectors = () => [];
 
 /** 18 (dynamic depending on # of players) */
-export const OuterSectors = [];
+export const OuterSectors = (numPlayers) => [];

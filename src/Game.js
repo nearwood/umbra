@@ -24,7 +24,7 @@ const generateSector = (q, r) => {
     pos: { q, r, s },
   };
 
-  let d = sectorDistance(sector, GalacticCenter);
+  let d = sectorDistance(sector, { pos: { q: 0, r: 0, s: 0 } });
   sector.ring = Math.min(d, 3);
   sector.tile = null;
 
@@ -33,10 +33,10 @@ const generateSector = (q, r) => {
 
 const isPos = (sector, q, r, s) => sector.pos.q === q && sector.pos.r === r && sector.pos.s === s;
 
-const placeTile = (map, tileId, [q, r, s]) => {
+const placeTile = (map, tiles, tileId, [q, r, s]) => {
   let sector = map.find(sector => isPos(sector, q, r, s));
 
-  let desiredTile = StartingSectors.find(t => t.id === tileId);
+  let desiredTile = tiles.find(t => t.id === tileId);
   // if !desireTile, search innerTiles, outerTiles...
 
   if (sector && desiredTile) {
@@ -52,49 +52,18 @@ const placeInfluence = (map, tileId, player) => {
   //TODO decrement from player board?
   let sector = map.find(sector => sector?.tile?.id === tileId);
   if (sector) {
-    //TODO Clone tile???
-    //sector.tile.influence = player;
+    sector.tile.influence = player;
   } else {
     throw Error("No such sector tile");
   }
 }
-
-//Uncaught TypeError: "tile" is read-only
-// const EmptyMap = [
-//   generateSector(0, 0),
-
-//   //Inner Sectors
-//   generateSector(0, -1),
-//   generateSector(1, -1),
-//   generateSector(1, 0),
-//   generateSector(0, 1),
-//   generateSector(-1, 1),
-//   generateSector(-1, 0),
-
-//   //Middle Sectors
-//   generateSector(0, -2),
-//   generateSector(1, -2),
-//   generateSector(2, -2),
-//   generateSector(2, -1),
-//   generateSector(2, 0),
-//   generateSector(1, 1),
-//   generateSector(0, 2),
-//   generateSector(-1, 2),
-//   generateSector(-2, 2),
-//   generateSector(-2, 1),
-//   generateSector(-2, 0),
-//   generateSector(-1, -1),
-
-//   //Outer Sectors (in play determined by num players)
-//   //...
-// ];
 
 /**
  * Each player chooses a starting hex (and playerboard),
  * and places the hex in the spot closes to them.
  * @param {number} numPlayers 
  */
-const generateMap = (numPlayers) => {
+const generateMap = (numPlayers, tiles) => {
   let map = [
     //Galactive Center 
     generateSector(0, 0),
@@ -126,43 +95,43 @@ const generateMap = (numPlayers) => {
   ];
 
   const gcSector = map.find(sector => isPos(sector, 0, 0, 0));
-  gcSector.tile = GalacticCenter;
+  gcSector.tile = tiles.center;
 
   switch (numPlayers) {
     default:
       throw new Error("Invalid numPlayers");
     case 1: //eg. AI?
     case 2:
-      placeTile(map, '221', [0, -2, 2]);
+      placeTile(map, tiles.starting, '221', [0, -2, 2]);
       placeInfluence(map, '221', "0");
-      placeTile(map, '222', [0, 2, -2]);
+      placeTile(map, tiles.starting, '222', [0, 2, -2]);
       placeInfluence(map, '222', "1");
       break;
     case 3:
-      placeTile(map, '221', [0, -2, 2]);
-      placeTile(map, '222', [2, 0, -2]);
-      placeTile(map, '223', [-2, 2, 0]);
+      placeTile(map, tiles.starting, '221', [0, -2, 2]);
+      placeTile(map, tiles.starting, '222', [2, 0, -2]);
+      placeTile(map, tiles.starting, '223', [-2, 2, 0]);
       break;
     case 4:
-      placeTile(map, '221', [-2, 0, 2]);
-      placeTile(map, '222', [2, -2, 0]);
-      placeTile(map, '223', [2, 0, -2]);
-      placeTile(map, '224', [-2, 2, 0]);
+      placeTile(map, tiles.starting, '221', [-2, 0, 2]);
+      placeTile(map, tiles.starting, '222', [2, -2, 0]);
+      placeTile(map, tiles.starting, '223', [2, 0, -2]);
+      placeTile(map, tiles.starting, '224', [-2, 2, 0]);
       break;
     case 5:
-      placeTile(map, '221', [-2, 0, 2]);
-      placeTile(map, '222', [2, -2, 0]);
-      placeTile(map, '223', [2, 0, -2]);
-      placeTile(map, '224', [-2, 2, 0]);
-      placeTile(map, '225', [0, -2, 2]);
+      placeTile(map, tiles.starting, '221', [-2, 0, 2]);
+      placeTile(map, tiles.starting, '222', [2, -2, 0]);
+      placeTile(map, tiles.starting, '223', [2, 0, -2]);
+      placeTile(map, tiles.starting, '224', [-2, 2, 0]);
+      placeTile(map, tiles.starting, '225', [0, -2, 2]);
       break;
     case 6:
-      placeTile(map, '221', [-2, 0, 2]);
-      placeTile(map, '222', [2, -2, 0]);
-      placeTile(map, '223', [2, 0, -2]);
-      placeTile(map, '224', [-2, 2, 0]);
-      placeTile(map, '225', [0, -2, 2]);
-      placeTile(map, '226', [0, 2, -2]);
+      placeTile(map, tiles.starting, '221', [-2, 0, 2]);
+      placeTile(map, tiles.starting, '222', [2, -2, 0]);
+      placeTile(map, tiles.starting, '223', [2, 0, -2]);
+      placeTile(map, tiles.starting, '224', [-2, 2, 0]);
+      placeTile(map, tiles.starting, '225', [0, -2, 2]);
+      placeTile(map, tiles.starting, '226', [0, 2, -2]);
       break;
   }
 
@@ -185,15 +154,27 @@ const createPlayerData = (numPlayers) => {
 
 export const Umbra = {
   name: 'Umbra',
-  setup: (ctx) => ({
-    map: generateMap(ctx.numPlayers), //TODO will need phase to pick race
-    maxRounds: 9,
-    currentRound: 1,
-    data: createPlayerData(ctx.numPlayers),
-    hasPassed: resetHasPassed(ctx.numPlayers),
-    shipsAvailableForCombat: 0,
-    maxInfluence: 13
-  }),
+  setup: (ctx) => {
+    const tiles = {
+      center: GalacticCenter(),
+      inner: [],
+      starting: StartingSectors(),
+      middle: [],
+      outer: []
+    };
+
+    //Sectors can be empty, or have a tile
+    return {
+      tiles,
+      sectors: generateMap(ctx.numPlayers, tiles), //TODO will need phase to pick race
+      maxRounds: 9,
+      currentRound: 1,
+      data: createPlayerData(ctx.numPlayers),
+      hasPassed: resetHasPassed(ctx.numPlayers),
+      shipsAvailableForCombat: 0,
+      maxInfluence: 13
+    };
+  },
   minPlayers: 1,
   maxPlayers: 6,
   moves: {
