@@ -4,7 +4,7 @@ const RoundIndicators = ({ maxRounds, currentRound }) => {
   let indicators = [];
   for (let r = 1; r <= maxRounds; ++r) {
 
-    indicators.push(<div key={r} className={classNames('actionCell', { highlight: currentRound === r })}>{r}</div>);
+    indicators.push(<div key={r} className={classNames('cell', { highlight: currentRound === r })}>{r}</div>);
   }
   return indicators;
 }

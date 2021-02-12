@@ -84,7 +84,6 @@ body {
 .actionCell:not(.empty) {
   background-color: hotpink;
   color: #00000000
-
 }
 
 .shipParts {
@@ -109,7 +108,14 @@ body {
   min-height: 100px;
 }
 
-#rounds .highlight {
+#rounds .cell {
+  margin: 2px;
+  border: 1px solid black;
+  min-width: 32px;
+  min-height: 32px;
+  color: black;
+}
+#rounds .cell.highlight {
   background-color: purple;
 }
 
