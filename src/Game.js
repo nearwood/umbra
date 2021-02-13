@@ -1,4 +1,5 @@
 import { INVALID_MOVE } from "boardgame.io/core";
+import InnerTiles from "./innerTiles";
 import StartingTiles, { GalacticCenter } from "./startingTiles";
 
 const resetHasPassed = (numPlayers, obj) => {
@@ -135,6 +136,9 @@ const generateMap = (numPlayers, tiles) => {
       break;
   }
 
+  //TODO TEMP
+  placeTile(map, tiles.inner, '104', [0, -1, 1]);
+
   return map;
 };
 
@@ -157,7 +161,7 @@ export const Umbra = {
   setup: (ctx) => {
     const tiles = {
       center: GalacticCenter(),
-      inner: [],
+      inner: InnerTiles(),
       starting: StartingTiles(),
       middle: [],
       outer: []

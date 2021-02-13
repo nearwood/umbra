@@ -42,9 +42,41 @@ const renderInfluence = (ctx, tile) => {
   } else if (tile.influence) {
     return <circle cx="0" cy="0" r="2" className={`influence ${PlayerColors[ctx.currentPlayer]}`} />;
   } else {
-    return <circle cx="0" cy="0" r="2" className="influence empty" />;
+    return null; //<circle cx="0" cy="0" r="2" className="influence empty" />;
   }
 }
+
+const renderArtifact = (tile) => {
+  if (tile?.artifact) {
+    return <text x="0" y="-1" className='artifact'>✨</text>;
+  }
+
+  return null;
+};
+
+const renderAncient = (tile) => {
+  if (tile?.ancient) {
+    return <text x="-3" y="2" className='ancient'>👽</text>;
+    //return <text className='ancient'>👾</text>;
+    //return <text className='ancient'>🛸</text>;
+  }
+
+  return null;
+};
+
+const renderVP = (tile) => {
+  const cx = 2;
+  const cy = -3;
+  if (tile) {
+    return (<g className="vp">
+      <polygon x="2" points={`${cx},${cy} ${cx + 2.5},${cy + 1} ${cx + 5},${cy + 0}, ${cx + 5},${cy + 5}, ${cx + 2.5},${cy + 7}, ${cx + 0},${cy + 5}`} />
+      <text x="3.5" y="2">4</text>
+    </g>
+    );
+  }
+
+  return null;
+};
 
 const hexagonSize = { x: 10, y: 10 };
 
@@ -58,6 +90,9 @@ export const HexMap = ({ props }) => {
           {Array.isArray(G.sectors) && G.sectors.map(s =>
             <Hexagon q={s.pos.q} r={s.pos.r} s={s.pos.s} className={`sector ring${s.ring} ${s.tile ? "filled" : "empty"}`} fill={s.tile ? "spiral" : ""}>
               {!s.tile && <Text>{`${s.pos.q}, ${s.pos.r}, ${s.pos.s}`}</Text>}
+              {renderAncient(s.tile)}
+              {renderVP(s.tile)}
+              {renderArtifact(s.tile)}
               {/* <Text>{ringText(s.ring)}</Text> */}
               {renderWormholes(s.tile)}
               {renderInfluence(ctx, s.tile)}
