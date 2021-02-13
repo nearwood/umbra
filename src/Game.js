@@ -1,5 +1,5 @@
 import { INVALID_MOVE } from "boardgame.io/core";
-import { GalacticCenter, StartingSectors } from "./sectors";
+import StartingTiles, { GalacticCenter } from "./startingTiles";
 
 const resetHasPassed = (numPlayers, obj) => {
   const o = obj || {};
@@ -158,7 +158,7 @@ export const Umbra = {
     const tiles = {
       center: GalacticCenter(),
       inner: [],
-      starting: StartingSectors(),
+      starting: StartingTiles(),
       middle: [],
       outer: []
     };
