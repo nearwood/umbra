@@ -4,7 +4,7 @@
 export const GalacticCenter = () => ({
   name: 'GC', id: '001', // cosmetic
   pos: { q: 0, r: 0, s: 0 }, //fixed for this specific sector
-  influence: true,
+  influence: null,
   vp: 4, // victory points
   artifact: true, // star by VP
   gcDefense: true,

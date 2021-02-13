@@ -1,5 +1,13 @@
 import classNames from 'classnames';
 
+export const PlayerColors = {
+  "0": 'yellow',
+  "1": 'red',
+  "2": 'cyan',
+  "3": 'green',
+  "4": 'black',
+  "5": 'white',
+};
 
 const renderInfluenceCells = (G, ctx) => {
   let cells = [];
@@ -20,7 +28,7 @@ const renderInfluenceCells = (G, ctx) => {
   };
   for (let i = 1; i <= G.maxInfluence; ++i) {
     let f = G.data[ctx.currentPlayer].influence;
-    cells.push(<div className={classNames('actionCell', { empty: i >= f })}>{upkeepCostMap[i]}</div>);
+    cells.push(<div className={classNames('actionCell', { empty: i >= f }, PlayerColors[ctx.currentPlayer])}>{upkeepCostMap[i]}</div>);
   }
 
   return cells;

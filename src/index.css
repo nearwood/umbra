@@ -1,6 +1,44 @@
-body {
-  
+
+
+
+.yellow {
+  stroke: #220;
+  color: #ff0;
+  fill: #ff0;
+  background-color: #220;
 }
+
+.red {
+  fill: #f00;
+  color: #f00;
+  stroke: #020;
+  background-color: #200;
+}
+
+.cyan {
+  color: #0ff;
+  background-color: #022;
+}
+
+.green {
+  color: #0f0;
+  background-color: #020;
+}
+
+.black {
+  color: #222;
+  background-color: #ddd;
+}
+
+.white {
+  color: #fff;
+  background-color: #222;
+}
+
+
+
+
+
 
 .row {
   display: flex;
@@ -123,56 +161,37 @@ body {
 
 
 
-
-svg g.empty {
-  fill-opacity: 0.1;
-}
-
-svg g.empty:hover {
-  fill-opacity: 1;
-}
-
-/* svg g:hover text {
-  fill-opacity: 1;
-} */
-
-svg g polygon {
-  stroke: #000000;
-  stroke-width: 0.33;
-  transition: fill-opacity .2s;
-}
-
-svg g circle.wormhole {
+.sector circle.wormhole {
   fill: silver;
 }
 
-svg g circle.influence {
-  fill: silver;
-  fill-opacity: .1;
-  stroke: tomato;
+.sector circle.influence {
+  /* fill: silver; */
+  /* fill-opacity: .1; */
+  /* stroke: tomato; */
   stroke-width: .5;
 }
 
-svg g circle.influence.green {
-  fill: tomato;
-  fill-opacity: 1;
+.sector circle.influence.empty {
+  fill-opacity: 0;
+  stroke-opacity: .5;
 }
 
-svg g text {
+.sector text {
   font-size: 0.3em;
   fill-opacity: .5;
 }
 
-svg g.filled text {
+/* .sector g.filled text {
   fill: chartreuse;
   fill-opacity: 1;
   stroke: white;
   stroke-width: .25;
-}
+} */
 
-svg g.empty text {
+/* svg g.empty text {
   fill: #000000;
-}
+} */
 
 svg path {
   fill: none;
@@ -183,18 +202,47 @@ svg path {
   stroke-linejoin: round;
 }
 
-.ring0 {
+
+
+.sector {
+  stroke: #000000;
+  stroke-width: 0.33;
+  transition: fill-opacity .2s;
+}
+
+.sector text {
+  fill: black;
+  stroke: #000;
+  stroke-width: .1;
+}
+
+.sector.empty {
+  fill-opacity: 0.1;
+}
+
+.sector.empty:hover {
+  fill-opacity: 1;
+}
+
+.sector.empty:hover text {
+  fill: white;
+  stroke: #ccc;
+  fill-opacity: 1;
+  stroke-width: .1;
+}
+
+.sector.empty.ring0 {
   fill: lightcoral
 }
 
-.ring1 {
+.sector.empty.ring1 {
   fill: lightblue;
 }
 
-.ring2 {
+.sector.empty.ring2 {
   fill: lightgreen;
 }
 
-.ring3 {
+.sector.empty.ring3 {
   fill: white;
 }

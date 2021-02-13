@@ -1,4 +1,5 @@
 import { HexGrid, Layout, Hexagon, Text, Pattern, Path, Hex } from 'react-hexgrid';
+import { PlayerColors } from './PlayerBoard';
 
 const ringText = (ring) => {
   switch (ring) {
@@ -35,13 +36,13 @@ const renderWormholes = (tile) => {
   });
 };
 
-const renderInfluence = (tile) => {
+const renderInfluence = (ctx, tile) => {
   if (!tile) {
     return null;
-  } else if (!tile.influence) {
-    return <circle cx="0" cy="0" r="2" className="influence empty" />;
+  } else if (tile.influence) {
+    return <circle cx="0" cy="0" r="2" className={`influence ${PlayerColors[ctx.currentPlayer]}`} />;
   } else {
-    return <circle cx="0" cy="0" r="2" className="influence green" />;
+    return <circle cx="0" cy="0" r="2" className="influence empty" />;
   }
 }
 
@@ -55,11 +56,11 @@ export const HexMap = ({ props }) => {
       <HexGrid width={400} height={400} viewBox="-50 -50 100 100">
         <Layout size={{ x: 10, y: 10 }} flat={true} spacing={1.1} origin={{ x: 0, y: 0 }}>
           {Array.isArray(G.sectors) && G.sectors.map(s =>
-            <Hexagon q={s.pos.q} r={s.pos.r} s={s.pos.s} className={`ring${s.ring} ${s.tile ? "filled" : "empty"}`} fill={s.tile ? "spiral" : ""}>
-              <Text>{`${s.pos.q}, ${s.pos.r}, ${s.pos.s}`}</Text>
+            <Hexagon q={s.pos.q} r={s.pos.r} s={s.pos.s} className={`sector ring${s.ring} ${s.tile ? "filled" : "empty"}`} fill={s.tile ? "spiral" : ""}>
+              {!s.tile && <Text>{`${s.pos.q}, ${s.pos.r}, ${s.pos.s}`}</Text>}
               {/* <Text>{ringText(s.ring)}</Text> */}
               {renderWormholes(s.tile)}
-              {renderInfluence(s.tile)}
+              {renderInfluence(ctx, s.tile)}
             </Hexagon>
           )}
         </Layout>
