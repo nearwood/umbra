@@ -18,15 +18,19 @@ const renderWormholes = (tile) => {
   }
 
   return Object.keys(tile.wormholes).map(edge => {
-    switch (edge) {
-      default:
-        throw new Error("bad edge");
-      case "top": return <circle cx="0" cy="-8" r={wormholeRadius} className="wormhole" />;
-      case "tr": return <circle cx="7" cy="4" r={wormholeRadius} className="wormhole" />;
-      case "br": return <circle cx="7" cy="-4" r={wormholeRadius} className="wormhole" />;
-      case "bot": return <circle cx="0" cy="8" r={wormholeRadius} className="wormhole" />;
-      case "bl": return <circle cx="-7" cy="4" r={wormholeRadius} className="wormhole" />;
-      case "tl": return <circle cx="-7" cy="-4" r={wormholeRadius} className="wormhole" />;
+    if (tile.wormholes[edge] === true) {
+      switch (edge) {
+        default:
+          throw new Error("bad edge");
+        case "top": return <circle cx="0" cy="-8" r={wormholeRadius} className="wormhole" />;
+        case "tr": return <circle cx="7" cy="-4" r={wormholeRadius} className="wormhole" />;
+        case "br": return <circle cx="7" cy="4" r={wormholeRadius} className="wormhole" />;
+        case "bot": return <circle cx="0" cy="8" r={wormholeRadius} className="wormhole" />;
+        case "bl": return <circle cx="-7" cy="4" r={wormholeRadius} className="wormhole" />;
+        case "tl": return <circle cx="-7" cy="-4" r={wormholeRadius} className="wormhole" />;
+      }
+    } else {
+      return null;
     }
   });
 };
