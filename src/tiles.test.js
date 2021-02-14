@@ -1,5 +1,6 @@
 import StartingTiles from './startingTiles';
 import InnerTiles from './innerTiles';
+import MiddleTiles from './middleTiles';
 
 const tileCheck = (s) => {
   expect(s.name.length).toBeGreaterThan(0);
@@ -30,7 +31,18 @@ test('inner tiles', () => {
   const innerTiles = InnerTiles();
   expect(innerTiles.length).toBe(8);
   innerTiles.forEach(tileCheck);
+  expect(innerTiles.reduce(propTotal('discovery'), 0)).toBe(4);
   expect(innerTiles.reduce(propTotal('artifact'), 0)).toBe(2);
   expect(innerTiles.reduce(propTotal('ancient'), 0)).toBe(4);
   expect(innerTiles.reduce(propTotal('vp'), 0)).toBe(18);
+});
+
+test('middle tiles', () => {
+  const middleTiles = MiddleTiles();
+  expect(middleTiles.length).toBe(11);
+  middleTiles.forEach(tileCheck);
+  expect(middleTiles.reduce(propTotal('discovery'), 0)).toBe(6);
+  expect(middleTiles.reduce(propTotal('artifact'), 0)).toBe(2);
+  expect(middleTiles.reduce(propTotal('ancient'), 0)).toBe(3);
+  expect(middleTiles.reduce(propTotal('vp'), 0)).toBe(13);
 });
