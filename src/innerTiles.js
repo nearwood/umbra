@@ -7,6 +7,7 @@ const InnerTiles = () => [
     pos: null,
     influence: null,
     vp: 2,
+    discovery: true,
     artifact: false,
     ancient: true,
     planets: [
@@ -24,6 +25,7 @@ const InnerTiles = () => [
     pos: null,
     influence: null,
     vp: 3,
+    discovery: false,
     artifact: true,
     ancient: false,
     planets: [
@@ -40,6 +42,7 @@ const InnerTiles = () => [
     pos: null,
     influence: null,
     vp: 2,
+    discovery: false,
     artifact: false,
     ancient: false,
     planets: [
@@ -57,6 +60,7 @@ const InnerTiles = () => [
     pos: null,
     influence: null,
     vp: 2,
+    discovery: true,
     artifact: false,
     ancient: true,
     planets: [
@@ -74,6 +78,7 @@ const InnerTiles = () => [
     pos: null,
     influence: null,
     vp: 3,
+    discovery: true,
     artifact: true,
     ancient: true,
     planets: [
@@ -92,6 +97,7 @@ const InnerTiles = () => [
     pos: null,
     influence: null,
     vp: 2,
+    discovery: false,
     artifact: false,
     ancient: false,
     planets: [
@@ -109,6 +115,7 @@ const InnerTiles = () => [
     pos: null,
     influence: null,
     vp: 2,
+    discovery: false,
     artifact: false,
     ancient: false,
     planets: [
@@ -127,6 +134,7 @@ const InnerTiles = () => [
     pos: null,
     influence: null,
     vp: 2,
+    discovery: true,
     artifact: false,
     ancient: true,
     planets: [

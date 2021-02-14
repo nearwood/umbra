@@ -6,6 +6,7 @@ export const GalacticCenter = () => ({
   pos: { q: 0, r: 0, s: 0 }, //fixed for this specific sector
   influence: null,
   vp: 4, // victory points
+  discovery: true, // squarish outline around influence disc
   artifact: true, // star by VP
   gcDefense: true,
   planets: [
