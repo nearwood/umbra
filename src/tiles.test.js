@@ -1,10 +1,11 @@
 import StartingTiles from './startingTiles';
 import InnerTiles from './innerTiles';
 import MiddleTiles from './middleTiles';
+import OuterTiles from './outerTiles';
 
 const tileCheck = (s) => {
   expect(s.name.length).toBeGreaterThan(0);
-  expect(s.id.length).toBeGreaterThan(0);
+  expect(s.id.length).toBe(3);
   expect(Object.keys(s.wormholes)).toContain("top");
   expect(Object.keys(s.wormholes)).toContain("tr");
   expect(Object.keys(s.wormholes)).toContain("br");
@@ -45,4 +46,14 @@ test('middle tiles', () => {
   expect(middleTiles.reduce(propTotal('artifact'), 0)).toBe(2);
   expect(middleTiles.reduce(propTotal('ancient'), 0)).toBe(3);
   expect(middleTiles.reduce(propTotal('vp'), 0)).toBe(13);
+});
+
+test('outer tiles', () => {
+  const outerTiles = OuterTiles();
+  expect(outerTiles.length).toBe(18);
+  outerTiles.forEach(tileCheck);
+  expect(outerTiles.reduce(propTotal('discovery'), 0)).toBe(10);
+  expect(outerTiles.reduce(propTotal('artifact'), 0)).toBe(3);
+  expect(outerTiles.reduce(propTotal('ancient'), 0)).toBe(4);
+  expect(outerTiles.reduce(propTotal('vp'), 0)).toBe(21);
 });
