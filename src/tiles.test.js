@@ -57,3 +57,14 @@ test('outer tiles', () => {
   expect(outerTiles.reduce(propTotal('ancient'), 0)).toBe(4);
   expect(outerTiles.reduce(propTotal('vp'), 0)).toBe(21);
 });
+
+test('outer tiles dynamicism', () => {
+  expect(OuterTiles().length).toBe(18);
+  expect(OuterTiles(2).length).toBe(5);
+  expect(OuterTiles(3).length).toBe(10);
+  expect(OuterTiles(4).length).toBe(14);
+  expect(OuterTiles(5).length).toBe(16);
+  expect(OuterTiles(6).length).toBe(18);
+  expect(() => OuterTiles(-1)).toThrow();
+  expect(() => OuterTiles(7)).toThrow();
+});
