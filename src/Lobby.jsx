@@ -5,8 +5,8 @@ import { Umbra } from './Game';
 
 const App = () => (
   <Lobby
-    gameServer={`http://${window.location.hostname}:8443`}
-    lobbyServer={`http://${window.location.hostname}:8443`}
+    gameServer={`${process.env.REACT_APP_MULTIPLAYER_HOST}`}
+    lobbyServer={`${process.env.REACT_APP_MULTIPLAYER_HOST}`}
     gameComponents={[
       { game: Umbra, board: GameBoard }
     ]}
