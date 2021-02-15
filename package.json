@@ -20,7 +20,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "serve": "node -r esm src/server.js"
+    "serve": "sudo serve -s build -l 80",
+    "server": "node -r esm src/server.js"
   },
   "eslintConfig": {
     "extends": [
