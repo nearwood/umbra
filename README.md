@@ -14,12 +14,39 @@ Livestreamed development: https://www.twitch.tv/blozup
 
 # TODO
 
-1. Basic phase/turn flow
-    - Do nothing and pass ✔
-1. Setup initial hex map
-1. Explore/Research
-1. Influence
-1. Production
+- [x] Basic game definition.
+- [x] First action (pass)
+- [ ] Initialize game (setup playerboards, hexes, etc.)
+  - [x] Setup hex map
+  - [ ] Setup player boards
+    - [ ] Cubes
+    - [ ] Tech
+    - [ ] Influence (limited)
+    - [ ] Ships (limited)
+  - [ ] Setup game board
+    - [ ] Research tiles (limited)
+    - [ ] Ship parts (unlimited)
+    - [ ] Orbitals (unlimited)
+    - [ ] Monolith (unlimited)
+- [ ] Place Influence
+- [ ] Production
+  - Cubes are unlimited
+  - [ ] Money
+  - [ ] Science
+  - [ ] Materials
+- [ ] Explore?
+- [ ] Combat
+- [ ] Diplomacy
+- [ ] VP
+  - [ ] Discovery Tiles
+
+## Actions
+- [ ] Explore
+- [ ] Influence
+- [ ] Research
+- [ ] Upgrade
+- [ ] Build
+- [ ] Move
 
 
 ## Map/Sector libraries
