@@ -47,12 +47,12 @@ const placeTile = (map, tiles, tileId, [q, r, s]) => {
     console.warn("Sector/Tile not found: ", tileId, [q, r, s]);
   }
   //sector.tile.pos ?
-  return sector?.tile !== null;
+  return sector.tile !== null;
 }
 
 const placeInfluence = (map, tileId, player) => {
   //TODO decrement from player board?
-  let sector = map.find(sector => sector?.tile?.id === tileId);
+  let sector = map.find(sector => sector.tile && sector.tile.id === tileId);
   if (sector) {
     sector.tile.influence = player;
   } else {

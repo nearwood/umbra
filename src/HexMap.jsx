@@ -14,7 +14,7 @@ const ringText = (ring) => {
 const wormholeRadius = 1.5;
 
 const renderWormholes = (tile) => {
-  if (!tile?.wormholes) {
+  if (!tile || !tile.wormholes) {
     return null;
   }
 
@@ -47,7 +47,7 @@ const renderInfluence = (ctx, tile) => {
 }
 
 const renderArtifact = (tile) => {
-  if (tile?.artifact) {
+  if (tile && tile.artifact) {
     return <text x="0" y="-1" className='artifact'>✨</text>;
   }
 
@@ -55,7 +55,7 @@ const renderArtifact = (tile) => {
 };
 
 const renderAncient = (tile) => {
-  if (tile?.ancient) {
+  if (tile && tile.ancient) {
     return <text x="-3" y="2" className='ancient'>👽</text>;
     //return <text className='ancient'>👾</text>;
     //return <text className='ancient'>🛸</text>;
