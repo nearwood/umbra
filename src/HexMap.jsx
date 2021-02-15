@@ -23,12 +23,12 @@ const renderWormholes = (tile) => {
       switch (edge) {
         default:
           throw new Error("bad edge");
-        case "top": return <circle cx="0" cy="-8" r={wormholeRadius} className="wormhole" />;
-        case "tr": return <circle cx="7" cy="-4" r={wormholeRadius} className="wormhole" />;
-        case "br": return <circle cx="7" cy="4" r={wormholeRadius} className="wormhole" />;
-        case "bot": return <circle cx="0" cy="8" r={wormholeRadius} className="wormhole" />;
-        case "bl": return <circle cx="-7" cy="4" r={wormholeRadius} className="wormhole" />;
-        case "tl": return <circle cx="-7" cy="-4" r={wormholeRadius} className="wormhole" />;
+        case "top": return <circle key={edge} cx="0" cy="-8" r={wormholeRadius} className="wormhole" />;
+        case "tr": return <circle key={edge} cx="7" cy="-4" r={wormholeRadius} className="wormhole" />;
+        case "br": return <circle key={edge} cx="7" cy="4" r={wormholeRadius} className="wormhole" />;
+        case "bot": return <circle key={edge} cx="0" cy="8" r={wormholeRadius} className="wormhole" />;
+        case "bl": return <circle key={edge} cx="-7" cy="4" r={wormholeRadius} className="wormhole" />;
+        case "tl": return <circle key={edge} cx="-7" cy="-4" r={wormholeRadius} className="wormhole" />;
       }
     } else {
       return null;
@@ -88,7 +88,7 @@ export const HexMap = ({ props }) => {
       <HexGrid width={400} height={400} viewBox="-50 -50 100 100">
         <Layout size={{ x: 10, y: 10 }} flat={true} spacing={1.1} origin={{ x: 0, y: 0 }}>
           {Array.isArray(G.sectors) && G.sectors.map(s =>
-            <Hexagon q={s.pos.q} r={s.pos.r} s={s.pos.s} className={`sector ring${s.ring} ${s.tile ? "filled" : "empty"}`} fill={s.tile ? "spiral" : ""}>
+            <Hexagon key={`${s.pos.q}_${s.pos.r}_${s.pos.s}`} q={s.pos.q} r={s.pos.r} s={s.pos.s} className={`sector ring${s.ring} ${s.tile ? "filled" : "empty"}`} fill={s.tile ? "spiral" : ""}>
               {!s.tile && <Text>{`${s.pos.q}, ${s.pos.r}, ${s.pos.s}`}</Text>}
               {renderAncient(s.tile)}
               {renderVP(s.tile)}

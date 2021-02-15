@@ -9,8 +9,9 @@ Livestreamed development: https://www.twitch.tv/blozup
 # DevOps
 
 - Domain? Did I ever figure out CORS issues?
-- Scope
 - Lint, prettier, etc.
+- Update hex library to remove react warnings
+- EC2 instance
 
 # TODO
 
