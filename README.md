@@ -6,12 +6,14 @@ Attempt #2. [Previous attempt](https://github.com/nearwood/eclipsed).
 
 Livestreamed development: https://www.twitch.tv/blozup
 
+Live dev server: http://ec2-3-87-217-45.compute-1.amazonaws.com/
+
 # DevOps
 
 - Domain? Did I ever figure out CORS issues?
 - Lint, prettier, etc.
 - Update hex library to remove react warnings
-- EC2 instance
+- [x] EC2 instance
 
 # TODO
 
