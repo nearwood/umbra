@@ -2,6 +2,7 @@ import StartingTiles from './startingTiles';
 import InnerTiles from './innerTiles';
 import MiddleTiles from './middleTiles';
 import OuterTiles from './outerTiles';
+import TechTiles from './techTiles';
 
 const tileCheck = (s) => {
   expect(s.name.length).toBeGreaterThan(0);
@@ -67,4 +68,16 @@ test('outer tiles dynamicism', () => {
   expect(OuterTiles(6).length).toBe(18);
   expect(() => OuterTiles(-1)).toThrow();
   expect(() => OuterTiles(7)).toThrow();
+});
+
+
+test('tech tiles', () => {
+  expect(TechTiles().length).toBe(24);
+  expect(() => TechTiles(1)).toThrow();
+  expect(TechTiles(2).length).toBe(12);
+  expect(TechTiles(3).length).toBe(14);
+  expect(TechTiles(4).length).toBe(16);
+  expect(TechTiles(5).length).toBe(18);
+  expect(TechTiles(6).length).toBe(20);
+  expect(() => TechTiles(7)).toThrow();
 });
