@@ -101,7 +101,6 @@ const generateMap = (numPlayers, tiles) => {
   switch (numPlayers) {
     default:
       throw new Error("Invalid numPlayers");
-    case 1: //eg. AI?
     case 2:
       placeTile(map, tiles.starting, '221', [0, -2, 2]);
       placeInfluence(map, '221', "0");
@@ -179,7 +178,7 @@ export const Umbra = {
       maxInfluence: 13
     };
   },
-  minPlayers: 1,
+  minPlayers: 2,
   maxPlayers: 6,
   moves: {
     /** Trade 2x `from` type for 1x `to` type.
