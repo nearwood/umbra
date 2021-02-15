@@ -40,7 +40,13 @@ export const PlayerBoard = ({ props }) => {
   return (<>
     <div className='board col'>
       <div id='shipSection'>
-        Ships go here.
+        <svg width={128} height={100} viewBox="-24 -24 72 100">
+          <polygon points="12,0 24,-24 36,0 48,48 72,72 -24,72 0,48" className="shipRect" />
+          <rect x={12} y={0} width={24} height={24} className="shipRect" />
+          <rect x={12} y={24} width={24} height={24} className="shipRect" />
+          <rect x={0} y={48} width={24} height={24} className="shipRect" />
+          <rect x={24} y={48} width={24} height={24} className="shipRect" />
+        </svg>
       </div>
       <div id='rest' className='row'>
         <div id='rep'>
