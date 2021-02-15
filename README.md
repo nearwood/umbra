@@ -6,7 +6,8 @@ Attempt #2. [Previous attempt](https://github.com/nearwood/eclipsed).
 
 Livestreamed development: https://www.twitch.tv/blozup
 
-Live dev server: http://ec2-3-87-217-45.compute-1.amazonaws.com/
+Live dev server: https://ludos.dev
+
 
 # DevOps
 
