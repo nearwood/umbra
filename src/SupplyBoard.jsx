@@ -85,7 +85,7 @@ export const SupplyBoard = ({ props }) => {
       <div className='col' id='spareParts'>
         Spare parts
         <div>Phase: {ctx.phase}</div>
-        <div>Current Player: {ctx.currentPlayer}</div>
+        <div>Current Player: {parseInt(ctx.currentPlayer) + 1}</div>
       </div>
     </div>
   </>);

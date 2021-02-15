@@ -40,7 +40,7 @@ const renderInfluence = (ctx, tile) => {
   if (!tile) {
     return null;
   } else if (tile.influence) {
-    return <circle cx="0" cy="0" r="2" className={`influence ${PlayerColors[ctx.currentPlayer]}`} />;
+    return <circle cx="0" cy="0" r="2" className={`influence ${PlayerColors[tile.influence]}`} />;
   } else {
     return null; //<circle cx="0" cy="0" r="2" className="influence empty" />;
   }
