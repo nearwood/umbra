@@ -9,12 +9,10 @@ const ShipParts = () => [
     quantity: Infinity,
     damage: 1,
     energy: -1,
-
   }, {
     name: 'Electron Computer',
     quantity: Infinity,
     targeting: 1,
-
   }, {
     name: 'Nuclear Drive',
     quantity: Infinity,

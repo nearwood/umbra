@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 
-import { TechCategory } from './techTiles';
+import { TechCategory } from './TechTiles';
 
 const RoundIndicators = ({ maxRounds, currentRound }) => {
   let indicators = [];

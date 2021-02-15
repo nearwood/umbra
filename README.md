@@ -11,10 +11,11 @@ Live dev server: https://ludos.dev
 
 # DevOps
 
-- Domain? Did I ever figure out CORS issues?
-- Lint, prettier, etc.
-- Update hex library to remove react warnings
+- [x] Domain? Did I ever figure out CORS issues?
+- [ ] Lint, prettier, etc.
+- [ ] Update hex library to remove react warnings
 - [x] EC2 instance
+- [ ] https netdata, update live monitor
 
 # TODO
 

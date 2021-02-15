@@ -1,7 +1,7 @@
 import { INVALID_MOVE } from "boardgame.io/core";
-import InnerTiles from "./innerTiles";
-import StartingTiles, { GalacticCenter } from "./startingTiles";
-import TechTiles from "./techTiles";
+import InnerTiles from "./InnerTiles";
+import StartingTiles, { GalacticCenter } from "./StartingTiles";
+import TechTiles from "./TechTiles";
 
 const resetHasPassed = (numPlayers, obj) => {
   const o = obj || {};
