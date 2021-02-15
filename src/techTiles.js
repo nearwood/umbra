@@ -1,10 +1,10 @@
-const TechCategory = {
+export const TechCategory = {
   Military: 'Military',
   Grid: 'Grid',
   Nano: 'Nano'
 };
 
-const TechType = {
+export const TechType = {
   None: 'None',
   Part: 'Part', //A ship part (upgrade)
   Build: 'Build',  //Can now build ship/structure

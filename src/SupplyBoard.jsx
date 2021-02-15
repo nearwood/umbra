@@ -1,5 +1,7 @@
 import classNames from 'classnames';
 
+import TechTiles, { TechCategory } from './techTiles';
+
 const RoundIndicators = ({ maxRounds, currentRound }) => {
   let indicators = [];
   for (let r = 1; r <= maxRounds; ++r) {
@@ -21,13 +23,9 @@ export const SupplyBoard = ({ props }) => {
         </div>
         <div id='researchTree' className='col'>
           <div className='research row'>
-            <div className='researchCell' />
-            <div className='researchCell' />
-            <div className='researchCell' />
-            <div className='researchCell' />
-            <div className='researchCell' />
-            <div className='researchCell' />
-            <div className='researchCell' />
+            {G.techTiles && G.techTiles.filter(t => t.category === TechCategory.Military).map(tile => (
+              <div key={tile.name} className='researchCell'>{tile.name}</div>
+            ))}
           </div>
           <div className='research row'>
             <div className='researchCell' />

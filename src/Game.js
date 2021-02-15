@@ -1,6 +1,7 @@
 import { INVALID_MOVE } from "boardgame.io/core";
 import InnerTiles from "./innerTiles";
 import StartingTiles, { GalacticCenter } from "./startingTiles";
+import TechTiles from "./techTiles";
 
 const resetHasPassed = (numPlayers, obj) => {
   const o = obj || {};
@@ -170,6 +171,7 @@ export const Umbra = {
     return {
       tiles,
       sectors: generateMap(ctx.numPlayers, tiles), //TODO will need phase to pick race
+      techTiles: TechTiles(ctx.numPlayers),
       maxRounds: 9,
       currentRound: 1,
       data: createPlayerData(ctx.numPlayers),
