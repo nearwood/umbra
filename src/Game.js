@@ -1,4 +1,5 @@
 import { INVALID_MOVE } from "boardgame.io/core";
+import Bot from "./Bot";
 import InnerTiles from "./InnerTiles";
 import StartingTiles, { GalacticCenter } from "./StartingTiles";
 import TechTiles from "./TechTiles";
@@ -59,6 +60,19 @@ const placeInfluence = (map, tileId, player) => {
     throw Error("No such sector tile");
   }
 }
+
+/** Trade 2x `from` type for 1x `to` type.
+ * Trade can happen "at any time" (?).
+ * Will probably want to limit this so the bot isn't wasting everyone's time.
+ */
+const Trade = (G, ctx, from, to) => {
+  if (G.data[ctx.currentPlayer][from] >= 2) { //TODO trade ratio
+    G.data[ctx.currentPlayer][from] -= 2;
+    G.data[ctx.currentPlayer][to] += 1;
+  } else {
+    return INVALID_MOVE;
+  }
+};
 
 /**
  * Each player chooses a starting hex (and playerboard),
@@ -146,9 +160,10 @@ const createPlayerData = (numPlayers) => {
   let d = {};
   for (let i = 0; i < numPlayers; ++i) {
     d[i] = {
-      money: 0,
-      science: 0,
-      materials: 0,
+      vp: 0,
+      money: 3,
+      science: 3,
+      materials: 3,
       influence: 13
     };
   }
@@ -182,24 +197,11 @@ export const Umbra = {
   },
   minPlayers: 2,
   maxPlayers: 6,
-  moves: {
-    /** Trade 2x `from` type for 1x `to` type.
-     * Trade can happen "at any time" (?).
-     * Will probably want to limit this so the bot isn't wasting everyone's time.
-    */
-    trade: (G, ctx, from, to) => {
-      if (G.resources[ctx.currentPlayer][from]) {
-        G.resources[ctx.currentPlayer][from] -= 2;
-        G.resources[ctx.currentPlayer][to] += 1;
-      } else {
-        return INVALID_MOVE;
-      }
-    }
-  },
   phases: {
     action: {
       start: true,
       moves: {
+        trade: Trade,
         pass: (G, ctx) => {
           G.hasPassed[ctx.currentPlayer] = true;
           ctx.events.endTurn();
@@ -211,6 +213,7 @@ export const Umbra = {
     },
     combat: {
       moves: {
+        trade: Trade,
         engage: (G, ctx) => {
           ctx.events.endTurn();
         },
@@ -221,6 +224,7 @@ export const Umbra = {
     },
     upkeep: {
       moves: {
+        trade: Trade,
         activeColonyShip: () => { },
         pass: (G, ctx) => {
           G.hasPassed[ctx.currentPlayer] = true;
@@ -238,27 +242,7 @@ export const Umbra = {
     }
   },
   ai: {
-    enumerate: (G, ctx) => {
-      let moves = [];
-      switch (ctx.phase) {
-        case 'action':
-          moves.push({ move: 'pass' });
-          break;
-
-        case 'combat':
-          moves.push({ move: 'engage' });
-          break;
-
-        case 'upkeep':
-          moves.push({ move: 'pass' });
-          break;
-
-        default:
-          break;
-      }
-
-      return moves;
-    },
+    enumerate: Bot
   },
 };
 
