@@ -251,6 +251,10 @@ svg path {
   transition: fill-opacity .2s;
 }
 
+.hexagon > polygon {
+  stroke-dasharray: 1;
+}
+
 .sector text {
   fill: black;
   stroke: #000;
