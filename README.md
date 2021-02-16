@@ -28,8 +28,8 @@ Live dev server: https://ludos.dev
     - [ ] Tech
     - [ ] Influence (limited)
     - [ ] Ships (limited)
-  - [ ] Setup game board
-    - [ ] Research tiles (limited)
+  - [ ] Setup supply board
+    - [x] Research tiles (limited)
     - [ ] Ship parts (unlimited)
     - [ ] Orbitals (unlimited)
     - [ ] Monolith (unlimited)
