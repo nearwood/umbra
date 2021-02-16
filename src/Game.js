@@ -171,6 +171,35 @@ const createPlayerData = (numPlayers) => {
   return d;
 };
 
+const randomInteger = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+
+const pickSomeMoreTiles = (tiles, numPlayers) => {
+  if (numPlayers >= 2 && numPlayers <= 6) {
+    let availableTiles = tiles.filter(t => t.bag >= 1);
+    const neededTiles = (2 * numPlayers + 8);
+    let numPickedTiles = 0;
+
+    while ((numPickedTiles < neededTiles) || availableTiles.length === 0) {
+      //Find a tile in the available tiles array
+      const i = randomInteger(0, availableTiles.length - 1);
+      const tile = availableTiles[i];
+
+      //Find tile on the OG array, so we can modify it
+      const realTile = tiles.find(t => t.name === tile.name);
+      realTile.bag -= 1;
+      realTile.supply += 1;
+      numPickedTiles += 1;
+
+      //Recount available tiles
+      availableTiles = tiles.filter(t => t.bag >= 1);
+    }
+
+    return tiles;
+  } else {
+    throw new Error('Invalid numPlayers for outer tiles');
+  }
+};
+
 export const Umbra = {
   name: 'Umbra',
   setup: (ctx) => {
@@ -182,11 +211,13 @@ export const Umbra = {
       outer: []
     };
 
+    const techTiles = pickSomeMoreTiles(TechTiles(), ctx.numPlayers);
+
     //Sectors can be empty, or have a tile
     return {
       tiles,
       sectors: generateMap(ctx.numPlayers, tiles), //TODO will need phase to pick race
-      techTiles: TechTiles(ctx.numPlayers),
+      techTiles,
       maxRounds: 9,
       currentRound: 1,
       data: createPlayerData(ctx.numPlayers),

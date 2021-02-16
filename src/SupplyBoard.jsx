@@ -14,17 +14,6 @@ const RoundIndicators = ({ maxRounds, currentRound }) => {
 export const SupplyBoard = ({ props }) => {
   const { G, ctx } = props;
 
-  const militaryTechSpots = [
-    'Neutron Bombs',
-    'Starbase',
-    'Plasma Cannon',
-    'Phase Shield',
-    'Advanced Mining',
-    'Tachyon Source',
-    'Plasma Missile',
-    'Gluon Computer',
-  ];
-
   const militaryTech = Array.isArray(G.techTiles) ? G.techTiles.filter(t => t.category === TechCategory.Military) : [];
   const gridTech = Array.isArray(G.techTiles) ? G.techTiles.filter(t => t.category === TechCategory.Grid) : [];
   const nanoTech = Array.isArray(G.techTiles) ? G.techTiles.filter(t => t.category === TechCategory.Nano) : [];
@@ -38,27 +27,19 @@ export const SupplyBoard = ({ props }) => {
         </div>
         <div id='researchTree' className='col'>
           <div className='research row'>
-            {militaryTechSpots.map(name => (
-              <div key={name} className='researchCell'>{name} {militaryTech.find(t => t.name === name)?.quantity}</div>
+            {militaryTech.map(tile => (
+              <div key={tile.name} className='researchCell'><span>🚀</span> {tile.name} {tile.supply}</div>
             ))}
           </div>
           <div className='research row'>
-            <div className='researchCell' />
-            <div className='researchCell' />
-            <div className='researchCell' />
-            <div className='researchCell' />
-            <div className='researchCell' />
-            <div className='researchCell' />
-            <div className='researchCell' />
+            {gridTech.map(tile => (
+              <div key={tile.name} className='researchCell'><span>🛠️</span> {tile.name} {tile.supply}</div>
+            ))}
           </div>
           <div className='research row'>
-            <div className='researchCell' />
-            <div className='researchCell' />
-            <div className='researchCell' />
-            <div className='researchCell' />
-            <div className='researchCell' />
-            <div className='researchCell' />
-            <div className='researchCell' />
+            {nanoTech.map(tile => (
+              <div key={tile.name} className='researchCell'><span>🤖</span> {tile.name} {tile.supply}</div>
+            ))}
           </div>
         </div>
         <div className='row shipParts'>
