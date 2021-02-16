@@ -14,6 +14,21 @@ const RoundIndicators = ({ maxRounds, currentRound }) => {
 export const SupplyBoard = ({ props }) => {
   const { G, ctx } = props;
 
+  const militaryTechSpots = [
+    'Neutron Bombs',
+    'Starbase',
+    'Plasma Cannon',
+    'Phase Shield',
+    'Advanced Mining',
+    'Tachyon Source',
+    'Plasma Missile',
+    'Gluon Computer',
+  ];
+
+  const militaryTech = Array.isArray(G.techTiles) ? G.techTiles.filter(t => t.category === TechCategory.Military) : [];
+  const gridTech = Array.isArray(G.techTiles) ? G.techTiles.filter(t => t.category === TechCategory.Grid) : [];
+  const nanoTech = Array.isArray(G.techTiles) ? G.techTiles.filter(t => t.category === TechCategory.Nano) : [];
+
   return (<>
     <div className='board row'>
       <div className='col'>
@@ -23,8 +38,8 @@ export const SupplyBoard = ({ props }) => {
         </div>
         <div id='researchTree' className='col'>
           <div className='research row'>
-            {G.techTiles && G.techTiles.filter(t => t.category === TechCategory.Military).map(tile => (
-              <div key={tile.name} className='researchCell'>{tile.name}</div>
+            {militaryTechSpots.map(name => (
+              <div key={name} className='researchCell'>{name} {militaryTech.find(t => t.name === name)?.quantity}</div>
             ))}
           </div>
           <div className='research row'>
