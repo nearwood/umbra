@@ -81,11 +81,30 @@
 }
 
 .techCell, .researchCell {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  flex-basis: 96px;
   background-color: darkturquoise;
   margin: 2px;
   border: 1px solid black;
   min-width: 48px;
   min-height: 48px;
+}
+
+.researchCell.empty {
+  background-color: white;
+  opacity: 80%;
+  color: grey;
+}
+.researchCell.empty .emoji {
+  opacity: 50%;
+}
+
+.researchCell:not(.empty) .cost {
+  border: 1px solid black;
+  border-radius: 14px;
+  padding: 2px;
 }
 
 .cubeCell {
@@ -117,6 +136,7 @@
   min-width: 32px;
   min-height: 32px;
   color: black;
+  background-color: #00000000;
 }
 
 .actionCell:not(.empty) {
