@@ -1,6 +1,8 @@
 import { INVALID_MOVE } from "boardgame.io/core";
 import Bot from "./Bot";
 import InnerTiles from "./InnerTiles";
+import MiddleTiles from "./MiddleTiles";
+import OuterTiles from "./OuterTiles";
 import StartingTiles, { GalacticCenter } from "./StartingTiles";
 import TechTiles from "./TechTiles";
 
@@ -40,10 +42,15 @@ const placeTile = (map, tiles, tileId, [q, r, s]) => {
   let sector = map.find(sector => isPos(sector, q, r, s));
 
   let desiredTile = tiles.find(t => t.id === tileId);
-  // if !desireTile, search innerTiles, outerTiles...
+
+  if (desiredTile.placed) {
+    console.error("Tile already placed:", tileId);
+    return false;
+  }
 
   if (sector && desiredTile) {
     sector.tile = desiredTile;
+    desiredTile.placed = true;
   } else {
     console.warn("Sector/Tile not found: ", tileId, [q, r, s]);
   }
@@ -60,6 +67,100 @@ const placeInfluence = (map, tileId, player) => {
     throw Error("No such sector tile");
   }
 }
+
+const getSector = (G, [q, r, s]) => G.sectors.find(sector => isPos(sector, q, r, s));
+
+const getNeighbors = (G, sector) => {
+  const neighbors = [];
+  const { q, r, s } = sector.pos;
+  const neighborCoords = [
+    { q: q - 0, r: r + 1, s: s - 1 }, //toq
+    { q: q + 1, r: r - 0, s: s - 1 }, //tr
+    { q: q + 1, r: r - 1, s: s - 0 }, //br
+    { q: q - 0, r: r - 1, s: s + 1 }, //bot
+    { q: q - 1, r: r - 0, s: s + 1 }, //bl
+    { q: q - 1, r: r + 1, s: s - 0 }, //tl
+  ];
+  neighborCoords.forEach(n => {
+    const potentialSector = getSector(G, [n.q, n.r, n.s]);
+    if (potentialSector) {
+      neighbors.push(potentialSector);
+    }
+  });
+
+  return neighbors;
+};
+
+const findAvailableSectors = (G, ctx) => {
+  const sectors = G.sectors.filter(s => s.tile && s.tile.influence === ctx.currentPlayer);
+  const validSectors = [];
+  sectors.forEach(s => {
+    const neighbors = getNeighbors(G, s);
+    validSectors.splice(0, 0, ...neighbors.filter(n => !n.tile));
+  });
+
+  return validSectors;
+};
+
+const PickUnplacedTile = (tiles) => {
+  const unplacedTiles = tiles.filter(t => !t.placed);
+  let tile = null;
+
+  if (unplacedTiles.length === 0) {
+    return null;
+  } else {
+    tile = unplacedTiles[randomInteger(0, unplacedTiles.length)];
+  }
+
+  return tile;
+}
+
+/** Choose a sector next to one of your ships, or influenced sectors, pick a tile for that sector's "ring".
+ * Choose to place or discard (if you don't like it).
+ * Wormholes must line up (unless you have that special wormhole tech).
+ * Put aliens/discovery stuff on it.
+ * May take control by placing influence.
+ * May activate colony ships after placing influence.
+ */
+const Explore = (G, ctx) => {
+  const validSectors = findAvailableSectors(G, ctx);
+  if (validSectors.length === 0) {
+    return INVALID_MOVE;
+  } else {
+    const theSector = validSectors[randomInteger(0, validSectors.length - 1)];
+    const pos = [theSector.pos.q, theSector.pos.r, theSector.pos.s];
+
+    switch (theSector.ring) {
+      case 1: {
+        const tile = PickUnplacedTile(G.tiles.inner);
+        if (!tile) {
+          return INVALID_MOVE;
+        }
+        placeTile(G.sectors, G.tiles.inner, tile.id, pos);
+        break;
+      }
+
+      case 2: {
+        const tile = PickUnplacedTile(G.tiles.middle);
+        if (!tile) {
+          return INVALID_MOVE;
+        }
+        placeTile(G.sectors, G.tiles.middle, tile.id, pos);
+        break;
+      }
+
+      default:
+      case 3: {
+        const tile = PickUnplacedTile(G.tiles.outer);
+        if (!tile) {
+          return INVALID_MOVE;
+        }
+        placeTile(G.sectors, G.tiles.outer, tile.id, pos);
+        break;
+      }
+    }
+  }
+};
 
 /** Trade 2x `from` type for 1x `to` type.
  * Trade can happen "at any time" (?).
@@ -151,7 +252,7 @@ const generateMap = (numPlayers, tiles) => {
   }
 
   //TODO TEMP
-  placeTile(map, tiles.inner, '104', [0, -1, 1]);
+  //placeTile(map, tiles.inner, '104', [0, -1, 1]);
 
   return map;
 };
@@ -212,8 +313,8 @@ export const Umbra = {
       center: GalacticCenter(),
       inner: InnerTiles(),
       starting: StartingTiles(),
-      middle: [],
-      outer: []
+      middle: MiddleTiles(),
+      outer: OuterTiles()
     };
 
     const techTiles = pickSomeMoreTiles(TechTiles(), ctx.numPlayers);
@@ -237,6 +338,7 @@ export const Umbra = {
     action: {
       start: true,
       moves: {
+        explore: Explore,
         trade: Trade,
         pass: (G, ctx) => {
           G.hasPassed[ctx.currentPlayer] = true;
