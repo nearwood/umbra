@@ -175,6 +175,15 @@ const Trade = (G, ctx, from, to) => {
   }
 };
 
+const generateRing3Sectors = ([q, r]) => [
+  generateSector(q, r - 1),
+  generateSector(q + 1, r - 1),
+  generateSector(q + 1, r),
+  generateSector(q, r + 1),
+  generateSector(q - 1, r + 1),
+  generateSector(q - 1, r),
+].filter(s => s.ring === 3);
+
 /**
  * Each player chooses a starting hex (and playerboard),
  * and places the hex in the spot closes to them.
@@ -217,38 +226,94 @@ const generateMap = (numPlayers, tiles) => {
   switch (numPlayers) {
     default:
       throw new Error("Invalid numPlayers");
-    case 2:
-      placeTile(map, tiles.starting, '221', [0, -2, 2]);
+    case 2: {
+      const startingCoords = [
+        [0, -2, 2],
+        [0, 2, -2]
+      ];
+
+      placeTile(map, tiles.starting, '221', startingCoords[0]);
       placeInfluence(map, '221', "0");
-      placeTile(map, tiles.starting, '222', [0, 2, -2]);
+      placeTile(map, tiles.starting, '222', startingCoords[1]);
       placeInfluence(map, '222', "1");
+
+      map.push(...generateRing3Sectors(startingCoords[0]));
+      map.push(...generateRing3Sectors(startingCoords[1]));
       break;
-    case 3:
-      placeTile(map, tiles.starting, '221', [0, -2, 2]);
-      placeTile(map, tiles.starting, '222', [2, 0, -2]);
-      placeTile(map, tiles.starting, '223', [-2, 2, 0]);
+    }
+
+    case 3: {
+      const startingCoords = [
+        [0, -2, 2],
+        [2, 0, -2],
+        [-2, 2, 0],
+      ];
+
+      placeTile(map, tiles.starting, '221', startingCoords[0]);
+      placeTile(map, tiles.starting, '222', startingCoords[1]);
+      placeTile(map, tiles.starting, '223', startingCoords[2]);
+
+      map.push(...generateRing3Sectors(startingCoords[0]));
+      map.push(...generateRing3Sectors(startingCoords[1]));
+      map.push(...generateRing3Sectors(startingCoords[2]));
       break;
-    case 4:
-      placeTile(map, tiles.starting, '221', [-2, 0, 2]);
-      placeTile(map, tiles.starting, '222', [2, -2, 0]);
-      placeTile(map, tiles.starting, '223', [2, 0, -2]);
-      placeTile(map, tiles.starting, '224', [-2, 2, 0]);
+    }
+
+    case 4: {
+      const startingCoords = [
+        [-2, 0, 2], [2, -2, 0], [2, 0, -2], [-2, 2, 0]
+      ];
+      placeTile(map, tiles.starting, '221', startingCoords[0]);
+      placeTile(map, tiles.starting, '222', startingCoords[1]);
+      placeTile(map, tiles.starting, '223', startingCoords[2]);
+      placeTile(map, tiles.starting, '224', startingCoords[3]);
+
+      map.push(...generateRing3Sectors(startingCoords[0]));
+      map.push(...generateRing3Sectors(startingCoords[1]));
+      map.push(...generateRing3Sectors(startingCoords[2]));
+      map.push(...generateRing3Sectors(startingCoords[3]));
       break;
-    case 5:
-      placeTile(map, tiles.starting, '221', [-2, 0, 2]);
-      placeTile(map, tiles.starting, '222', [2, -2, 0]);
-      placeTile(map, tiles.starting, '223', [2, 0, -2]);
-      placeTile(map, tiles.starting, '224', [-2, 2, 0]);
-      placeTile(map, tiles.starting, '225', [0, -2, 2]);
+    }
+
+    case 5: {
+      const startingCoords = [
+        [-2, 0, 2], [2, -2, 0], [2, 0, -2], [-2, 2, 0], [0, -2, 2],
+      ];
+
+      placeTile(map, tiles.starting, '221', startingCoords[0]);
+      placeTile(map, tiles.starting, '222', startingCoords[1]);
+      placeTile(map, tiles.starting, '223', startingCoords[2]);
+      placeTile(map, tiles.starting, '224', startingCoords[3]);
+      placeTile(map, tiles.starting, '225', startingCoords[4]);
+
+      map.push(...generateRing3Sectors(startingCoords[0]));
+      map.push(...generateRing3Sectors(startingCoords[1]));
+      map.push(...generateRing3Sectors(startingCoords[2]));
+      map.push(...generateRing3Sectors(startingCoords[3]));
+      map.push(...generateRing3Sectors(startingCoords[4]));
       break;
-    case 6:
-      placeTile(map, tiles.starting, '221', [-2, 0, 2]);
-      placeTile(map, tiles.starting, '222', [2, -2, 0]);
-      placeTile(map, tiles.starting, '223', [2, 0, -2]);
-      placeTile(map, tiles.starting, '224', [-2, 2, 0]);
-      placeTile(map, tiles.starting, '225', [0, -2, 2]);
-      placeTile(map, tiles.starting, '226', [0, 2, -2]);
+    }
+
+    case 6: {
+      const startingCoords = [
+        [-2, 0, 2], [2, -2, 0], [2, 0, -2], [-2, 2, 0], [0, -2, 2], [0, 2, -2]
+      ];
+
+      placeTile(map, tiles.starting, '221', startingCoords[0]);
+      placeTile(map, tiles.starting, '222', startingCoords[1]);
+      placeTile(map, tiles.starting, '223', startingCoords[2]);
+      placeTile(map, tiles.starting, '224', startingCoords[3]);
+      placeTile(map, tiles.starting, '225', startingCoords[4]);
+      placeTile(map, tiles.starting, '226', startingCoords[5]);
+
+      map.push(...generateRing3Sectors(startingCoords[0]));
+      map.push(...generateRing3Sectors(startingCoords[1]));
+      map.push(...generateRing3Sectors(startingCoords[2]));
+      map.push(...generateRing3Sectors(startingCoords[3]));
+      map.push(...generateRing3Sectors(startingCoords[4]));
+      map.push(...generateRing3Sectors(startingCoords[5]));
       break;
+    }
   }
 
   //TODO TEMP

@@ -85,7 +85,7 @@ export const HexMap = ({ props }) => {
 
   return (<>
     <div className='board col'>
-      <HexGrid width={400} height={400} viewBox="-50 -50 100 100">
+      <HexGrid width={400} height={400} viewBox="-50 -80 100 150">
         <Layout size={{ x: 10, y: 10 }} flat={true} spacing={1.1} origin={{ x: 0, y: 0 }}>
           {Array.isArray(G.sectors) && G.sectors.map(s =>
             <Hexagon key={`${s.pos.q}_${s.pos.r}_${s.pos.s}`} q={s.pos.q} r={s.pos.r} s={s.pos.s} className={`sector ring${s.ring} ${s.tile ? "filled" : "empty"}`} fill={s.tile ? "spiral" : ""}>
