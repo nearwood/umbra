@@ -38,7 +38,7 @@ const generateSector = (q, r) => {
 
 const isPos = (sector, q, r, s) => sector.pos.q === q && sector.pos.r === r && sector.pos.s === s;
 
-const placeTile = (map, tiles, tileId, [q, r, s]) => {
+const placeTile = (map, tiles, tileId, { q, r, s }) => {
   let sector = map.find(sector => isPos(sector, q, r, s));
 
   let desiredTile = tiles.find(t => t.id === tileId);
@@ -52,7 +52,7 @@ const placeTile = (map, tiles, tileId, [q, r, s]) => {
     sector.tile = desiredTile;
     desiredTile.placed = true;
   } else {
-    console.warn("Sector/Tile not found: ", tileId, [q, r, s]);
+    console.warn("Sector/Tile not found: ", tileId, { q, r, s });
   }
   //sector.tile.pos ?
   return sector.tile !== null;
@@ -68,7 +68,7 @@ const placeInfluence = (map, tileId, player) => {
   }
 }
 
-const getSector = (G, [q, r, s]) => G.sectors.find(sector => isPos(sector, q, r, s));
+const getSector = (G, { q, r, s }) => G.sectors.find(sector => isPos(sector, q, r, s));
 
 const getNeighbors = (G, sector) => {
   const neighbors = [];
@@ -82,7 +82,7 @@ const getNeighbors = (G, sector) => {
     { q: q - 1, r: r + 1, s: s - 0 }, //tl
   ];
   neighborCoords.forEach(n => {
-    const potentialSector = getSector(G, [n.q, n.r, n.s]);
+    const potentialSector = getSector(G, n);
     if (potentialSector) {
       neighbors.push(potentialSector);
     }
@@ -115,6 +115,14 @@ const PickUnplacedTile = (tiles) => {
   return tile;
 }
 
+const addExplorableSectors = (G, pos) => {
+  const maybeSectors = generateRing3Sectors(pos);
+  const validSectors = maybeSectors.filter(sector => !getSector(G, sector.pos));
+  if (validSectors.length > 0) {
+    G.sectors.push(...validSectors);
+  }
+}
+
 /** Choose a sector next to one of your ships, or influenced sectors, pick a tile for that sector's "ring".
  * Choose to place or discard (if you don't like it).
  * Wormholes must line up (unless you have that special wormhole tech).
@@ -128,7 +136,7 @@ const Explore = (G, ctx) => {
     return INVALID_MOVE;
   } else {
     const theSector = validSectors[randomInteger(0, validSectors.length - 1)];
-    const pos = [theSector.pos.q, theSector.pos.r, theSector.pos.s];
+    const pos = theSector.pos;
 
     switch (theSector.ring) {
       case 1: {
@@ -146,6 +154,7 @@ const Explore = (G, ctx) => {
           return INVALID_MOVE;
         }
         placeTile(G.sectors, G.tiles.middle, tile.id, pos);
+        addExplorableSectors(G, pos);
         break;
       }
 
@@ -156,6 +165,7 @@ const Explore = (G, ctx) => {
           return INVALID_MOVE;
         }
         placeTile(G.sectors, G.tiles.outer, tile.id, pos);
+        addExplorableSectors(G, pos);
         break;
       }
     }
@@ -175,7 +185,7 @@ const Trade = (G, ctx, from, to) => {
   }
 };
 
-const generateRing3Sectors = ([q, r]) => [
+const generateRing3Sectors = ({ q, r, s }) => [
   generateSector(q, r - 1),
   generateSector(q + 1, r - 1),
   generateSector(q + 1, r),
@@ -228,8 +238,8 @@ const generateMap = (numPlayers, tiles) => {
       throw new Error("Invalid numPlayers");
     case 2: {
       const startingCoords = [
-        [0, -2, 2],
-        [0, 2, -2]
+        { q: 0, r: -2, s: 2 },
+        { q: 0, r: 2, s: -2 }
       ];
 
       placeTile(map, tiles.starting, '221', startingCoords[0]);
@@ -244,11 +254,12 @@ const generateMap = (numPlayers, tiles) => {
 
     case 3: {
       const startingCoords = [
-        [0, -2, 2],
-        [2, 0, -2],
-        [-2, 2, 0],
+        { q: 0, r: -2, s: 2 },
+        { q: 2, r: 0, s: -2 },
+        { q: -2, r: 2, s: 0 },
       ];
 
+      //TODO influence for 3+ players
       placeTile(map, tiles.starting, '221', startingCoords[0]);
       placeTile(map, tiles.starting, '222', startingCoords[1]);
       placeTile(map, tiles.starting, '223', startingCoords[2]);
@@ -261,7 +272,7 @@ const generateMap = (numPlayers, tiles) => {
 
     case 4: {
       const startingCoords = [
-        [-2, 0, 2], [2, -2, 0], [2, 0, -2], [-2, 2, 0]
+        { q: -2, r: 0, s: 2 }, { q: 2, r: -2, s: 0 }, { q: 2, r: 0, s: -2 }, { q: -2, r: 2, s: 0 }
       ];
       placeTile(map, tiles.starting, '221', startingCoords[0]);
       placeTile(map, tiles.starting, '222', startingCoords[1]);
@@ -277,7 +288,7 @@ const generateMap = (numPlayers, tiles) => {
 
     case 5: {
       const startingCoords = [
-        [-2, 0, 2], [2, -2, 0], [2, 0, -2], [-2, 2, 0], [0, -2, 2],
+        { q: -2, r: 0, s: 2 }, { q: 2, r: -2, s: 0 }, { q: 2, r: 0, s: -2 }, { q: -2, r: 2, s: 0 }, { q: 0, r: -2, s: 2 },
       ];
 
       placeTile(map, tiles.starting, '221', startingCoords[0]);
@@ -296,7 +307,7 @@ const generateMap = (numPlayers, tiles) => {
 
     case 6: {
       const startingCoords = [
-        [-2, 0, 2], [2, -2, 0], [2, 0, -2], [-2, 2, 0], [0, -2, 2], [0, 2, -2]
+        { q: -2, r: 0, s: 2 }, { q: 2, r: -2, s: 0 }, { q: 2, r: 0, s: -2 }, { q: -2, r: 2, s: 0 }, { q: 0, r: -2, s: 2 }, { q: 0, r: 2, s: -2 }
       ];
 
       placeTile(map, tiles.starting, '221', startingCoords[0]);
@@ -317,7 +328,7 @@ const generateMap = (numPlayers, tiles) => {
   }
 
   //TODO TEMP
-  //placeTile(map, tiles.inner, '104', [0, -1, 1]);
+  //placeTile(map, tiles.inner, '104', {q: 0, r: -1, s: 1});
 
   return map;
 };
