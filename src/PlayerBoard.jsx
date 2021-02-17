@@ -34,6 +34,30 @@ const renderInfluenceCells = (G, ctx) => {
   return cells;
 }
 
+const renderProductionCell = (G, ctx, type) => {
+  let cells = [];
+  const productionMap = {
+    '1': 28,
+    '2': 24,
+    '3': 21,
+    '4': 18,
+    '5': 15,
+    '6': 12,
+    '7': 10,
+    '8': 8,
+    '9': 6,
+    '10': 4,
+    '11': 3,
+    '12': 2,
+  };
+  for (let i = 1; i <= 12; ++i) {
+    let f = G.data[ctx.currentPlayer].production[type];
+    cells.push(<div key={i} className={classNames('productionCell', { empty: 12 - f >= i })}>{productionMap[i]}</div>);
+  }
+
+  return cells;
+}
+
 export const PlayerBoard = ({ props }) => {
   const { G, ctx } = props;
 
@@ -85,43 +109,15 @@ export const PlayerBoard = ({ props }) => {
           <div className='row'>
             <div id='production' className='col'>
               <div className='row' id='money'>
-                <div className='cubeCell' />
-                <div className='cubeCell' />
-                <div className='cubeCell' />
-                <div className='cubeCell' />
-                <div className='cubeCell' />
-                <div className='cubeCell' />
-                <div className='cubeCell' />
-                <div className='cubeCell' />
-                <div className='cubeCell' />
-                <div className='cubeCell' />
-                <div className='cubeCell' />
+                {renderProductionCell(G, ctx, 'money')}
               </div>
               <div className='row' id='science'>
-                <div className='cubeCell' />
-                <div className='cubeCell' />
-                <div className='cubeCell' />
-                <div className='cubeCell' />
-                <div className='cubeCell' />
-                <div className='cubeCell' />
-                <div className='cubeCell' />
-                <div className='cubeCell' />
-                <div className='cubeCell' />
-                <div className='cubeCell' />
-                <div className='cubeCell' />
+                {renderProductionCell(G, ctx, 'science')}
+
               </div>
               <div className='row' id='materials'>
-                <div className='cubeCell' />
-                <div className='cubeCell' />
-                <div className='cubeCell' />
-                <div className='cubeCell' />
-                <div className='cubeCell' />
-                <div className='cubeCell' />
-                <div className='cubeCell' />
-                <div className='cubeCell' />
-                <div className='cubeCell' />
-                <div className='cubeCell' />
-                <div className='cubeCell' />
+                {renderProductionCell(G, ctx, 'materials')}
+
               </div>
             </div>
             <div id='buttons' className='row'>

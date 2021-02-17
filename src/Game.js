@@ -164,7 +164,12 @@ const createPlayerData = (numPlayers) => {
       money: 3,
       science: 3,
       materials: 3,
-      influence: 13
+      influence: 13,
+      production: {
+        money: 0,
+        science: 0,
+        materials: 0,
+      }
     };
   }
 
@@ -221,9 +226,9 @@ export const Umbra = {
       maxRounds: 9,
       currentRound: 1,
       data: createPlayerData(ctx.numPlayers),
-      hasPassed: resetHasPassed(ctx.numPlayers),
-      shipsAvailableForCombat: 0,
-      maxInfluence: 13
+      hasPassed: resetHasPassed(ctx.numPlayers), //TODO integrate into data
+      shipsAvailableForCombat: 0, //TODO integrate into data
+      maxInfluence: 13, //TODO integrate into data
     };
   },
   minPlayers: 2,
