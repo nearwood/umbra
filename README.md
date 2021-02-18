@@ -55,6 +55,9 @@ Live dev server: https://ludos.dev
 
 
 ## Map/Sector libraries
+
+https://github.com/nearwood/react-hexgrid
+
 https://github.com/Hellenic/react-hexgrid/
 
 https://github.com/icculusc/react-hex-engine

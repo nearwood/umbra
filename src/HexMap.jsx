@@ -1,4 +1,4 @@
-import { HexGrid, Layout, Hexagon, Text, Pattern, Path, Hex } from 'react-hexgrid';
+import { HexGrid, Layout, Hexagon, Text, Pattern, Path, Hex } from '@nearwood/react-hexgrid';
 import { PlayerColors } from './PlayerBoard';
 
 const ringText = (ring) => {
