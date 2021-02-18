@@ -8,7 +8,11 @@ export const GalacticCenter = () => ({
   vp: 4, // victory points
   discovery: true, // squarish outline around influence disc
   artifact: true, // star by VP
-  gcDefense: true,
+  gcDefense: {
+    hull: 7,
+    damage: 4,
+    targeting: 1
+  },
   planets: [
     { pink: { squares: 1, advanced: 1 } }, // science
     { brown: { squares: 1, advanced: 1 } }, // materials

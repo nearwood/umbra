@@ -1,8 +1,9 @@
-import StartingTiles from './startingTiles';
-import InnerTiles from './innerTiles';
-import MiddleTiles from './middleTiles';
-import OuterTiles from './outerTiles';
-import TechTiles from './techTiles';
+import StartingTiles from './StartingTiles';
+import InnerTiles from './InnerTiles';
+import MiddleTiles from './MiddleTiles';
+import OuterTiles from './OuterTiles';
+import TechTiles from './TechTiles';
+import DiscoveryTiles from './DiscoveryTiles';
 
 const tileCheck = (s) => {
   expect(s.name.length).toBeGreaterThan(0);
@@ -81,5 +82,14 @@ test('tech tiles', () => {
     expect(tile.name.length).toBeGreaterThanOrEqual(3);
     expect(tile.category).toBeDefined();
     expect(tile.type).toBeDefined();
+  })
+});
+
+
+test('discovery tiles', () => {
+  expect(DiscoveryTiles().length).toBe(21);
+  DiscoveryTiles().forEach(tile => {
+    expect(tile.vp).toBe(2);
+    expect(tile.name.length).toBeGreaterThanOrEqual(3);
   })
 });
