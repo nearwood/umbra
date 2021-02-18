@@ -73,11 +73,13 @@ test('outer tiles dynamicism', () => {
 
 test('tech tiles', () => {
   expect(TechTiles().length).toBe(24);
-  expect(() => TechTiles(1)).toThrow();
-  expect(TechTiles(2).length).toBe(12);
-  expect(TechTiles(3).length).toBe(14);
-  expect(TechTiles(4).length).toBe(16);
-  expect(TechTiles(5).length).toBe(18);
-  expect(TechTiles(6).length).toBe(20);
-  expect(() => TechTiles(7)).toThrow();
+  TechTiles().forEach(tile => {
+    expect(tile.bag).toBeGreaterThanOrEqual(0);
+    expect(tile.supply).toBe(0);
+    expect(tile.cost).toBeGreaterThanOrEqual(2);
+    expect(tile.minCost).toBeGreaterThanOrEqual(2);
+    expect(tile.name.length).toBeGreaterThanOrEqual(3);
+    expect(tile.category).toBeDefined();
+    expect(tile.type).toBeDefined();
+  })
 });
