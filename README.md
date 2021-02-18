@@ -13,9 +13,9 @@ Live dev server: https://ludos.dev
 
 - [x] Domain? Did I ever figure out CORS issues?
 - [ ] Lint, prettier, etc.
-- [ ] Update hex library to remove react warnings
+- [x] Update hex library to remove react warnings
 - [x] EC2 instance
-- [ ] https netdata, update live monitor
+- [x] https netdata, update live monitor
 
 # TODO
 
@@ -43,7 +43,7 @@ Live dev server: https://ludos.dev
 - [ ] Combat
 - [ ] Diplomacy
 - [ ] VP
-  - [ ] Discovery Tiles
+- [ ] Discovery Tiles
 
 ## Actions
 - [ ] Explore
