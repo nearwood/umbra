@@ -5,15 +5,17 @@ import { Umbra } from './Game';
 import { PlayerBoard } from './PlayerBoard';
 import { SupplyBoard } from './SupplyBoard';
 import { HexMap } from './HexMap';
+import { SpeciesList } from './SpeciesList';
 
 export const GameBoard = (props) => (
-  <div>
-    <HexMap props={props} />
-    <hr />
-    <SupplyBoard props={props} />
-    <hr />
-    <PlayerBoard props={props} />
-  </div>
+  props.ctx.phase === 'pick' ? <SpeciesList props={props} /> :
+    <div>
+      <HexMap props={props} />
+      <hr />
+      <SupplyBoard props={props} />
+      <hr />
+      <PlayerBoard props={props} />
+    </div>
 );
 
 const GameClient = Client({

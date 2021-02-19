@@ -1,4 +1,50 @@
+html {
+  font-family: Arial, Helvetica, sans-serif;
+}
 
+.species.row div {
+  flex-basis: 100px;
+}
+
+.species .playerIndicator {
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: #0f0;
+  text-shadow: 0px 0px 5px #090;
+  border: 2px solid #0f0;
+  padding: 2px;
+  margin: 2px;
+  border-radius: 10px;
+  background-color: #020;
+}
+
+.species.row .col {
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* .species .name {
+  flex-shrink: 2;
+} */
+
+.species input.avatar {
+  margin-top: 10px;
+  border: 2px solid black;
+  border-radius: 10px;
+  width: 128px;
+}
+
+.species > div {
+  margin: 10px;
+  border: 3px solid black;
+  padding: 10px;
+}
+
+.species div.disabled {
+  opacity: 0.33;
+}
 
 
 .yellow {

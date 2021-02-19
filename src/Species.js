@@ -7,7 +7,7 @@ const Species = () => [
   {
     name: 'Terran Conglomerate',
     type: SpeciesType.human,
-    avatar: null, //JPG URL?
+    avatar: "avatars/pilot.png", //JPG URL?
     startingSector: '229', //TODO Verify that's what this is.
     startingResources: {
       money: 2,
@@ -34,7 +34,7 @@ const Species = () => [
   {
     name: 'Mechanema',
     type: SpeciesType.alien,
-    avatar: null,
+    avatar: "avatars/alien-yellow.png",
     startingSector: '230',
     startingResources: {
       money: 3,

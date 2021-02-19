@@ -3,6 +3,7 @@ import Bot from "./Bot";
 import InnerTiles from "./InnerTiles";
 import MiddleTiles from "./MiddleTiles";
 import OuterTiles from "./OuterTiles";
+import Species from "./Species";
 import StartingTiles, { GalacticCenter } from "./StartingTiles";
 import TechTiles from "./TechTiles";
 
@@ -346,7 +347,8 @@ const createPlayerData = (numPlayers) => {
         money: 0,
         science: 0,
         materials: 0,
-      }
+      },
+      species: null,
     };
   }
 
@@ -382,6 +384,24 @@ const pickSomeMoreTiles = (tiles, numPlayers) => {
   }
 };
 
+const PickBoard = (G, ctx, speciesName) => {
+  const species = Species();
+  const theSpecies = species.find(s => s.name === speciesName);
+  if (!theSpecies) {
+    return INVALID_MOVE;
+  }
+
+  if (!G.data[ctx.currentPlayer].species) {
+    G.data[ctx.currentPlayer].species = theSpecies.name;
+    //TODO Remove picked species from list for next player
+    //TODO Remove pair from list to emulate physical game
+  } else {
+    return INVALID_MOVE;
+  }
+
+  ctx.events.endTurn();
+};
+
 export const Umbra = {
   name: 'Umbra',
   setup: (ctx) => {
@@ -397,8 +417,9 @@ export const Umbra = {
 
     //Sectors can be empty, or have a tile
     return {
+      species: Species(),
       tiles,
-      sectors: generateMap(ctx.numPlayers, tiles), //TODO will need phase to pick race
+      sectors: generateMap(ctx.numPlayers, tiles),
       techTiles,
       maxRounds: 9,
       currentRound: 1,
@@ -411,8 +432,16 @@ export const Umbra = {
   minPlayers: 2,
   maxPlayers: 6,
   phases: {
-    action: {
+    pick: {
       start: true,
+      moves: {
+        pickBoard: PickBoard
+      },
+      endIf: (G, ctx) => Object.values(G.data).every(p => p.species !== null),
+      next: 'action'
+    },
+    action: {
+      //start: true,
       moves: {
         explore: Explore,
         trade: Trade,

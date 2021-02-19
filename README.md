@@ -22,6 +22,7 @@ Live dev server: https://ludos.dev
 - [x] Basic game definition.
 - [x] First action (pass)
 - [ ] Initialize game (setup playerboards, hexes, etc.)
+  - [x] Each player picks a board
   - [x] Setup hex map
   - [ ] Setup player boards
     - [x] Cubes
@@ -53,6 +54,9 @@ Live dev server: https://ludos.dev
 - [ ] Build
 - [ ] Move
 
+## Game Art
+
+https://www.patreon.com/justinnichol
 
 ## Map/Sector libraries
 
