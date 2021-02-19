@@ -23,7 +23,6 @@ const ShipParts = () => [
     name: 'Nuclear Source',
     quantity: Infinity,
     energy: 3,
-
   }, {
     name: 'Hull',
     quantity: Infinity,

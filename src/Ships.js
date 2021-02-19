@@ -2,6 +2,7 @@
 const Ships = () => [
   {
     name: 'Interceptor',
+    quantity: 8,
     baseEnergy: 0,
     baseInitiative: 2,
     slots: [{
@@ -16,6 +17,7 @@ const Ships = () => [
     //SVG definitions? large + small?
   }, {
     name: 'Cruiser',
+    quantity: 4,
     baseEnergy: 0,
     baseInitiative: 1,
     slots: [{
@@ -33,6 +35,7 @@ const Ships = () => [
     }],
   }, {
     name: 'Dreadnought',
+    quantity: 2,
     baseEnergy: 0,
     baseInitiative: 0,
     slots: [{
@@ -54,6 +57,7 @@ const Ships = () => [
     }],
   }, {
     name: 'Starbase',
+    quantity: 4,
     baseInitiative: 4,
     baseEnergy: 3,
     slots: [{

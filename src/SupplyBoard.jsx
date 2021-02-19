@@ -28,17 +28,17 @@ export const SupplyBoard = ({ props }) => {
         <div id='researchTree' className='col'>
           <div className='research row'>
             {militaryTech.map(tile => (
-              <div key={tile.name} className={classNames('researchCell', { empty: tile.supply === 0 })}><div>{tile.name}</div> <div><span className='emoji'>🚀</span><span className='cost'>{tile.cost}/{tile.minCost}</span></div></div>
+              <div key={tile.name} className={classNames('researchCell', { empty: tile.supply === 0 })}><div>{tile.name}</div> <div><span className='emoji'>🛠️</span><span className='cost'>{tile.cost}/{tile.minCost}</span></div></div>
             ))}
           </div>
           <div className='research row'>
             {gridTech.map(tile => (
-              <div key={tile.name} className={classNames('researchCell', { empty: tile.supply === 0 })}> <div>{tile.name}</div> <div><span className='emoji'>🛠️</span><span className='cost'>{tile.cost}/{tile.minCost}</span></div></div>
+              <div key={tile.name} className={classNames('researchCell', { empty: tile.supply === 0 })}> <div>{tile.name}</div> <div><span className='emoji'>💰</span><span className='cost'>{tile.cost}/{tile.minCost}</span></div></div>
             ))}
           </div>
           <div className='research row'>
             {nanoTech.map(tile => (
-              <div key={tile.name} className={classNames('researchCell', { empty: tile.supply === 0 })}> <div>{tile.name}</div> <div><span className='emoji'>🤖</span><span className='cost'>{tile.cost}/{tile.minCost}</span></div></div>
+              <div key={tile.name} className={classNames('researchCell', { empty: tile.supply === 0 })}> <div>{tile.name}</div> <div><span className='emoji'>🧬</span><span className='cost'>{tile.cost}/{tile.minCost}</span></div></div>
             ))}
           </div>
         </div>
