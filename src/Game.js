@@ -340,6 +340,8 @@ const createPlayerData = (numPlayers) => {
       },
       species: null,
       hasPassed: false,
+      shipsAvailableForCombat: 0,
+      maxInfluence: 13,
     };
   }
 
@@ -414,9 +416,7 @@ export const Umbra = {
       techTiles,
       maxRounds: 9,
       currentRound: 1,
-      data: createPlayerData(ctx.numPlayers),
-      shipsAvailableForCombat: 0, //TODO integrate into data
-      maxInfluence: 13, //TODO integrate into data
+      data: createPlayerData(ctx.numPlayers)
     };
   },
   minPlayers: 2,
@@ -452,7 +452,7 @@ export const Umbra = {
         },
         retreat: (G, ctx, shipType, hex) => { }
       },
-      endIf: G => G.shipsAvailableForCombat === 0,
+      endIf: G => Object.values(G.data).every(p => p.shipsAvailableForCombat === 0),
       next: 'upkeep'
     },
     upkeep: {

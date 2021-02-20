@@ -26,7 +26,7 @@ const renderInfluenceCells = (G, ctx) => {
     '12': 0,
     '13': 0,
   };
-  for (let i = 1; i <= G.maxInfluence; ++i) {
+  for (let i = 1; i <= G.data[ctx.currentPlayer].maxInfluence; ++i) {
     let f = G.data[ctx.currentPlayer].influence;
     cells.push(<div key={i} className={classNames('actionCell', { empty: i >= f }, PlayerColors[ctx.currentPlayer])}>{upkeepCostMap[i]}</div>);
   }
