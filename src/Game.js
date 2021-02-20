@@ -334,9 +334,9 @@ const createPlayerData = (numPlayers) => {
       materials: 3,
       influence: 13,
       production: {
-        money: 0,
-        science: 0,
-        materials: 0,
+        money: 2,
+        science: 2,
+        materials: 2,
       },
       species: null,
       hasPassed: false,
