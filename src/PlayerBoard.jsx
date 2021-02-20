@@ -34,7 +34,7 @@ const renderInfluenceCells = (G, ctx) => {
   return cells;
 }
 
-const renderProductionCell = (G, ctx, type) => {
+const renderProductionCell = (player, type) => {
   let cells = [];
   const productionMap = {
     '1': 28,
@@ -48,11 +48,11 @@ const renderProductionCell = (G, ctx, type) => {
     '9': 6,
     '10': 4,
     '11': 3,
-    '12': 2,
+    '12': 2, //instructions have misprint, there are 12 total
   };
   for (let i = 1; i <= 12; ++i) {
-    let f = G.data[ctx.currentPlayer].production[type];
-    cells.push(<div key={i} className={classNames('productionCell', { empty: 12 - f >= i })}>{productionMap[i]}</div>);
+    let f = player.production[type];
+    cells.push(<div key={i} className={classNames('productionCell', { empty: f >= productionMap[i] })}>{productionMap[i]}</div>);
   }
 
   return cells;
@@ -60,17 +60,25 @@ const renderProductionCell = (G, ctx, type) => {
 
 export const PlayerBoard = ({ props }) => {
   const { G, ctx } = props;
+  const player = G.data[ctx.currentPlayer];
 
   return (<>
     <div className='board col'>
-      <div id='shipSection'>
-        <svg width={128} height={100} viewBox="-24 -24 72 100">
-          <polygon points="12,0 24,-24 36,0 48,48 72,72 -24,72 0,48" className="shipRect" />
-          <rect x={12} y={0} width={24} height={24} className="shipRect" />
-          <rect x={12} y={24} width={24} height={24} className="shipRect" />
-          <rect x={0} y={48} width={24} height={24} className="shipRect" />
-          <rect x={24} y={48} width={24} height={24} className="shipRect" />
-        </svg>
+      <div className='row'>
+        <div id='shipSection' className='grow row'>
+          <svg width={128} height={100} viewBox="-24 -24 72 100">
+            <polygon points="12,0 24,-24 36,0 48,48 72,72 -24,72 0,48" className="shipRect" />
+            <rect x={12} y={0} width={24} height={24} className="shipRect" />
+            <rect x={12} y={24} width={24} height={24} className="shipRect" />
+            <rect x={0} y={48} width={24} height={24} className="shipRect" />
+            <rect x={24} y={48} width={24} height={24} className="shipRect" />
+          </svg>
+        </div>
+        <div className='resources'>
+          <div><span className='emoji'>💰</span> <span className='resources'>{player.money}</span>+<span className='production'>{player.production.money}</span></div>
+          <div><span className='emoji'>🧬</span> <span className='resources'>{player.science}</span>+<span className='production'>{player.production.science}</span></div>
+          <div><span className='emoji'>🛠️</span> <span className='resources'>{player.materials}</span>+<span className='production'>{player.production.materials}</span></div>
+        </div>
       </div>
       <div id='rest' className='row'>
         <div id='rep'>
@@ -109,15 +117,13 @@ export const PlayerBoard = ({ props }) => {
           <div className='row'>
             <div id='production' className='col'>
               <div className='row' id='money'>
-                {renderProductionCell(G, ctx, 'money')}
+                {renderProductionCell(player, 'money')}
               </div>
               <div className='row' id='science'>
-                {renderProductionCell(G, ctx, 'science')}
-
+                {renderProductionCell(player, 'science')}
               </div>
               <div className='row' id='materials'>
-                {renderProductionCell(G, ctx, 'materials')}
-
+                {renderProductionCell(player, 'materials')}
               </div>
             </div>
             <div id='buttons' className='row'>

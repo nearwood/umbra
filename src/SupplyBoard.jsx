@@ -22,8 +22,10 @@ export const SupplyBoard = ({ props }) => {
     <div className='board row'>
       <div className='col'>
         <div id='rounds' className='row'>
-          <div>Round:</div>
-          <RoundIndicators maxRounds={G.maxRounds} currentRound={G.currentRound} />
+          <div>Round: </div>
+          <div className='row'><RoundIndicators maxRounds={G.maxRounds} currentRound={G.currentRound} /></div>
+          <div>Phase: {ctx.phase}</div>
+          <div>Current Player: {parseInt(ctx.currentPlayer) + 1}</div>
         </div>
         <div id='researchTree' className='col'>
           <div className='research row'>
@@ -77,11 +79,6 @@ export const SupplyBoard = ({ props }) => {
             </div>
           </div>
         </div>
-      </div>
-      <div className='col' id='spareParts'>
-        Spare parts
-        <div>Phase: {ctx.phase}</div>
-        <div>Current Player: {parseInt(ctx.currentPlayer) + 1}</div>
       </div>
     </div>
   </>);
