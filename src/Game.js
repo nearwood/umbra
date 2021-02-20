@@ -379,11 +379,14 @@ const pickSomeMoreTiles = (tiles, numPlayers) => {
 
 const PickBoard = (G, ctx, speciesName) => {
   const species = Species();
+
+  //Check that species exists
   const theSpecies = species.find(s => s.name === speciesName);
   if (!theSpecies) {
     return INVALID_MOVE;
   }
 
+  //Check that species isn't already picked
   if (!G.data[ctx.currentPlayer].species) {
     G.data[ctx.currentPlayer].species = theSpecies.name;
     //TODO Remove picked species from list for next player
