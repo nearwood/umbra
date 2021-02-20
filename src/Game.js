@@ -7,16 +7,6 @@ import Species from "./Species";
 import StartingTiles, { GalacticCenter } from "./StartingTiles";
 import TechTiles from "./TechTiles";
 
-const resetHasPassed = (numPlayers, obj) => {
-  const o = obj || {};
-
-  for (let i = 0; i < numPlayers; ++i) {
-    o[i] = false;
-  }
-
-  return o;
-}
-
 
 const sectorDistance = (s1, s2) => {
   const a = s1.pos;
@@ -349,6 +339,7 @@ const createPlayerData = (numPlayers) => {
         materials: 0,
       },
       species: null,
+      hasPassed: false,
     };
   }
 
@@ -424,7 +415,6 @@ export const Umbra = {
       maxRounds: 9,
       currentRound: 1,
       data: createPlayerData(ctx.numPlayers),
-      hasPassed: resetHasPassed(ctx.numPlayers), //TODO integrate into data
       shipsAvailableForCombat: 0, //TODO integrate into data
       maxInfluence: 13, //TODO integrate into data
     };
@@ -446,12 +436,12 @@ export const Umbra = {
         explore: Explore,
         trade: Trade,
         pass: (G, ctx) => {
-          G.hasPassed[ctx.currentPlayer] = true;
+          G.data[ctx.currentPlayer].hasPassed = true;
           ctx.events.endTurn();
         }
       },
-      endIf: G => Object.values(G.hasPassed).every(p => p),
-      onEnd: (G, ctx) => (resetHasPassed(ctx.numPlayers, G.hasPassed), G),
+      endIf: G => Object.values(G.data).every(p => p.hasPassed),
+      onEnd: (G, ctx) => (Object.values(G.data).forEach(p => p.hasPassed = false), G),
       next: 'combat'
     },
     combat: {
@@ -470,12 +460,12 @@ export const Umbra = {
         trade: Trade,
         activeColonyShip: () => { },
         pass: (G, ctx) => {
-          G.hasPassed[ctx.currentPlayer] = true;
+          G.data[ctx.currentPlayer].hasPassed = true;
           ctx.events.endTurn();
         }
       },
-      endIf: G => Object.values(G.hasPassed).every(p => p),
-      onEnd: (G, ctx) => (resetHasPassed(ctx.numPlayers, G.hasPassed), G.currentRound += 1, G),
+      endIf: G => Object.values(G.data).every(p => p.hasPassed),
+      onEnd: (G, ctx) => (Object.values(G.data).forEach(p => p.hasPassed = false), G.currentRound += 1, G),
       next: 'action'
     }
   },
