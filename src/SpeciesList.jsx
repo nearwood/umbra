@@ -6,7 +6,7 @@ export const SpeciesList = ({ props }) => {
   const species = G.species;
 
   return (<>
-    <div className='species row'>
+    <div className='species row wrap'>
       {species.map(s => {
         const player = Object.keys(G.data).find(k => G.data[k].species === s.name);
 
@@ -18,10 +18,10 @@ export const SpeciesList = ({ props }) => {
           <div>
             <div>Money/Science/Materials: {s.startingResources.money}/{s.startingResources.science}/{s.startingResources.materials}</div>
             <div>Trade: {s.tradeRatio}=&gt;1</div>
-            <div>Interceptor: {s.shipCost.Interceptor}</div>
-            <div>Cruiser: {s.shipCost.Cruiser}</div>
-            <div>Dreadnought: {s.shipCost.Dreadnought}</div>
-            <div>Starbase: {s.shipCost.Starbase}</div>
+            <div>Interceptor: {s.buildCost.Interceptor}</div>
+            <div>Cruiser: {s.buildCost.Cruiser}</div>
+            <div>Dreadnought: {s.buildCost.Dreadnought}</div>
+            <div>Starbase: {s.buildCost.Starbase}</div>
             <div>Moves: {s.actions.moves}</div>
             <div>Builds: {s.actions.builds}</div>
             <div>Upgrades: {s.actions.upgrades}</div>

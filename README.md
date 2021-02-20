@@ -56,7 +56,9 @@ Live dev server: https://ludos.dev
 
 ## Game Art
 
-https://www.patreon.com/justinnichol
+tatermand@gmail.com - ships/planets
+
+https://www.patreon.com/justinnichol - avatars
 
 ## Map/Sector libraries
 

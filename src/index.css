@@ -96,6 +96,10 @@ html {
   flex-flow: column;
 }
 
+.wrap {
+  flex-wrap: wrap;
+}
+
 .board {
   background-color: bisque;
   max-width: 66%;
