@@ -3,51 +3,14 @@ import Bot from "./Bot";
 import InnerTiles from "./InnerTiles";
 import MiddleTiles from "./MiddleTiles";
 import OuterTiles from "./OuterTiles";
+import ShipParts from "./ShipParts";
 import Species from "./Species";
 import StartingTiles, { GalacticCenter } from "./StartingTiles";
 import TechTiles from "./TechTiles";
+import { randomInteger, isPos, placeTile, generateSector, generateRing3Sectors } from './utils';
+import { Explore, Trade } from './moves';
 
 
-const sectorDistance = (s1, s2) => {
-  const a = s1.pos;
-  const b = s2.pos;
-  return (Math.abs(a.q - b.q) + Math.abs(a.r - b.r) + Math.abs(a.s - b.s)) / 2
-}
-
-const generateSector = (q, r) => {
-  let s = -q - r;
-  let sector = {
-    pos: { q, r, s },
-  };
-
-  let d = sectorDistance(sector, { pos: { q: 0, r: 0, s: 0 } });
-  sector.ring = Math.min(d, 3);
-  sector.tile = null;
-
-  return sector;
-}
-
-const isPos = (sector, q, r, s) => sector.pos.q === q && sector.pos.r === r && sector.pos.s === s;
-
-const placeTile = (map, tiles, tileId, { q, r, s }) => {
-  let sector = map.find(sector => isPos(sector, q, r, s));
-
-  let desiredTile = tiles.find(t => t.id === tileId);
-
-  if (desiredTile.placed) {
-    console.error("Tile already placed:", tileId);
-    return false;
-  }
-
-  if (sector && desiredTile) {
-    sector.tile = desiredTile;
-    desiredTile.placed = true;
-  } else {
-    console.warn("Sector/Tile not found: ", tileId, { q, r, s });
-  }
-  //sector.tile.pos ?
-  return sector.tile !== null;
-}
 
 const placeInfluence = (map, tileId, player) => {
   //TODO decrement from player board?
@@ -58,132 +21,6 @@ const placeInfluence = (map, tileId, player) => {
     throw Error("No such sector tile");
   }
 }
-
-const getSector = (G, { q, r, s }) => G.sectors.find(sector => isPos(sector, q, r, s));
-
-const getNeighbors = (G, sector) => {
-  const neighbors = [];
-  const { q, r, s } = sector.pos;
-  const neighborCoords = [
-    { q: q - 0, r: r + 1, s: s - 1 }, //toq
-    { q: q + 1, r: r - 0, s: s - 1 }, //tr
-    { q: q + 1, r: r - 1, s: s - 0 }, //br
-    { q: q - 0, r: r - 1, s: s + 1 }, //bot
-    { q: q - 1, r: r - 0, s: s + 1 }, //bl
-    { q: q - 1, r: r + 1, s: s - 0 }, //tl
-  ];
-  neighborCoords.forEach(n => {
-    const potentialSector = getSector(G, n);
-    if (potentialSector) {
-      neighbors.push(potentialSector);
-    }
-  });
-
-  return neighbors;
-};
-
-const findAvailableSectors = (G, ctx) => {
-  const sectors = G.sectors.filter(s => s.tile && s.tile.influence === ctx.currentPlayer);
-  const validSectors = [];
-  sectors.forEach(s => {
-    const neighbors = getNeighbors(G, s);
-    validSectors.splice(0, 0, ...neighbors.filter(n => !n.tile));
-  });
-
-  return validSectors;
-};
-
-const PickUnplacedTile = (tiles) => {
-  const unplacedTiles = tiles.filter(t => !t.placed);
-  let tile = null;
-
-  if (unplacedTiles.length === 0) {
-    return null;
-  } else {
-    tile = unplacedTiles[randomInteger(0, unplacedTiles.length)];
-  }
-
-  return tile;
-}
-
-const addExplorableSectors = (G, pos) => {
-  const maybeSectors = generateRing3Sectors(pos);
-  const validSectors = maybeSectors.filter(sector => !getSector(G, sector.pos));
-  if (validSectors.length > 0) {
-    G.sectors.push(...validSectors);
-  }
-}
-
-/** Choose a sector next to one of your ships, or influenced sectors, pick a tile for that sector's "ring".
- * Choose to place or discard (if you don't like it).
- * Wormholes must line up (unless you have that special wormhole tech).
- * Put aliens/discovery stuff on it.
- * May take control by placing influence.
- * May activate colony ships after placing influence.
- */
-const Explore = (G, ctx) => {
-  const validSectors = findAvailableSectors(G, ctx);
-  if (validSectors.length === 0) {
-    return INVALID_MOVE;
-  } else {
-    const theSector = validSectors[randomInteger(0, validSectors.length - 1)];
-    const pos = theSector.pos;
-
-    switch (theSector.ring) {
-      case 1: {
-        const tile = PickUnplacedTile(G.tiles.inner);
-        if (!tile) {
-          return INVALID_MOVE;
-        }
-        placeTile(G.sectors, G.tiles.inner, tile.id, pos);
-        break;
-      }
-
-      case 2: {
-        const tile = PickUnplacedTile(G.tiles.middle);
-        if (!tile) {
-          return INVALID_MOVE;
-        }
-        placeTile(G.sectors, G.tiles.middle, tile.id, pos);
-        addExplorableSectors(G, pos);
-        break;
-      }
-
-      default:
-      case 3: {
-        const tile = PickUnplacedTile(G.tiles.outer);
-        if (!tile) {
-          return INVALID_MOVE;
-        }
-        placeTile(G.sectors, G.tiles.outer, tile.id, pos);
-        addExplorableSectors(G, pos);
-        break;
-      }
-    }
-  }
-};
-
-/** Trade 2x `from` type for 1x `to` type.
- * Trade can happen "at any time" (?).
- * Will probably want to limit this so the bot isn't wasting everyone's time.
- */
-const Trade = (G, ctx, from, to) => {
-  if (G.data[ctx.currentPlayer][from] >= 2) { //TODO trade ratio
-    G.data[ctx.currentPlayer][from] -= 2;
-    G.data[ctx.currentPlayer][to] += 1;
-  } else {
-    return INVALID_MOVE;
-  }
-};
-
-const generateRing3Sectors = ({ q, r, s }) => [
-  generateSector(q, r - 1),
-  generateSector(q + 1, r - 1),
-  generateSector(q + 1, r),
-  generateSector(q, r + 1),
-  generateSector(q - 1, r + 1),
-  generateSector(q - 1, r),
-].filter(s => s.ring === 3);
 
 /**
  * Each player chooses a starting hex (and playerboard),
@@ -348,8 +185,6 @@ const createPlayerData = (numPlayers) => {
   return d;
 };
 
-const randomInteger = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
-
 const pickSomeMoreTiles = (tiles, numPlayers) => {
   if (numPlayers >= 2 && numPlayers <= 6) {
     let availableTiles = tiles.filter(t => t.bag >= 1);
@@ -424,6 +259,7 @@ export const Umbra = {
       tiles,
       sectors: generateMap(ctx.numPlayers, tiles),
       techTiles,
+      parts: ShipParts(),
       maxRounds: 9,
       currentRound: 1,
       data: createPlayerData(ctx.numPlayers)
