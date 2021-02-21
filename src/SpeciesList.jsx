@@ -3,17 +3,25 @@ import classNames from 'classnames';
 
 export const SpeciesList = ({ props }) => {
   const { G, ctx } = props;
+  // const player = G.data[ctx.currentPlayer];
   const species = G.species;
+
+  const toggleSelected = (name) => {
+    // if (player.species !== name) {
+    props.moves.pickBoard(name);
+    // } else {
+    //   props.moves.pickBoard();
+    // }
+  };
 
   return (<>
     <div className='species row wrap'>
       {species.map(s => {
-        const player = Object.keys(G.data).find(k => G.data[k].species === s.name);
+        const selectedPlayer = Object.keys(G.data).find(k => G.data[k].species === s.name);
+        const disabled = !!selectedPlayer;// && selectedPlayer !== ctx.currentPlayer;
 
-        const disabled = !!player;
-
-        return (<div className={classNames('col', { disabled })}>
-          {disabled && <span className='playerIndicator'>Player #{parseInt(player) + 1}</span>}
+        return (<div key={s.name} className={classNames('col', { disabled })}>
+          {disabled && <span className='indicator'>Player #{parseInt(selectedPlayer) + 1}</span>}
           <h2 className='name'>{s.name}</h2>
           <div>
             <div>Money/Science/Materials: {s.startingResources.money}/{s.startingResources.science}/{s.startingResources.materials}</div>
@@ -26,7 +34,7 @@ export const SpeciesList = ({ props }) => {
             <div>Builds: {s.actions.builds}</div>
             <div>Upgrades: {s.actions.upgrades}</div>
           </div>
-          <input disabled={disabled} type="image" alt="avatar" className="avatar" src={s.avatar} onClick={() => props.moves.pickBoard(s.name)} />
+          <input disabled={disabled} type="image" alt="avatar" className="avatar" src={s.avatar} onClick={() => toggleSelected(s.name)} />
         </div>);
       }
       )}
