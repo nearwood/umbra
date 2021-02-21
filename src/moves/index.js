@@ -1,4 +1,5 @@
 import Explore from './Explore';
 import Trade from './Trade';
+import PickBoard from './PickBoard';
 
-export { Explore, Trade };
+export { PickBoard, Explore, Trade };
