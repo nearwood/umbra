@@ -53,7 +53,7 @@ export const SupplyBoard = ({ props }) => {
         <div className='row shipParts'>
           <div className='col'>
             <div className='row'>
-              <div className='partsCell' />
+              <div className='partsCell'>{G.parts.find(p => p.name === 'Ion Cannon').name}</div>
               <div className='partsCell' />
             </div>
             <div className='row'>
