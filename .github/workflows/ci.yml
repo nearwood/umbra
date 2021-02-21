@@ -20,11 +20,17 @@ jobs:
         node-version: 12.x
     - run: npm ci
     - run: npm test
-    - run: npm run build --if-present
-    - name: Upload Build Artifact
-      uses: actions/upload-artifact@v2.2.2
+    - run: npm run build
+    # - name: Upload Build Artifact
+    #   uses: actions/upload-artifact@v2.2.2
+    #   with:
+    #     name: umbra
+    #     path: build/
+    #     if-no-files-found: error
+    #     retention-days: 1
+    - name: Rsync with server
       with:
-        name: umbra
-        path: build/
-        if-no-files-found: error
-        retention-days: 1
+        SSH_KEY: ${{ secrets.UMBRA_DEV_EC2 }}
+      run: |
+        echo $SSH_KEY > ssh.key && rsync -e 'ssh -i ssh.key' -azP build/ ubuntu@ludos.dev:/var/www/umbra-dev/
+    - run: rm ssh.key
