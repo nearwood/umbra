@@ -10,6 +10,14 @@ const RoundIndicators = ({ maxRounds, currentRound }) => {
   return indicators;
 }
 
+const CostLabel = ({ cost, minCost }) => {
+  if (cost !== minCost) {
+    return <span className='cost'><span className='price'>{cost}</span>|<span className='min'>{minCost}</span></span>;
+  } else {
+    return <span className='cost'><span className='price'>{cost}</span></span>;
+  }
+}
+
 export const SupplyBoard = ({ props }) => {
   const { G, ctx, isActive } = props;
 
@@ -28,17 +36,17 @@ export const SupplyBoard = ({ props }) => {
         <div id='researchTree' className='col'>
           <div className='research row'>
             {militaryTech.map(tile => (
-              <div key={tile.name} className={classNames('researchCell center', { empty: tile.supply === 0 })}><div>{tile.name}</div> <div className='row'><span className='emoji'>🛠️</span><span className='grow' /><span className='cost'>{tile.cost}/{tile.minCost}</span></div></div>
+              <div key={tile.name} className={classNames('researchCell center', { empty: tile.supply === 0 })}><div>{tile.name}</div> <div className='row'><span className='emoji'>🛠️</span><span className='grow' /><CostLabel cost={tile.cost} minCost={tile.minCost} /></div></div>
             ))}
           </div>
           <div className='research row'>
             {gridTech.map(tile => (
-              <div key={tile.name} className={classNames('researchCell center', { empty: tile.supply === 0 })}> <div>{tile.name}</div> <div className='row'><span className='emoji'>💰</span><span className='grow' /><span className='cost'>{tile.cost}/{tile.minCost}</span></div></div>
+              <div key={tile.name} className={classNames('researchCell center', { empty: tile.supply === 0 })}> <div>{tile.name}</div> <div className='row'><span className='emoji'>💰</span><span className='grow' /><CostLabel cost={tile.cost} minCost={tile.minCost} /></div></div>
             ))}
           </div>
           <div className='research row'>
             {nanoTech.map(tile => (
-              <div key={tile.name} className={classNames('researchCell center', { empty: tile.supply === 0 })}> <div>{tile.name}</div> <div className='row'><span className='emoji'>🧬</span><span className='grow' /><span className='cost'>{tile.cost}/{tile.minCost}</span></div></div>
+              <div key={tile.name} className={classNames('researchCell center', { empty: tile.supply === 0 })}> <div>{tile.name}</div> <div className='row'><span className='emoji'>🧬</span><span className='grow' /><CostLabel cost={tile.cost} minCost={tile.minCost} /></div></div>
             ))}
           </div>
         </div>

@@ -171,11 +171,21 @@ div.resources span.production {
 .researchCell .cost {
   border: 1px solid black;
   border-radius: 4px;
-  padding: 1px;
+  padding: 1px 3px;
   margin: 2px;
 }
 .researchCell.empty .cost {
   border-color: grey;
+}
+.researchCell .cost .price {
+  font-weight: bold;
+}
+
+.super {
+  vertical-align: super;
+}
+.sub {
+  vertical-align: sub;
 }
 
 .researchCell .row {
