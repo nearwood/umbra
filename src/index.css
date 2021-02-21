@@ -6,17 +6,10 @@ html {
   flex-basis: 100px;
 }
 
-.species .playerIndicator {
+.species .indicator {
   position: absolute;
   right: 0;
   top: 0;
-  color: #0f0;
-  text-shadow: 0px 0px 5px #090;
-  border: 2px solid #0f0;
-  padding: 2px;
-  margin: 2px;
-  border-radius: 10px;
-  background-color: #020;
 }
 
 .species.row .col {
@@ -106,6 +99,7 @@ html {
 
 .center {
   align-items: center;
+  text-align: center;
 }
 
 .end {
@@ -158,8 +152,10 @@ div.resources span.production {
   background-color: darkturquoise;
   margin: 2px;
   border: 1px solid black;
+  border-radius: 4px;
   min-width: 48px;
   min-height: 48px;
+  padding: 2px 2px 0px 2px;
 }
 
 .researchCell.empty {
@@ -167,14 +163,23 @@ div.resources span.production {
   opacity: 80%;
   color: grey;
 }
+
 .researchCell.empty .emoji {
   opacity: 50%;
 }
 
-.researchCell:not(.empty) .cost {
+.researchCell .cost {
   border: 1px solid black;
-  border-radius: 14px;
-  padding: 2px;
+  border-radius: 4px;
+  padding: 1px;
+  margin: 2px;
+}
+.researchCell.empty .cost {
+  border-color: grey;
+}
+
+.researchCell .row {
+  width: 100%;
 }
 
 .productionCell {
@@ -245,15 +250,55 @@ div.resources span.production {
   justify-content: space-between;
 }
 
-#rounds .cell {
+.indicator {
+  border: 1px solid #0f0;
+  color: #080;
+  background-color: #020;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  font-weight: bold;
+  border-radius: 8px;
   margin: 2px;
-  border: 1px solid black;
+  padding: 2px;
+  text-shadow: 0px 0px 8px #060;
+}
+
+.indicator.highlight {
+  background-color: #080;
+  color: #0f0;
+}
+
+#rounds .cell {
   min-width: 32px;
   min-height: 32px;
-  color: black;
+  width: 40px;
+  height: 40px;
 }
 #rounds .cell.highlight {
-  background-color: purple;
+
+}
+
+.phase.indicator {
+  padding: 2px 10px;
+  text-transform: uppercase;
+}
+
+.phase.action {
+  color: #0c0;
+}
+.phase.combat {
+  color:#c00;
+  background-color: #200;
+  border-color: #f00;
+  text-shadow: 0 0 8px #600;
+}
+.phase.upkeep {
+  color:#0cc;
+  background-color: #022;
+  border-color: #0ff;
+  text-shadow: 0 0 8px #066;
 }
 
 

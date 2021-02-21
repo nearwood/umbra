@@ -59,11 +59,11 @@ const renderProductionCell = (player, type) => {
 }
 
 export const PlayerBoard = ({ props }) => {
-  const { G, ctx } = props;
+  const { G, ctx, isActive } = props;
   const player = G.data[ctx.currentPlayer];
 
   return (<>
-    <div className='board col'>
+    <div className={classNames('board col', { disabled: !isActive })}>
       <div className='row'>
         <div id='shipSection' className='grow row'>
           <svg width={128} height={100} viewBox="-24 -24 72 100">
@@ -127,13 +127,13 @@ export const PlayerBoard = ({ props }) => {
               </div>
             </div>
             <div id='buttons' className='row'>
-              <button>EXP</button>
-              <button>INF</button>
-              <button>RES</button>
-              <button>UPG</button>
-              <button>REP</button>
-              <button>MOV</button>
-              <button onClick={() => props.moves.pass()}>PAS</button>
+              <button disabled={!isActive}>EXP</button>
+              <button disabled={!isActive}>INF</button>
+              <button disabled={!isActive}>RES</button>
+              <button disabled={!isActive}>UPG</button>
+              <button disabled={!isActive}>REP</button>
+              <button disabled={!isActive}>MOV</button>
+              <button disabled={!isActive} onClick={() => props.moves.pass()}>PAS</button>
             </div>
           </div>
           <div id='actions' className='row'>
