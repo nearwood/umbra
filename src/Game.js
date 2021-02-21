@@ -379,6 +379,13 @@ const pickSomeMoreTiles = (tiles, numPlayers) => {
 
 const PickBoard = (G, ctx, speciesName) => {
   const species = Species();
+  const player = G.data[ctx.currentPlayer];
+
+  //To unselect a board
+  // if (!speciesName && player.species) {
+  //   player.species = null;
+  //   return;
+  // }
 
   //Check that species exists
   const theSpecies = species.find(s => s.name === speciesName);
@@ -387,8 +394,8 @@ const PickBoard = (G, ctx, speciesName) => {
   }
 
   //Check that species isn't already picked
-  if (!G.data[ctx.currentPlayer].species) {
-    G.data[ctx.currentPlayer].species = theSpecies.name;
+  if (!player.species) {
+    player.species = theSpecies.name;
     //TODO Remove picked species from list for next player
     //TODO Remove pair from list to emulate physical game
   } else {
