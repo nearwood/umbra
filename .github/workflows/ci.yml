@@ -33,5 +33,5 @@ jobs:
       shell: bash
       env:
         SSH_KEY: ${{ secrets.UMBRA_DEV_EC2 }}
-      run: echo "$SSH_KEY" > ssh.key && chmod 600 ssh.key && ls -la ssh.key && rsync -e 'ssh -v -i ssh.key' -aznvP build/ ubuntu@ludos.dev:/var/www/umbra-dev/
+      run: echo "$SSH_KEY" > ssh.key && chmod 600 ssh.key && rsync -e 'ssh -v -i ssh.key -o StrictHostKeyChecking=no' -aznvP build/ ubuntu@ludos.dev:/var/www/umbra-dev/
     - run: rm ssh.key
