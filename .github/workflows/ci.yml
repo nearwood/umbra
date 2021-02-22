@@ -30,7 +30,8 @@ jobs:
     #     if-no-files-found: error
     #     retention-days: 1
     - name: Rsync with server
+      shell: bash
       env:
         SSH_KEY: ${{ secrets.UMBRA_DEV_EC2 }}
-      run: echo $SSH_KEY > ssh.key && chmod 600 ssh.key && ls -la ssh.key && rsync -e 'ssh -v -i ssh.key' -aznvP build/ ubuntu@ludos.dev:/var/www/umbra-dev/
+      run: echo "$SSH_KEY" > ssh.key && chmod 600 ssh.key && ls -la ssh.key && rsync -e 'ssh -v -i ssh.key' -aznvP build/ ubuntu@ludos.dev:/var/www/umbra-dev/
     - run: rm ssh.key
