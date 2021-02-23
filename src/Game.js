@@ -1,7 +1,29 @@
 import Setup from './Setup';
 import * as Moves from './moves';
 import Bot from "./Bot";
+import { UpkeepMap, ProductionMap } from './PlayerBoard';
 
+/** Pay upkeep amounts (money), produce resources (money, science, materials) */
+const upkeep = (G, ctx) => {
+  Object.values(G.data).forEach(player => {
+    const upkeepDue = UpkeepMap[player.influence];
+    player.money += -upkeepDue + player.production.money;
+
+    //TODO If negative, bankrupt procedures
+    player.money = Math.max(player.money, 0);
+
+    player.materials += player.production.materials;
+    player.science += player.production.science;
+
+    Object.keys(player.spentInfluence).forEach(key => {
+      const spent = player.spentInfluence[key];
+      if (key !== 'influence') {
+        player.influence += spent;
+      }
+      player.spentInfluence[key] = 0;
+    });
+  });
+};
 
 export const Umbra = {
   name: 'Umbra',
@@ -43,6 +65,7 @@ export const Umbra = {
       next: 'upkeep'
     },
     upkeep: {
+      onBegin: upkeep,
       moves: {
         trade: Moves.Trade,
         activeColonyShip: () => { },

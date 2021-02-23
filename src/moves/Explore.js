@@ -71,6 +71,11 @@ const addExplorableSectors = (G, pos) => {
  * May activate colony ships after placing influence.
  */
 const Explore = (G, ctx) => {
+  const player = G.data[ctx.currentPlayer];
+  if (player.influence === 0) {
+    return INVALID_MOVE;
+  }
+
   const validSectors = findAvailableSectors(G, ctx);
   if (validSectors.length === 0) {
     return INVALID_MOVE;
@@ -110,6 +115,9 @@ const Explore = (G, ctx) => {
       }
     }
   }
+
+  player.influence -= 1;
+  player.spentInfluence.explore += 1;
 };
 
 export default Explore;

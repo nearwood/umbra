@@ -163,10 +163,18 @@ const createPlayerData = (numPlayers) => {
   for (let i = 0; i < numPlayers; ++i) {
     d[i] = {
       vp: 0,
-      money: 3,
-      science: 3,
-      materials: 3,
+      money: 0,
+      science: 0,
+      materials: 0,
       influence: 13,
+      spentInfluence: {
+        explore: 0,
+        influence: 0,
+        research: 0,
+        upgrade: 0,
+        build: 0,
+        move: 0,
+      },
       production: {
         money: 2,
         science: 2,

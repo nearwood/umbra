@@ -9,26 +9,43 @@ export const PlayerColors = {
   "5": 'white',
 };
 
+export const UpkeepMap = {
+  '1': 30,
+  '2': 25,
+  '3': 21,
+  '4': 17,
+  '5': 13,
+  '6': 10,
+  '7': 7,
+  '8': 5,
+  '9': 3,
+  '10': 2,
+  '11': 1,
+  '12': 0,
+  '13': 0,
+}
+
+export const ProductionMap = {
+  '1': 28,
+  '2': 24,
+  '3': 21,
+  '4': 18,
+  '5': 15,
+  '6': 12,
+  '7': 10,
+  '8': 8,
+  '9': 6,
+  '10': 4,
+  '11': 3,
+  '12': 2, //instructions have misprint, there are 12 total
+};
+
 const renderInfluenceCells = (G, ctx) => {
   let cells = [];
-  const upkeepCostMap = {
-    '1': 30,
-    '2': 25,
-    '3': 21,
-    '4': 17,
-    '5': 13,
-    '6': 10,
-    '7': 7,
-    '8': 5,
-    '9': 3,
-    '10': 2,
-    '11': 1,
-    '12': 0,
-    '13': 0,
-  };
+
   for (let i = 1; i <= G.data[ctx.currentPlayer].maxInfluence; ++i) {
     let f = G.data[ctx.currentPlayer].influence;
-    cells.push(<div key={i} className={classNames('actionCell', { empty: i >= f }, PlayerColors[ctx.currentPlayer])}>{upkeepCostMap[i]}</div>);
+    cells.push(<div key={i} className={classNames('actionCell', { empty: i >= f }, PlayerColors[ctx.currentPlayer])}>{UpkeepMap[i]}</div>);
   }
 
   return cells;
@@ -36,23 +53,10 @@ const renderInfluenceCells = (G, ctx) => {
 
 const renderProductionCell = (player, type) => {
   let cells = [];
-  const productionMap = {
-    '1': 28,
-    '2': 24,
-    '3': 21,
-    '4': 18,
-    '5': 15,
-    '6': 12,
-    '7': 10,
-    '8': 8,
-    '9': 6,
-    '10': 4,
-    '11': 3,
-    '12': 2, //instructions have misprint, there are 12 total
-  };
+
   for (let i = 1; i <= 12; ++i) {
     let f = player.production[type];
-    cells.push(<div key={i} className={classNames('productionCell', { empty: f >= productionMap[i] })}>{productionMap[i]}</div>);
+    cells.push(<div key={i} className={classNames('productionCell', { empty: f >= ProductionMap[i] })}>{ProductionMap[i]}</div>);
   }
 
   return cells;
@@ -127,13 +131,13 @@ export const PlayerBoard = ({ props }) => {
               </div>
             </div>
             <div id='buttons' className='row'>
-              <button disabled={!isActive}>EXP</button>
-              <button disabled={!isActive}>INF</button>
-              <button disabled={!isActive}>RES</button>
-              <button disabled={!isActive}>UPG</button>
-              <button disabled={!isActive}>REP</button>
-              <button disabled={!isActive}>MOV</button>
-              <button disabled={!isActive} onClick={() => props.moves.pass()}>PAS</button>
+              <button disabled={!isActive} onClick={() => props.moves.explore()}><div>EXP</div>{player.spentInfluence.explore}</button>
+              <button disabled={!isActive}><div>INF</div>{player.spentInfluence.influence}</button>
+              <button disabled={!isActive}><div>RES</div>{player.spentInfluence.research}</button>
+              <button disabled={!isActive}><div>UPG</div>{player.spentInfluence.upgrade}</button>
+              <button disabled={!isActive}><div>BLD</div>{player.spentInfluence.build}</button>
+              <button disabled={!isActive}><div>MOV</div>{player.spentInfluence.move}</button>
+              <button disabled={!isActive} onClick={() => props.moves.pass()}><div>PASS</div></button>
             </div>
           </div>
           <div id='actions' className='row'>

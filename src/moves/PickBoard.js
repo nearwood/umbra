@@ -23,6 +23,10 @@ const applyStartingTech = (G, player, species) => {
         break;
     }
   });
+
+  Object.keys(species.startingResources).forEach(key => {
+    player[key] = species.startingResources[key];
+  });
 };
 
 const PickBoard = (G, ctx, speciesName) => {
