@@ -63,6 +63,10 @@ export const PlayerBoard = ({ props }) => {
   const player = G.data[ctx.currentPlayer];
   const species = G.species.find(s => s.name === player.species);
 
+  const emptyMaterialsSpots = Array(7 - player.research.materials.length).fill(0).map((x, i) => <div key={i} className='techCell' />);
+  const emptyScienceSpots = Array(7 - player.research.science.length).fill(0).map((x, i) => <div key={i} className='techCell' />);
+  const emptyMoneySpots = Array(7 - player.research.money.length).fill(0).map((x, i) => <div key={i} className='techCell' />);
+
   return (<>
     <div className={classNames('board col', { disabled: !isActive })}>
       <div className='row'>
@@ -89,31 +93,22 @@ export const PlayerBoard = ({ props }) => {
           <div className='row'>
             <div id='techTree' className='col grow'>
               <div className='tech row'>
-                <div className='techCell' />
-                <div className='techCell' />
-                <div className='techCell' />
-                <div className='techCell' />
-                <div className='techCell' />
-                <div className='techCell' />
-                <div className='techCell' />
+                {player.research.materials.map(tile => (
+                  <div key={tile.name} className={classNames('techCell center')}><div>{tile.name}</div> <div className='row'><span className='emoji'>🛠️</span><span className='grow' /></div></div>
+                ))}
+                {emptyMaterialsSpots}
               </div>
               <div className='tech row'>
-                <div className='techCell' />
-                <div className='techCell' />
-                <div className='techCell' />
-                <div className='techCell' />
-                <div className='techCell' />
-                <div className='techCell' />
-                <div className='techCell' />
+                {player.research.money.map(tile => (
+                  <div key={tile.name} className={classNames('techCell center')}><div>{tile.name}</div> <div className='row'><span className='emoji'>🛠️</span><span className='grow' /></div></div>
+                ))}
+                {emptyMoneySpots}
               </div>
               <div className='tech row'>
-                <div className='techCell' />
-                <div className='techCell' />
-                <div className='techCell' />
-                <div className='techCell' />
-                <div className='techCell' />
-                <div className='techCell' />
-                <div className='techCell' />
+                {player.research.science.map(tile => (
+                  <div key={tile.name} className={classNames('techCell center')}><div>{tile.name}</div> <div className='row'><span className='emoji'>🛠️</span><span className='grow' /></div></div>
+                ))}
+                {emptyScienceSpots}
               </div>
             </div>
             <img alt="avatar" className='avatar' src={species.avatar} />
