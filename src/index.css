@@ -22,11 +22,15 @@ html {
   flex-shrink: 2;
 } */
 
-.species input.avatar {
+.species input.avatar, img.avatar {
   margin-top: 10px;
   border: 2px solid black;
   border-radius: 10px;
   width: 128px;
+}
+
+img.avatar {
+  margin: 4px;
 }
 
 .species > div {

@@ -61,6 +61,7 @@ const renderProductionCell = (player, type) => {
 export const PlayerBoard = ({ props }) => {
   const { G, ctx, isActive } = props;
   const player = G.data[ctx.currentPlayer];
+  const species = G.species.find(s => s.name === player.species);
 
   return (<>
     <div className={classNames('board col', { disabled: !isActive })}>
@@ -85,34 +86,37 @@ export const PlayerBoard = ({ props }) => {
           Rep goes here.
         </div>
         <div className='right col'>
-          <div id='techTree' className='col'>
-            <div className='tech row'>
-              <div className='techCell' />
-              <div className='techCell' />
-              <div className='techCell' />
-              <div className='techCell' />
-              <div className='techCell' />
-              <div className='techCell' />
-              <div className='techCell' />
+          <div className='row'>
+            <div id='techTree' className='col grow'>
+              <div className='tech row'>
+                <div className='techCell' />
+                <div className='techCell' />
+                <div className='techCell' />
+                <div className='techCell' />
+                <div className='techCell' />
+                <div className='techCell' />
+                <div className='techCell' />
+              </div>
+              <div className='tech row'>
+                <div className='techCell' />
+                <div className='techCell' />
+                <div className='techCell' />
+                <div className='techCell' />
+                <div className='techCell' />
+                <div className='techCell' />
+                <div className='techCell' />
+              </div>
+              <div className='tech row'>
+                <div className='techCell' />
+                <div className='techCell' />
+                <div className='techCell' />
+                <div className='techCell' />
+                <div className='techCell' />
+                <div className='techCell' />
+                <div className='techCell' />
+              </div>
             </div>
-            <div className='tech row'>
-              <div className='techCell' />
-              <div className='techCell' />
-              <div className='techCell' />
-              <div className='techCell' />
-              <div className='techCell' />
-              <div className='techCell' />
-              <div className='techCell' />
-            </div>
-            <div className='tech row'>
-              <div className='techCell' />
-              <div className='techCell' />
-              <div className='techCell' />
-              <div className='techCell' />
-              <div className='techCell' />
-              <div className='techCell' />
-              <div className='techCell' />
-            </div>
+            <img alt="avatar" className='avatar' src={species.avatar} />
           </div>
           <div className='row'>
             <div id='production' className='col'>
