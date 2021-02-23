@@ -172,6 +172,11 @@ const createPlayerData = (numPlayers) => {
         science: 2,
         materials: 2,
       },
+      research: {
+        money: [], //grid
+        science: [], //nano
+        materials: [], //military
+      },
       species: null,
       hasPassed: false,
       shipsAvailableForCombat: 0,

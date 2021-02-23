@@ -1,6 +1,29 @@
 import { INVALID_MOVE } from "boardgame.io/core";
 import Species from "../Species";
+import { TechCategory } from "../TechTiles";
 
+const applyStartingTech = (G, player, species) => {
+  species.startingTech.forEach(techName => {
+    //Find the technology, get its type, apply to the matching player's track
+    const tile = G.techTiles.find(tile => tile.name === techName);
+    if (!tile) {
+      throw new Error(`Could not find tech tile: ${techName}`);
+    }
+
+    switch (tile.category) {
+      default: throw new Error(`Invalid tech category: ${tile.category}`);
+      case TechCategory.Military:
+        player.research.materials.push(tile);
+        break;
+      case TechCategory.Grid:
+        player.research.money.push(tile);
+        break;
+      case TechCategory.Nano:
+        player.research.science.push(tile);
+        break;
+    }
+  });
+};
 
 const PickBoard = (G, ctx, speciesName) => {
   const species = Species();
@@ -21,6 +44,7 @@ const PickBoard = (G, ctx, speciesName) => {
   //Check that species isn't already picked
   if (!player.species) {
     player.species = theSpecies.name;
+    applyStartingTech(G, player, theSpecies);
     //TODO Remove picked species from list for next player
     //TODO Remove pair from list to emulate physical game
   } else {
