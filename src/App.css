@@ -104,6 +104,9 @@ img.avatar {
   text-align: center;
 }
 
+.start {
+  align-self: flex-start;
+}
 .end {
   align-self: flex-end;
 }

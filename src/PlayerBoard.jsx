@@ -99,19 +99,19 @@ export const PlayerBoard = ({ props }) => {
             <div id='techTree' className='col grow'>
               <div className='tech row'>
                 {player.research.materials.map(tile => (
-                  <div key={tile.name} className={classNames('techCell center')}><div>{tile.name}</div> <div className='row'><span className='emoji'>🛠️</span><span className='grow' /></div></div>
+                  <div key={tile.name} className={classNames('techCell center')}><div>{tile.name}</div><span className='emoji start'>🛠️</span></div>
                 ))}
                 {emptyMaterialsSpots}
               </div>
               <div className='tech row'>
                 {player.research.money.map(tile => (
-                  <div key={tile.name} className={classNames('techCell center')}><div>{tile.name}</div> <div className='row'><span className='emoji'>🛠️</span><span className='grow' /></div></div>
+                  <div key={tile.name} className={classNames('techCell center')}><div>{tile.name}</div><span className='emoji start'>💰</span></div>
                 ))}
                 {emptyMoneySpots}
               </div>
               <div className='tech row'>
                 {player.research.science.map(tile => (
-                  <div key={tile.name} className={classNames('techCell center')}><div>{tile.name}</div> <div className='row'><span className='emoji'>🛠️</span><span className='grow' /></div></div>
+                  <div key={tile.name} className={classNames('techCell center')}><div>{tile.name}</div><span className='emoji start'>🧬</span></div>
                 ))}
                 {emptyScienceSpots}
               </div>
