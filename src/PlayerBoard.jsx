@@ -59,8 +59,9 @@ const renderProductionCell = (player, type) => {
 }
 
 export const PlayerBoard = ({ props }) => {
-  const { G, ctx, isActive } = props;
-  const player = G.data[ctx.currentPlayer];
+  const { G, ctx, playerId, isActive } = props;
+  const id = playerId ? playerId : ctx.currentPlayer; //TODO Gonna need big refactor for this.
+  const player = G.data[id];
   const species = G.species.find(s => s.name === player.species);
 
   const emptyMaterialsSpots = Array(7 - player.research.materials.length).fill(0).map((x, i) => <div key={i} className='techCell' />);
