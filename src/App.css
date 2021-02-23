@@ -1,2 +1,429 @@
-.App {
+
+
+.species.row div {
+  flex-basis: 100px;
+}
+
+.species .indicator {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.species.row .col {
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* .species .name {
+  flex-shrink: 2;
+} */
+
+.species input.avatar, img.avatar {
+  margin-top: 10px;
+  border: 2px solid black;
+  border-radius: 10px;
+  width: 128px;
+}
+
+img.avatar {
+  margin: 4px;
+}
+
+.species > div {
+  margin: 10px;
+  border: 3px solid black;
+  padding: 10px;
+}
+
+.species div.disabled {
+  opacity: 0.33;
+}
+
+
+.yellow {
+  stroke: #220;
+  color: #ff0;
+  fill: #ff0;
+  background-color: #220;
+}
+
+.red {
+  fill: #f00;
+  color: #f00;
+  stroke: #020;
+  background-color: #200;
+}
+
+.cyan {
+  color: #0ff;
+  background-color: #022;
+}
+
+.green {
+  color: #0f0;
+  background-color: #020;
+}
+
+.black {
+  color: #222;
+  background-color: #ddd;
+}
+
+.white {
+  color: #fff;
+  background-color: #222;
+}
+
+
+
+
+
+
+.row {
+  display: flex;
+  flex-flow: row;
+}
+
+.col {
+  display: flex;
+  flex-flow: column;
+}
+
+.wrap {
+  flex-wrap: wrap;
+}
+
+.grow {
+  flex-grow: 2;
+}
+
+.center {
+  align-items: center;
+  text-align: center;
+}
+
+.end {
+  align-self: flex-end;
+}
+
+.board {
+  background-color: bisque;
+  max-width: 66%;
+}
+
+#rest {
+  min-height: 50%; 
+  background-color: darkgoldenrod;
+}
+
+.right {
+  min-height: 50%;
+  background-color: darkseagreen;
+  flex: 1;
+}
+
+div.resources span.resources {
+  font-weight: 700;
+}
+
+div.resources span.production {
+  font-weight: 300;
+}
+
+#shipSection {
+  min-width: 50%;
+  min-height: 100px;
+}
+
+#researchTree, #techTree {
+  min-width: 50%;
+  min-height: 100px;
+}
+
+.tech, .research {
+  justify-content: space-around;
+}
+
+.techCell, .researchCell {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  flex-basis: 96px;
+  background-color: darkturquoise;
+  margin: 2px;
+  border: 1px solid black;
+  border-radius: 4px;
+  min-width: 48px;
+  min-height: 48px;
+  padding: 2px 2px 0px 2px;
+}
+
+.researchCell.empty {
+  background-color: white;
+  opacity: 80%;
+  color: grey;
+}
+
+.researchCell.empty .emoji {
+  opacity: 50%;
+}
+
+.researchCell .cost {
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 1px 3px;
+  margin: 2px;
+}
+.researchCell.empty .cost {
+  border-color: grey;
+}
+.researchCell .cost .price {
+  font-weight: bold;
+}
+
+.super {
+  vertical-align: super;
+}
+.sub {
+  vertical-align: sub;
+}
+
+.researchCell .row {
+  width: 100%;
+}
+
+.productionCell {
+  margin: 2px;
+  border: 1px solid black;
+  min-width: 24px;
+  min-height: 24px;
+  color: rgba(0,0,0,0);
+}
+
+.productionCell.empty {
+  color: black;
+}
+
+#money .productionCell {
+  background-color: goldenrod;
+}
+
+#science .productionCell {
+  background-color: lightpink;
+}
+
+#materials .productionCell {
+  background-color: brown;
+}
+
+#actions {
+  justify-content: space-around;
+}
+
+.actionCell {
+  margin: 2px;
+  border: 1px solid black;
+  min-width: 32px;
+  min-height: 32px;
+  color: black;
+  background-color: #00000000;
+}
+
+.actionCell:not(.empty) {
+  background-color: hotpink;
+  color: #00000000
+}
+
+.shipParts {
+  justify-content: space-between;
+  background-color: indianred;
+}
+
+.shipParts .row {
+  justify-content: space-between;
+}
+
+.partsCell {
+  margin: 2px;
+  border: 1px solid black;
+  min-width: 48px;
+  min-height: 48px;
+  background-color: gray;
+}
+
+#rep {
+  min-width: 50px;
+  min-height: 100px;
+}
+
+#rounds {
+  justify-content: space-between;
+}
+
+.indicator {
+  border: 1px solid #0f0;
+  color: #080;
+  background-color: #020;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  font-weight: bold;
+  border-radius: 8px;
+  margin: 2px;
+  padding: 2px;
+  text-shadow: 0px 0px 8px #060;
+}
+
+.indicator.highlight {
+  background-color: #080;
+  color: #0f0;
+}
+
+#rounds .cell {
+  min-width: 32px;
+  min-height: 32px;
+  width: 40px;
+  height: 40px;
+}
+#rounds .cell.highlight {
+
+}
+
+.phase.indicator {
+  padding: 2px 10px;
+  text-transform: uppercase;
+}
+
+.phase.action {
+  color: #0c0;
+}
+.phase.combat {
+  color:#c00;
+  background-color: #200;
+  border-color: #f00;
+  text-shadow: 0 0 8px #600;
+}
+.phase.upkeep {
+  color:#0cc;
+  background-color: #022;
+  border-color: #0ff;
+  text-shadow: 0 0 8px #066;
+}
+
+
+
+svg .shipRect {
+  fill-opacity: 0;
+  stroke-width: 1;
+  stroke: black;
+}
+
+
+
+.sector circle.wormhole {
+  fill: silver;
+}
+
+.sector circle.influence {
+  /* fill: silver; */
+  /* fill-opacity: .1; */
+  /* stroke: tomato; */
+  stroke-width: .5;
+}
+
+.sector circle.influence.empty {
+  fill-opacity: 0;
+  stroke-opacity: .5;
+}
+
+.sector text {
+  font-size: 0.3em;
+  fill-opacity: .5;
+}
+
+.sector .vp polygon {
+  fill: goldenrod;
+  fill-opacity: 1;
+  stroke-width: .5;
+  stroke: black;
+}
+
+.sector .vp text {
+  font-size: 4px;
+  fill: white;
+  fill-opacity: 1;
+  stroke-width: .1;
+  stroke: white;
+}
+
+/* .sector g.filled text {
+  fill: chartreuse;
+  fill-opacity: 1;
+  stroke: white;
+  stroke-width: .25;
+} */
+
+/* svg g.empty text {
+  fill: #000000;
+} */
+
+svg path {
+  fill: none;
+  stroke: hsl(310, 86%, 44%);
+  stroke-width: 0.4em;
+  stroke-opacity: 0.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+
+
+.sector {
+  stroke: #000000;
+  stroke-width: 0.33;
+  transition: fill-opacity .2s;
+}
+
+.hexagon > polygon {
+  stroke-dasharray: 1;
+}
+
+.sector text {
+  fill: black;
+  stroke: #000;
+  stroke-width: .1;
+}
+
+.sector.empty {
+  fill-opacity: 0.1;
+}
+
+.sector.empty:hover {
+  fill-opacity: 1;
+}
+
+.sector.empty:hover text {
+  fill: white;
+  stroke: #ccc;
+  fill-opacity: 1;
+  stroke-width: .1;
+}
+
+.sector.empty.ring0 {
+  fill: lightcoral
+}
+
+.sector.empty.ring1 {
+  fill: lightblue;
+}
+
+.sector.empty.ring2 {
+  fill: lightgreen;
+}
+
+.sector.empty.ring3 {
+  fill: lightsalmon;
 }

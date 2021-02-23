@@ -1,6 +1,6 @@
 import { Client } from 'boardgame.io/react';
 import { SocketIO } from 'boardgame.io/multiplayer';
-
+import './App.css';
 import { Umbra } from './Game';
 import { PlayerBoard } from './PlayerBoard';
 import { SupplyBoard } from './SupplyBoard';
