@@ -18,8 +18,14 @@ const CostLabel = ({ cost, minCost }) => {
   }
 }
 
+const researchTech = (tech) => {
+  console.log(tech.name);
+};
+
 export const SupplyBoard = ({ props }) => {
   const { G, ctx, isActive } = props;
+
+  const player = G.data[ctx.currentPlayer];
 
   const militaryTech = Array.isArray(G.techTiles) ? G.techTiles.filter(t => t.category === TechCategory.Military) : [];
   const gridTech = Array.isArray(G.techTiles) ? G.techTiles.filter(t => t.category === TechCategory.Grid) : [];
@@ -36,17 +42,17 @@ export const SupplyBoard = ({ props }) => {
         <div id='researchTree' className='col'>
           <div className='research row'>
             {militaryTech.map(tile => (
-              <div key={tile.name} className={classNames('researchCell center', { empty: tile.supply === 0 })}><div>{tile.name}</div> <div className='row'><span className='emoji'>🛠️</span><span className='grow' /><CostLabel cost={tile.cost} minCost={tile.minCost} /></div></div>
+              <button onClick={() => researchTech(tile)} key={tile.name} disabled={tile.supply === 0 || player.science < tile.cost} className={classNames('researchCell center', { empty: tile.supply === 0 })}><div>{tile.name}</div> <div className='row'><span className='emoji'>🛠️</span><span className='grow' /><CostLabel cost={tile.cost} minCost={tile.minCost} /></div></button>
             ))}
           </div>
           <div className='research row'>
             {gridTech.map(tile => (
-              <div key={tile.name} className={classNames('researchCell center', { empty: tile.supply === 0 })}> <div>{tile.name}</div> <div className='row'><span className='emoji'>💰</span><span className='grow' /><CostLabel cost={tile.cost} minCost={tile.minCost} /></div></div>
+              <button onClick={() => researchTech(tile)} key={tile.name} disabled={tile.supply === 0 || player.science < tile.cost} className={classNames('researchCell center', { empty: tile.supply === 0 })}> <div>{tile.name}</div> <div className='row'><span className='emoji'>💰</span><span className='grow' /><CostLabel cost={tile.cost} minCost={tile.minCost} /></div></button>
             ))}
           </div>
           <div className='research row'>
             {nanoTech.map(tile => (
-              <div key={tile.name} className={classNames('researchCell center', { empty: tile.supply === 0 })}> <div>{tile.name}</div> <div className='row'><span className='emoji'>🧬</span><span className='grow' /><CostLabel cost={tile.cost} minCost={tile.minCost} /></div></div>
+              <button onClick={() => researchTech(tile)} key={tile.name} disabled={tile.supply === 0 || player.science < tile.cost} className={classNames('researchCell center', { empty: tile.supply === 0 })}> <div>{tile.name}</div> <div className='row'><span className='emoji'>🧬</span><span className='grow' /><CostLabel cost={tile.cost} minCost={tile.minCost} /></div></button>
             ))}
           </div>
         </div>
