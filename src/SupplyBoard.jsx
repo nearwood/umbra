@@ -19,6 +19,42 @@ const CostLabel = ({ cost, minCost }) => {
   }
 }
 
+const getShipPart = (G, i) => G.parts[i] ? G.parts[i] : { name: "404 part not found" };
+
+const ShipPart = (part) => {
+  const stats = [];
+
+  if (part.damage) {
+    if (part.damage >= 0) {
+      stats.push(<span key="damage" className='emoji damage'>🚀 {part.damage}</span>);
+    } else {
+      stats.push(<span key="damage" className='emoji damage'>🛡️ {-part.damage}</span>);
+    }
+  }
+
+  if (part.targeting) {
+    if (part.targeting >= 0) {
+      stats.push(<span key="targeting" className='emoji targeting'>🎯 {part.targeting}</span>);
+    } else {
+      stats.push(<span key="targeting" className='emoji targeting'>🥴 {-part.targeting}</span>);
+    }
+  }
+
+  if (part.energy) {
+    if (part.energy >= 0) {
+      stats.push(<span key="energy" className='emoji energy'>🔋 {part.energy}</span>);
+    } else {
+      stats.push(<span key="energy" className='emoji energy'>⚡ {-part.energy}</span>);
+    }
+  }
+
+  if (part.initiative) {
+    stats.push(<span key="initiative" className='emoji initiative'>⏫ {part.initiative}</span>);
+  }
+
+  return <div className="partsCell"><div>{part.name}</div> {stats}</div>;
+}
+
 export const SupplyBoard = ({ props }) => {
   const { G, ctx, isActive, moves } = props;
 
@@ -56,35 +92,35 @@ export const SupplyBoard = ({ props }) => {
         <div className='row shipParts'>
           <div className='col'>
             <div className='row'>
-              <div className='partsCell'>{G.parts.find(p => p.name === 'Ion Cannon').name}</div>
-              <div className='partsCell' />
+              {ShipPart(getShipPart(G, 0))}
+              {ShipPart(getShipPart(G, 1))}
             </div>
             <div className='row'>
-              <div className='partsCell' />
-              <div className='partsCell' />
+              {ShipPart(getShipPart(G, 2))}
+              {ShipPart(getShipPart(G, 3))}
             </div>
             <div className='row'>
-              <div className='partsCell' />
+              {ShipPart(getShipPart(G, 4))}
             </div>
           </div>
           <div className='col'>
             <div className='row'>
-              <div className='partsCell' />
-              <div className='partsCell' />
-              <div className='partsCell' />
-              <div className='partsCell' />
+              {ShipPart(getShipPart(G, 5))}
+              {ShipPart(getShipPart(G, 6))}
+              {ShipPart(getShipPart(G, 7))}
+              {ShipPart(getShipPart(G, 8))}
             </div>
             <div className='row'>
-              <div className='partsCell' />
-              <div className='partsCell' />
-              <div className='partsCell' />
-              <div className='partsCell' />
+              {ShipPart(getShipPart(G, 9))}
+              {ShipPart(getShipPart(G, 10))}
+              {ShipPart(getShipPart(G, 11))}
+              {ShipPart(getShipPart(G, 12))}
             </div>
             <div className='row'>
-              <div className='partsCell' />
-              <div className='partsCell' />
-              <div className='partsCell' />
-              <div className='partsCell' />
+              {ShipPart(getShipPart(G, 13))}
+              {ShipPart(getShipPart(G, 14))}
+              {ShipPart(getShipPart(G, 15))}
+              {ShipPart(getShipPart(G, 16))}
             </div>
           </div>
         </div>
