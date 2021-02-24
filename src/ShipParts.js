@@ -27,7 +27,7 @@ const ShipParts = () => [
   {
     prereq: true,
     name: 'Plasma Cannon',
-    damaged: 2, //Does damage
+    damage: 2, //Does damage
     energy: -2, //Requires energy
   }, {
     prereq: true,
