@@ -1,7 +1,7 @@
 import Setup from './Setup';
 import * as Moves from './moves';
 import Bot from "./Bot";
-import { UpkeepMap, ProductionMap } from './PlayerBoard';
+import { UpkeepMap } from './PlayerBoard';
 
 /** Pay upkeep amounts (money), produce resources (money, science, materials) */
 const upkeep = (G, ctx) => {
@@ -43,6 +43,9 @@ export const Umbra = {
       //start: true,
       moves: {
         explore: Moves.Explore,
+        beginResearch: Moves.beginResearch,
+        research: Moves.Research,
+        endResearch: Moves.endResearch,
         trade: Moves.Trade,
         pass: (G, ctx) => {
           G.data[ctx.currentPlayer].hasPassed = true;

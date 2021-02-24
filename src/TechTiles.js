@@ -1,7 +1,7 @@
 export const TechCategory = {
-  Military: 'Military',
-  Grid: 'Grid',
-  Nano: 'Nano'
+  Military: 'materials',
+  Grid: 'money',
+  Nano: 'science'
 };
 
 export const TechType = {

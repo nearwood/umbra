@@ -1,6 +1,5 @@
 import { INVALID_MOVE } from "boardgame.io/core";
 import Species from "../Species";
-import { TechCategory } from "../TechTiles";
 
 const applyStartingTech = (G, player, species) => {
   species.startingTech.forEach(techName => {
@@ -10,22 +9,11 @@ const applyStartingTech = (G, player, species) => {
       throw new Error(`Could not find tech tile: ${techName}`);
     }
 
-    switch (tile.category) {
-      default: throw new Error(`Invalid tech category: ${tile.category}`);
-      case TechCategory.Military:
-        player.research.materials.push(tile);
-        break;
-      case TechCategory.Grid:
-        player.research.money.push(tile);
-        break;
-      case TechCategory.Nano:
-        player.research.science.push(tile);
-        break;
-    }
+    player.research[tile.category].push(tile);
   });
 
   Object.keys(species.startingResources).forEach(key => {
-    player[key] = species.startingResources[key];
+    player[key] = species.startingResources[key] + 100;
   });
 };
 

@@ -45,6 +45,7 @@ Live dev server: https://ludos.dev
 - [ ] Diplomacy
 - [ ] VP
 - [ ] Discovery Tiles
+- [ ] Reactions during any phase?
 
 ## Actions
 - [ ] Explore

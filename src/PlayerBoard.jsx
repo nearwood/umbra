@@ -63,7 +63,7 @@ const renderProductionCell = (player, type) => {
 }
 
 export const PlayerBoard = ({ props }) => {
-  const { G, ctx, playerId, isActive } = props;
+  const { G, ctx, playerId, isActive, moves } = props;
   const id = playerId ? playerId : ctx.currentPlayer; //TODO Gonna need big refactor for this.
   const player = G.data[id];
   const species = G.species.find(s => s.name === player.species);
@@ -131,13 +131,13 @@ export const PlayerBoard = ({ props }) => {
               </div>
             </div>
             <div id='buttons' className='row'>
-              <button disabled={!isActive} onClick={() => props.moves.explore()}><div>EXP</div>{player.spentInfluence.explore}</button>
-              <button disabled={!isActive}><div>INF</div>{player.spentInfluence.influence}</button>
-              <button disabled={!isActive}><div>RES</div>{player.spentInfluence.research}</button>
-              <button disabled={!isActive}><div>UPG</div>{player.spentInfluence.upgrade}</button>
-              <button disabled={!isActive}><div>BLD</div>{player.spentInfluence.build}</button>
-              <button disabled={!isActive}><div>MOV</div>{player.spentInfluence.move}</button>
-              <button disabled={!isActive} onClick={() => props.moves.pass()}><div>PASS</div></button>
+              <button disabled={!isActive} onClick={() => moves.explore()}><div>EXP</div>{player.spentInfluence.explore}</button>
+              <button disabled={true}><div>INF</div>{player.spentInfluence.influence}</button>
+              <button disabled={!isActive} onClick={() => G.researchEnabled ? moves.endResearch() : moves.beginResearch()}><div>RES</div>{player.spentInfluence.research}</button>
+              <button disabled={true}><div>UPG</div>{player.spentInfluence.upgrade}</button>
+              <button disabled={true}><div>BLD</div>{player.spentInfluence.build}</button>
+              <button disabled={true}><div>MOV</div>{player.spentInfluence.move}</button>
+              <button disabled={!isActive} onClick={() => moves.pass()}><div>PASS</div></button>
             </div>
           </div>
           <div id='actions' className='row'>
