@@ -7,5 +7,6 @@ src/public/
 **/.env*
 **/*.md
 **/*.sh
+**/*.css
 **/*.test.js
 # TODO Need client + server folders
