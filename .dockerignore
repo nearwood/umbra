@@ -1,0 +1,11 @@
+node_modules/
+build/
+src/public/
+.github/
+
+**/.gitignore
+**/.env*
+**/*.md
+**/*.sh
+**/*.test.js
+# TODO Need client + server folders
