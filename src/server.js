@@ -5,10 +5,9 @@ const { Umbra } = require('./Game');
 
 const server = Server({
   games: [Umbra],
-  https: process.env.TLS_CERT ? {
-    cert: fs.readFileSync(process.env.TLS_CERT),
-    key: fs.readFileSync(process.env.TLS_KEY),
-  } : undefined
 });
 
-server.run(8443);
+//This runs in a container behind a LB so it can be whatever port we want.
+server.run(8080);
+
+// Health check: GET :8080/games
