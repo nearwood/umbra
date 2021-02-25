@@ -1,7 +1,38 @@
 import Setup from './Setup';
 import * as Moves from './moves';
 import Bot from "./Bot";
-import { UpkeepMap } from './PlayerBoard';
+
+
+export const UpkeepMap = {
+  '1': 30,
+  '2': 25,
+  '3': 21,
+  '4': 17,
+  '5': 13,
+  '6': 10,
+  '7': 7,
+  '8': 5,
+  '9': 3,
+  '10': 2,
+  '11': 1,
+  '12': 0,
+  '13': 0,
+};
+
+export const ProductionMap = {
+  '1': 28,
+  '2': 24,
+  '3': 21,
+  '4': 18,
+  '5': 15,
+  '6': 12,
+  '7': 10,
+  '8': 8,
+  '9': 6,
+  '10': 4,
+  '11': 3,
+  '12': 2, //instructions have misprint, there are 12 total
+};
 
 /** Pay upkeep amounts (money), produce resources (money, science, materials) */
 const upkeep = (G, ctx) => {

@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { UpkeepMap, ProductionMap } from './Game';
 
 export const PlayerColors = {
   "0": 'yellow',
@@ -7,37 +8,6 @@ export const PlayerColors = {
   "3": 'green',
   "4": 'black',
   "5": 'white',
-};
-
-export const UpkeepMap = {
-  '1': 30,
-  '2': 25,
-  '3': 21,
-  '4': 17,
-  '5': 13,
-  '6': 10,
-  '7': 7,
-  '8': 5,
-  '9': 3,
-  '10': 2,
-  '11': 1,
-  '12': 0,
-  '13': 0,
-}
-
-export const ProductionMap = {
-  '1': 28,
-  '2': 24,
-  '3': 21,
-  '4': 18,
-  '5': 15,
-  '6': 12,
-  '7': 10,
-  '8': 8,
-  '9': 6,
-  '10': 4,
-  '11': 3,
-  '12': 2, //instructions have misprint, there are 12 total
 };
 
 const renderInfluenceCells = (G, ctx) => {
