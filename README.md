@@ -14,9 +14,7 @@ Live dev server: https://ludos.dev
 - [x] Domain? Did I ever figure out CORS issues?
 - [ ] Lint, prettier, etc.
 - [x] Update hex library to remove react warnings
-- [x] EC2 instance
-- [x] https netdata, update live monitor
-
+- [ ] ECS + domain
 # TODO
 
 - [x] Basic game definition.
@@ -26,20 +24,17 @@ Live dev server: https://ludos.dev
   - [x] Setup hex map
   - [ ] Setup player boards
     - [x] Cubes
-    - [ ] Tech
+    - [x] Tech
     - [x] Influence (limited)
     - [ ] Ships (limited)
+    - [ ] Orbitals (unlimited)
+    - [ ] Monolith (unlimited)
   - [ ] Setup supply board
     - [x] Research tiles (limited)
     - [ ] Ship parts (unlimited)
-    - [ ] Orbitals (unlimited)
-    - [ ] Monolith (unlimited)
 - [ ] Place Influence
-- [ ] Production
-  - Cubes are limited
-  - [ ] Money
-  - [ ] Science
-  - [ ] Materials
+- [x] Production
+  - [ ] Cubes are limited
 - [ ] Explore?
 - [ ] Combat
 - [ ] Diplomacy

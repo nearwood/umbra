@@ -1,4 +1,8 @@
 
+div.map {
+  background-image: url('background.png');
+  align-items: center;
+}
 
 .species.row div {
   flex-basis: 100px;
@@ -138,6 +142,9 @@ div.resources span.production {
 #shipSection {
   min-width: 50%;
   min-height: 100px;
+  align-items: center;
+  justify-content: space-around;
+
 }
 
 #researchTree, #techTree {
@@ -198,11 +205,15 @@ div.resources span.production {
 }
 
 .productionCell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 2px;
   border: 1px solid black;
   min-width: 24px;
   min-height: 24px;
   color: rgba(0,0,0,0);
+  border-radius: 4px;
 }
 
 .productionCell.empty {
@@ -226,12 +237,16 @@ div.resources span.production {
 }
 
 .actionCell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 2px;
   border: 1px solid black;
   min-width: 32px;
   min-height: 32px;
   color: black;
   background-color: #00000000;
+  border-radius: 6px;
 }
 
 .actionCell:not(.empty) {
@@ -355,6 +370,22 @@ div.borderHighlight {
 }
 
 
+img.ship#interceptor {
+  max-width: 55px;
+  max-height: 48px;
+}
+img.ship#cruiser {
+  max-width: 93px;
+  max-height: 110px;
+}
+img.ship#dreadnought {
+  max-width: 200px;
+  max-height: 182px;
+}
+img.ship#starbase {
+  max-width: 150px;
+  max-height: 150px;
+}
 
 svg .shipRect {
   fill-opacity: 0;
@@ -423,23 +454,23 @@ svg path {
 
 
 .sector {
-  stroke: #000000;
+  stroke: #080;
   stroke-width: 0.33;
   transition: fill-opacity .2s;
 }
 
-.hexagon > polygon {
-  stroke-dasharray: 1;
-}
+/* .hexagon > polygon {
+  stroke-dasharray: 0;
+} */
 
 .sector text {
-  fill: black;
-  stroke: #000;
+  fill: #fff;
+  stroke: #fff;
   stroke-width: .1;
 }
 
 .sector.empty {
-  fill-opacity: 0.1;
+  fill-opacity: 0.2;
 }
 
 .sector.empty:hover {
@@ -454,17 +485,17 @@ svg path {
 }
 
 .sector.empty.ring0 {
-  fill: lightcoral
+  fill: #090;
 }
 
 .sector.empty.ring1 {
-  fill: lightblue;
+  fill: #060;
 }
 
 .sector.empty.ring2 {
-  fill: lightgreen;
+  fill: #040;
 }
 
 .sector.empty.ring3 {
-  fill: lightsalmon;
+  fill: #020;
 }

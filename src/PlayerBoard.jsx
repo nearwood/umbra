@@ -46,13 +46,10 @@ export const PlayerBoard = ({ props }) => {
     <div className={classNames('board col', { disabled: !isActive })}>
       <div className='row'>
         <div id='shipSection' className='grow row'>
-          <svg width={128} height={100} viewBox="-24 -24 72 100">
-            <polygon points="12,0 24,-24 36,0 48,48 72,72 -24,72 0,48" className="shipRect" />
-            <rect x={12} y={0} width={24} height={24} className="shipRect" />
-            <rect x={12} y={24} width={24} height={24} className="shipRect" />
-            <rect x={0} y={48} width={24} height={24} className="shipRect" />
-            <rect x={24} y={48} width={24} height={24} className="shipRect" />
-          </svg>
+          <img alt="interceptor" src="ships/interceptor.png" className="ship" id="interceptor" />
+          <img alt="cruiser" src="ships/cruiser.png" className="ship" id="cruiser" />
+          <img alt="dreadnought" src="ships/dreadnought.png" className="ship" id="dreadnought" />
+          <img alt="starbase" src="ships/starbase.png" className="ship" id="starbase" />
         </div>
         <div className='resources'>
           <div><span className='emoji'>💰</span> <span className='resources'>{player.money}</span>+<span className='production'>{player.production.money}</span></div>
