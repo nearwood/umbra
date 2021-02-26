@@ -286,6 +286,23 @@ div.resources span.production {
   justify-content: space-between;
 }
 
+.blink {
+  animation: blinkyblink 250ms steps(2, start) infinite;
+}
+@keyframes blinkyblink {
+  from {
+    padding-left: 6px;
+  }
+  to {
+    border-left: 5px solid #0f0;
+  }
+}
+
+
+div.borderHighlight {
+  border-left: 5px solid red;
+}
+
 .indicator {
   border: 1px solid #0f0;
   color: #080;

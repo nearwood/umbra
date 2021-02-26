@@ -11,7 +11,6 @@ export const beginResearch = (G, ctx) => {
 };
 
 export const endResearch = (G, ctx) => {
-  //TODO return influence if you don't actually research anything?
   G.researchEnabled = false;
 };
 

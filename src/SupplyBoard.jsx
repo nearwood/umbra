@@ -72,7 +72,7 @@ export const SupplyBoard = ({ props }) => {
           <div>Phase: <span className={classNames('phase indicator', ctx.phase)}>{ctx.phase}</span></div>
           <div>Current Player: <span className={classNames('indicator', { highlight: isActive })}>{parseInt(ctx.currentPlayer) + 1}</span></div>
         </div>
-        <div id='researchTree' className='col'>
+        <div id='researchTree' className={classNames('col', { blink: G.researchEnabled })}>
           <div className='research row'>
             {militaryTech.map(tile => (
               <button onClick={() => moves.research(tile.name)} key={tile.name} disabled={!researchEnabled(G, ctx, tile)} className={classNames('researchCell center', { empty: tile.supply === 0 })}><div>{tile.name} x{tile.supply}</div> <div className='row'><span className='emoji'>🛠️</span><span className='grow' /><CostLabel cost={tile.cost} minCost={tile.minCost} /></div></button>
