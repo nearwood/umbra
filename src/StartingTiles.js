@@ -14,9 +14,17 @@ export const GalacticCenter = () => ({
     targeting: 1
   },
   planets: [
-    { pink: { squares: 1, advanced: 1 } }, // science
-    { brown: { squares: 1, advanced: 1 } }, // materials
-    { gray: { squares: 2 } } // wildcard
+    //Science
+    { color: 'pink', advanced: false },
+    { color: 'pink', advanced: true },
+
+    //Materials
+    { color: 'brown', advanced: false },
+    { color: 'brown', advanced: true },
+
+    //Wildcard
+    { color: 'gray', advanced: false },
+    { color: 'gray', advanced: false },
   ],
   //Wormholes referenced top, TR, BR, bottom, BL, TL when the name/id/vp are upright
   wormholes: {
@@ -58,9 +66,11 @@ const StartingTiles = () => [
     vp: 3,
     artifact: true,
     planets: [
-      { orange: { squares: 1, advanced: 1 } },
-      { pink: { squares: 1, advanced: 1 } },
-      { brown: { squares: 1 } },
+      { color: 'orange', advanced: false },
+      { color: 'orange', advanced: true },
+      { color: 'pink', advanced: false },
+      { color: 'pink', advanced: true },
+      { color: 'brown', advanced: false },
     ],
     wormholes: getStartingWormholes(),
   }, {
@@ -71,8 +81,10 @@ const StartingTiles = () => [
     vp: 3,
     artifact: true,
     planets: [
-      { orange: { squares: 1, advanced: 1 } },
-      { pink: { squares: 1, advanced: 1 } },
+      { color: 'orange', advanced: false },
+      { color: 'orange', advanced: true },
+      { color: 'pink', advanced: false },
+      { color: 'pink', advanced: true },
     ],
     wormholes: getStartingWormholes(),
   }, {
@@ -84,9 +96,11 @@ const StartingTiles = () => [
     vp: 3,
     artifact: true,
     planets: [
-      { orange: { squares: 1, advanced: 1 } },
-      { pink: { squares: 1, advanced: 1 } },
-      { brown: { squares: 1 } },
+      { color: 'orange', advanced: false },
+      { color: 'orange', advanced: true },
+      { color: 'pink', advanced: false },
+      { color: 'pink', advanced: true },
+      { color: 'brown', advanced: false },
     ],
     wormholes: getStartingWormholes(),
   }, {
@@ -97,9 +111,10 @@ const StartingTiles = () => [
     vp: 3,
     artifact: true,
     planets: [
-      { orange: { squares: 1 } },
-      { pink: { squares: 1, advanced: 1 } },
-      { brown: { advanced: 1 } },
+      { color: 'orange', advanced: false },
+      { color: 'pink', advanced: false },
+      { color: 'pink', advanced: true },
+      { color: 'brown', advanced: true },
     ],
     wormholes: getStartingWormholes(),
   }, {
@@ -111,9 +126,11 @@ const StartingTiles = () => [
     vp: 3,
     artifact: true,
     planets: [
-      { orange: { squares: 1, advanced: 1 } },
-      { pink: { squares: 1, advanced: 1 } },
-      { brown: { squares: 1 } },
+      { color: 'orange', advanced: false },
+      { color: 'orange', advanced: true },
+      { color: 'pink', advanced: false },
+      { color: 'pink', advanced: true },
+      { color: 'brown', advanced: false },
     ],
     wormholes: getStartingWormholes(),
   }, {
@@ -124,9 +141,9 @@ const StartingTiles = () => [
     vp: 3,
     artifact: true,
     planets: [
-      { orange: { squares: 1 } },
-      { pink: { squares: 1 } },
-      { brown: { squares: 1 } },
+      { color: 'orange', advanced: false },
+      { color: 'pink', advanced: false },
+      { color: 'brown', advanced: false },
     ],
     wormholes: getStartingWormholes(),
   }, {
@@ -138,9 +155,11 @@ const StartingTiles = () => [
     vp: 3,
     artifact: true,
     planets: [
-      { orange: { squares: 1, advanced: 1 } },
-      { pink: { squares: 1, advanced: 1 } },
-      { brown: { squares: 1 } },
+      { color: 'orange', advanced: false },
+      { color: 'orange', advanced: true },
+      { color: 'pink', advanced: false },
+      { color: 'pink', advanced: true },
+      { color: 'brown', advanced: false },
     ],
     wormholes: getStartingWormholes(),
   }, {
@@ -151,9 +170,9 @@ const StartingTiles = () => [
     vp: 3,
     artifact: true,
     planets: [
-      { orange: { squares: 1 } },
-      { pink: { squares: 1 } },
-      { brown: { advanced: 1 } },
+      { color: 'orange', advanced: false },
+      { color: 'pink', advanced: false },
+      { color: 'brown', advanced: true },
     ],
     wormholes: getStartingWormholes(),
   }, {
@@ -165,9 +184,11 @@ const StartingTiles = () => [
     vp: 3,
     artifact: true,
     planets: [
-      { orange: { squares: 1, advanced: 1 } },
-      { pink: { squares: 1, advanced: 1 } },
-      { brown: { squares: 1 } },
+      { color: 'orange', advanced: false },
+      { color: 'orange', advanced: true },
+      { color: 'pink', advanced: false },
+      { color: 'pink', advanced: true },
+      { color: 'brown', advanced: false },
     ],
     wormholes: getStartingWormholes(),
   }, {
@@ -178,9 +199,10 @@ const StartingTiles = () => [
     vp: 3,
     artifact: true,
     planets: [
-      { orange: { squares: 1, advanced: 1 } },
-      { pink: { squares: 1 } },
-      { brown: { advanced: 1 } },
+      { color: 'orange', advanced: false },
+      { color: 'orange', advanced: true },
+      { color: 'pink', advanced: false },
+      { color: 'brown', advanced: true },
     ],
     wormholes: getStartingWormholes(),
   }, {
@@ -192,9 +214,11 @@ const StartingTiles = () => [
     vp: 3,
     artifact: true,
     planets: [
-      { orange: { squares: 1, advanced: 1 } },
-      { pink: { squares: 1, advanced: 1 } },
-      { brown: { squares: 1 } },
+      { color: 'orange', advanced: false },
+      { color: 'orange', advanced: true },
+      { color: 'pink', advanced: false },
+      { color: 'pink', advanced: true },
+      { color: 'brown', advanced: false },
     ],
     wormholes: getStartingWormholes(),
   }, {
@@ -205,9 +229,10 @@ const StartingTiles = () => [
     vp: 3,
     artifact: true,
     planets: [
-      { orange: { advanced: 1 } },
-      { pink: { squares: 1 } },
-      { brown: { squares: 1, advanced: 1 } },
+      { color: 'orange', advanced: true },
+      { color: 'pink', advanced: false },
+      { color: 'brown', advanced: false },
+      { color: 'brown', advanced: true },
     ],
     wormholes: getStartingWormholes(),
   },

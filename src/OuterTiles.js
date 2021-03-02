@@ -25,9 +25,9 @@ const OuterTiles = (numPlayers) => {
     artifact: true,
     ancient: true,
     planets: [
-      { orange: { squares: 1 } },
-      { brown: { advanced: 1 } },
-      { pink: { squares: 1 } },
+      { color: 'orange', advanced: false },
+      { color: 'brown', advanced: true },
+      { color: 'pink', advanced: false },
     ],
     wormholes: {
       top: true,
@@ -44,8 +44,8 @@ const OuterTiles = (numPlayers) => {
     artifact: true,
     ancient: true,
     planets: [
-      { orange: { advanced: 1 } },
-      { brown: { squares: 1 } },
+      { color: 'orange', advanced: true },
+      { color: 'brown', advanced: false },
     ],
     wormholes: {
       top: true,
@@ -62,7 +62,7 @@ const OuterTiles = (numPlayers) => {
     artifact: true,
     ancient: true,
     planets: [
-      { white: { squares: 1 } },
+      { color: 'gray', advanced: false },
     ],
     wormholes: {
       top: false,
@@ -79,8 +79,8 @@ const OuterTiles = (numPlayers) => {
     artifact: false,
     ancient: false,
     planets: [
-      { orange: { advanced: 1 } },
-      { brown: { squares: 1 } },
+      { color: 'orange', advanced: true },
+      { color: 'brown', advanced: false },
     ],
     wormholes: {
       top: true,
@@ -97,8 +97,8 @@ const OuterTiles = (numPlayers) => {
     artifact: false,
     ancient: true,
     planets: [
-      { pink: { squares: 1 } },
-      { brown: { squares: 1 } },
+      { color: 'pink', advanced: false },
+      { color: 'brown', advanced: false },
     ],
     wormholes: {
       top: true,
@@ -115,8 +115,8 @@ const OuterTiles = (numPlayers) => {
     artifact: false,
     ancient: false,
     planets: [
-      { orange: { squares: 1 } },
-      { brown: { squares: 1 } },
+      { color: 'orange', advanced: false },
+      { color: 'brown', advanced: false },
     ],
     wormholes: {
       top: false,
@@ -133,8 +133,8 @@ const OuterTiles = (numPlayers) => {
     artifact: false,
     ancient: false,
     planets: [
-      { orange: { squares: 1 } },
-      { pink: { advanced: 1 } },
+      { color: 'orange', advanced: false },
+      { color: 'pink', advanced: true },
     ],
     wormholes: {
       top: true,
@@ -151,7 +151,7 @@ const OuterTiles = (numPlayers) => {
     artifact: false,
     ancient: false,
     planets: [
-      { brown: { advanced: 1 } },
+      { color: 'brown', advanced: true },
       { pink: { squares: 1, } },
     ],
     wormholes: {
@@ -169,8 +169,8 @@ const OuterTiles = (numPlayers) => {
     artifact: false,
     ancient: false,
     planets: [
-      { orange: { squares: 1 } },
-      { pink: { advanced: 1 } },
+      { color: 'orange', advanced: false },
+      { color: 'pink', advanced: true },
     ],
     wormholes: {
       top: true,
@@ -187,8 +187,8 @@ const OuterTiles = (numPlayers) => {
     artifact: false,
     ancient: false,
     planets: [
-      { orange: { squares: 1 } },
-      { brown: { squares: 1 } },
+      { color: 'orange', advanced: false },
+      { color: 'brown', advanced: false },
     ],
     wormholes: {
       top: true,
@@ -205,7 +205,7 @@ const OuterTiles = (numPlayers) => {
     artifact: false,
     ancient: false,
     planets: [
-      { brown: { squares: 1 } },
+      { color: 'brown', advanced: false },
     ],
     wormholes: {
       top: true,
@@ -222,7 +222,7 @@ const OuterTiles = (numPlayers) => {
     artifact: false,
     ancient: false,
     planets: [
-      { brown: { squares: 1 } },
+      { color: 'brown', advanced: false },
     ],
     wormholes: {
       top: true,
@@ -239,7 +239,7 @@ const OuterTiles = (numPlayers) => {
     artifact: false,
     ancient: false,
     planets: [
-      { white: { squares: 1 } },
+      { color: 'gray', advanced: false },
     ],
     wormholes: {
       top: true,
@@ -256,7 +256,7 @@ const OuterTiles = (numPlayers) => {
     artifact: false,
     ancient: false,
     planets: [
-      { white: { squares: 1 } },
+      { color: 'gray', advanced: false },
     ],
     wormholes: {
       top: false,
@@ -303,7 +303,8 @@ const OuterTiles = (numPlayers) => {
     artifact: false,
     ancient: false,
     planets: [
-      { orange: { squares: 1, advanced: 1 } },
+      { color: 'orange', advanced: false },
+      { color: 'orange', advanced: true },
     ],
     wormholes: {
       top: false,
@@ -320,8 +321,8 @@ const OuterTiles = (numPlayers) => {
     artifact: false,
     ancient: false,
     planets: [
-      { brown: { advanced: 1 } },
-      { white: { squares: 1 } },
+      { color: 'brown', advanced: true },
+      { color: 'gray', advanced: false },
     ],
     wormholes: {
       top: false,

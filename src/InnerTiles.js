@@ -11,8 +11,9 @@ const InnerTiles = () => [
     artifact: false,
     ancient: true,
     planets: [
-      { orange: { squares: 1 } },
-      { brown: { squares: 1, advanced: 1 } },
+      { color: 'orange', advanced: false },
+      { color: 'brown', advanced: false },
+      { color: 'brown', advanced: true },
     ],
     wormholes: {
       top: false,
@@ -29,7 +30,8 @@ const InnerTiles = () => [
     artifact: true,
     ancient: false,
     planets: [
-      { pink: { squares: 1, advanced: 1 } },
+      { color: 'pink', advanced: false },
+      { color: 'pink', advanced: true },
     ],
     wormholes: {
       top: true,
@@ -46,8 +48,8 @@ const InnerTiles = () => [
     artifact: false,
     ancient: false,
     planets: [
-      { orange: { advanced: 1 } },
-      { white: { squares: 1 } },
+      { color: 'orange', advanced: true },
+      { color: 'gray', advanced: false },
     ],
     wormholes: {
       top: true,
@@ -64,8 +66,10 @@ const InnerTiles = () => [
     artifact: false,
     ancient: true,
     planets: [
-      { orange: { squares: 1, advanced: 1 } },
-      { pink: { squares: 1, advanced: 1 } },
+      { color: 'orange', advanced: false },
+      { color: 'orange', advanced: true },
+      { color: 'pink', advanced: false },
+      { color: 'pink', advanced: true },
     ],
     wormholes: {
       top: true,
@@ -82,9 +86,9 @@ const InnerTiles = () => [
     artifact: true,
     ancient: true,
     planets: [
-      { orange: { squares: 1 } },
-      { pink: { squares: 1 } },
-      { brown: { advanced: 1 } },
+      { color: 'orange', advanced: false },
+      { color: 'pink', advanced: false },
+      { color: 'brown', advanced: true },
     ],
     wormholes: {
       top: true,
@@ -101,8 +105,8 @@ const InnerTiles = () => [
     artifact: false,
     ancient: false,
     planets: [
-      { brown: { squares: 1 } },
-      { pink: { squares: 1 } },
+      { color: 'brown', advanced: false },
+      { color: 'pink', advanced: false },
     ],
     wormholes: {
       top: true,
@@ -119,9 +123,9 @@ const InnerTiles = () => [
     artifact: false,
     ancient: false,
     planets: [
-      { orange: { squares: 1 } },
-      { brown: { advanced: 1 } },
-      { pink: { advanced: 1 } },
+      { color: 'orange', advanced: false },
+      { color: 'brown', advanced: true },
+      { color: 'pink', advanced: true },
     ],
     wormholes: {
       top: true,
@@ -138,9 +142,9 @@ const InnerTiles = () => [
     artifact: false,
     ancient: true,
     planets: [
-      { orange: { advanced: 1 } },
-      { pink: { squares: 1 } },
-      { white: { squares: 1 } },
+      { color: 'orange', advanced: true },
+      { color: 'pink', advanced: false },
+      { color: 'gray', advanced: false },
     ],
     wormholes: {
       top: true,
