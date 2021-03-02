@@ -1,5 +1,6 @@
 import { HexGrid, Layout, Hexagon, Text, Pattern, Path, Hex } from '@nearwood/react-hexgrid';
 import { PlayerColors } from './PlayerBoard';
+import classNames from 'classnames';
 
 const ringText = (ring) => {
   switch (ring) {
@@ -23,12 +24,12 @@ const renderWormholes = (tile) => {
       switch (edge) {
         default:
           throw new Error("bad edge");
-        case "top": return <circle key={edge} cx="0" cy="-8" r={wormholeRadius} className="wormhole" />;
-        case "tr": return <circle key={edge} cx="7" cy="-4" r={wormholeRadius} className="wormhole" />;
-        case "br": return <circle key={edge} cx="7" cy="4" r={wormholeRadius} className="wormhole" />;
-        case "bot": return <circle key={edge} cx="0" cy="8" r={wormholeRadius} className="wormhole" />;
-        case "bl": return <circle key={edge} cx="-7" cy="4" r={wormholeRadius} className="wormhole" />;
-        case "tl": return <circle key={edge} cx="-7" cy="-4" r={wormholeRadius} className="wormhole" />;
+        case "top": return <circle key={edge} cx="0" cy="-8.5" r={wormholeRadius} className="wormhole" />;
+        case "tr": return <circle key={edge} cx="7.5" cy="-4.5" r={wormholeRadius} className="wormhole" />;
+        case "br": return <circle key={edge} cx="7.5" cy="4.5" r={wormholeRadius} className="wormhole" />;
+        case "bot": return <circle key={edge} cx="0" cy="8.5" r={wormholeRadius} className="wormhole" />;
+        case "bl": return <circle key={edge} cx="-7.5" cy="4.5" r={wormholeRadius} className="wormhole" />;
+        case "tl": return <circle key={edge} cx="-7.5" cy="-4.5" r={wormholeRadius} className="wormhole" />;
       }
     } else {
       return null;
@@ -44,7 +45,39 @@ const renderInfluence = (ctx, tile) => {
   } else {
     return null; //<circle cx="0" cy="0" r="2" className="influence empty" />;
   }
-}
+};
+
+const renderProduction = (ctx, tile) => {
+  if (!tile) {
+    return null;
+  }
+
+  let count = {
+    orange: 0,
+    brown: 0,
+    pink: 0,
+    gray: 0,
+  };
+
+  const planets = tile.planets.map(planet => {
+    const { color, advanced } = planet;
+
+    switch (planet.color) {
+      case 'orange':
+        return <rect x={-5 + 2.5 * (count[planet.color]++)} y="-6" width="2" height="2" className={classNames(`planet ${color}`, { advanced })} />;
+      case 'brown':
+        return <rect x={-5 + 2.5 * (count[planet.color]++)} y="-3" width="2" height="2" className={classNames(`planet ${color}`, { advanced })} />;
+      case 'pink':
+        return <rect x={-5 + 2.5 * (count[planet.color]++)} y="3" width="2" height="2" className={classNames(`planet ${color}`, { advanced })} />;
+      case 'gray':
+        return <rect x={-5 + 2.5 * (count[planet.color]++)} y="0" width="2" height="2" className={classNames(`planet ${color}`, { advanced })} />;
+      default:
+        throw new Error(`Bad planet color: ${planet.color}`);
+    }
+  });
+
+  return planets;
+};
 
 const renderArtifact = (tile) => {
   if (tile && tile.artifact) {
@@ -85,7 +118,7 @@ export const HexMap = ({ props }) => {
 
   return (<>
     <div className='map board col'>
-      <HexGrid width="100%" height={400} viewBox="-50 -80 100 150">
+      <HexGrid width="100%" height={800} viewBox="-50 -80 100 150">
         <Layout size={{ x: 10, y: 10 }} flat={true} spacing={1.1} origin={{ x: 0, y: 0 }}>
           {Array.isArray(G.sectors) && G.sectors.map(s =>
             <Hexagon key={`${s.pos.q}_${s.pos.r}_${s.pos.s}`} q={s.pos.q} r={s.pos.r} s={s.pos.s} className={`sector ring${s.ring} ${s.tile ? "filled" : "empty"}`} fill={s.tile ? "spiral" : ""}>
@@ -96,6 +129,7 @@ export const HexMap = ({ props }) => {
               {/* <Text>{ringText(s.ring)}</Text> */}
               {renderWormholes(s.tile)}
               {renderInfluence(ctx, s.tile)}
+              {renderProduction(ctx, s.tile)}
             </Hexagon>
           )}
         </Layout>

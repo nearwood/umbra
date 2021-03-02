@@ -22,6 +22,13 @@ Live dev server: https://ludos.dev
 - [ ] Initialize game (setup playerboards, hexes, etc.)
   - [x] Each player picks a board
   - [x] Setup hex map
+    - [x] VP
+    - [x] Discovery marker
+    - [x] Ancient marker
+    - [x] Wormholes
+    - [x] Influence
+    - [x] Planets
+    - [x] Production
   - [ ] Setup player boards
     - [x] Cubes
     - [x] Tech
@@ -31,7 +38,7 @@ Live dev server: https://ludos.dev
     - [ ] Monolith (unlimited)
   - [ ] Setup supply board
     - [x] Research tiles (limited)
-    - [ ] Ship parts (unlimited)
+    - [x] Ship parts (unlimited)
 - [ ] Place Influence
 - [x] Production
   - [ ] Cubes are limited

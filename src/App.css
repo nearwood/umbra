@@ -499,3 +499,23 @@ svg path {
 .sector.empty.ring3 {
   fill: #020;
 }
+
+rect.planet {
+  stroke: black;
+}
+rect.planet.advanced {
+  stroke: #0f0;
+}
+
+.planet.orange {
+  fill: orange;
+}
+.planet.brown {
+  fill: brown;
+}
+.planet.pink {
+  fill: pink;
+}
+.planet.gray {
+  fill: gray;
+}
