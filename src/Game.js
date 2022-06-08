@@ -56,6 +56,25 @@ const upkeep = (G, ctx) => {
   });
 };
 
+/** Draw new tech tiles according to # of players.
+ * Then, each player:
+ *  - Moves influence discs from action track back to influence track.
+ *  - Moves any cubes from graveyards to population tracks.
+ *  - If population tracks are full, move to another track.
+ *  - Resets colony ships.
+ * 
+ * New round begins.
+ */
+const cleanup = (G, ctx) => {
+  Object.values(G.data).forEach(player => {
+    player.colonyShips.forEach(ship => ship.deployed = false);
+    player.hasPassed = false;
+  });
+
+  G.currentRound += 1;
+  //return G;
+};
+
 export const Umbra = {
   name: 'Umbra',
   setup: Setup,
@@ -103,14 +122,14 @@ export const Umbra = {
       onBegin: upkeep,
       moves: {
         trade: Moves.Trade,
-        activateColonyShip: () => { },
+        colonize: Moves.Colonize, //same as in action phase, with one caveat
         pass: (G, ctx) => {
           G.data[ctx.currentPlayer].hasPassed = true;
           ctx.events.endTurn();
         }
       },
       endIf: G => Object.values(G.data).every(p => p.hasPassed),
-      onEnd: (G, ctx) => (Object.values(G.data).forEach(p => p.hasPassed = false), G.currentRound += 1, G),
+      onEnd: cleanup,
       next: 'action'
     }
   },
