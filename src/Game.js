@@ -103,7 +103,7 @@ export const Umbra = {
       onBegin: upkeep,
       moves: {
         trade: Moves.Trade,
-        activeColonyShip: () => { },
+        activateColonyShip: () => { },
         pass: (G, ctx) => {
           G.data[ctx.currentPlayer].hasPassed = true;
           ctx.events.endTurn();
@@ -116,7 +116,7 @@ export const Umbra = {
   },
   endIf: (G, ctx) => {
     if (G.currentRound > G.maxRounds) {
-      return { winner: 'whoever has the most points' };
+      return { winner: 'whomever has the most points' };
     }
   },
   ai: {
