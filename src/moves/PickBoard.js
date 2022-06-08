@@ -20,7 +20,7 @@ const applyStartingTech = (G, player, species) => {
   });
 
   Object.keys(species.startingResources).forEach(key => {
-    player[key] = species.startingResources[key] + 100;
+    player[key] = species.startingResources[key];
   });
 };
 
