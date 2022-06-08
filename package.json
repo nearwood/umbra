@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@nearwood/react-hexgrid": "^1.1.0",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.1",
@@ -11,8 +12,9 @@
     "esm": "^3.2.25",
     "prettier": "^2.2.1",
     "react": "^17.0.1",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^17.0.1",
-    "@nearwood/react-hexgrid": "^1.1.0",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.0"
   },
