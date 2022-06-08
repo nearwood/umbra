@@ -502,9 +502,14 @@ svg path {
 
 rect.planet {
   stroke: black;
+  cursor: pointer;
+  fill-opacity: 0.5;
 }
 rect.planet.advanced {
   stroke: #0f0;
+}
+rect.planet.colonized {
+  fill-opacity: 1.0;
 }
 
 .planet.orange {

@@ -2,6 +2,13 @@ import { INVALID_MOVE } from "boardgame.io/core";
 import Species from "../Species";
 
 const applyStartingTech = (G, player, species) => {
+  player.colonyShips = [];
+  for (let i = 1; i <= species.colonyShips; ++i) {
+    player.colonyShips.push({ index: i, deployed: false });
+  }
+
+  //player.maxInfluence = species.maxInfluence;
+
   species.startingTech.forEach(techName => {
     //Find the technology, get its type, apply to the matching player's track
     const tile = G.techTiles.find(tile => tile.name === techName);

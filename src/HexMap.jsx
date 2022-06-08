@@ -47,7 +47,8 @@ const renderInfluence = (ctx, tile) => {
   }
 };
 
-const renderProduction = (ctx, tile) => {
+/** TODO Disable when !active or no colony ships */
+const renderProduction = (tile, colonize) => {
   if (!tile) {
     return null;
   }
@@ -59,18 +60,20 @@ const renderProduction = (ctx, tile) => {
     gray: 0,
   };
 
-  const planets = tile.planets.map(planet => {
-    const { color, advanced } = planet;
+  const planets = tile.planets.map((planet, i) => {
+    const { color, advanced, colonized } = planet;
+
+    const key = `${color}_${i}_${colonized}`;
 
     switch (planet.color) {
       case 'orange':
-        return <rect x={-5 + 2.5 * (count[planet.color]++)} y="-6" width="2" height="2" className={classNames(`planet ${color}`, { advanced })} />;
+        return <rect key={key} onClick={() => colonize(tile.id, i)} x={-5 + 2.5 * (count[planet.color]++)} y="-6" width="2" height="2" className={classNames(`planet ${color}`, { colonized, advanced })} />;
       case 'brown':
-        return <rect x={-5 + 2.5 * (count[planet.color]++)} y="-3" width="2" height="2" className={classNames(`planet ${color}`, { advanced })} />;
+        return <rect key={key} onClick={() => colonize(tile.id, i)} x={-5 + 2.5 * (count[planet.color]++)} y="-3" width="2" height="2" className={classNames(`planet ${color}`, { colonized, advanced })} />;
       case 'pink':
-        return <rect x={-5 + 2.5 * (count[planet.color]++)} y="3" width="2" height="2" className={classNames(`planet ${color}`, { advanced })} />;
+        return <rect key={key} onClick={() => colonize(tile.id, i)} x={-5 + 2.5 * (count[planet.color]++)} y="3" width="2" height="2" className={classNames(`planet ${color}`, { colonized, advanced })} />;
       case 'gray':
-        return <rect x={-5 + 2.5 * (count[planet.color]++)} y="0" width="2" height="2" className={classNames(`planet ${color}`, { advanced })} />;
+        return <rect key={key} onClick={() => colonize(tile.id, i)} x={-5 + 2.5 * (count[planet.color]++)} y="0" width="2" height="2" className={classNames(`planet ${color}`, { colonized, advanced })} />;
       default:
         throw new Error(`Bad planet color: ${planet.color}`);
     }
@@ -114,7 +117,7 @@ const renderVP = (tile) => {
 const hexagonSize = { x: 10, y: 10 };
 
 export const HexMap = ({ props }) => {
-  const { G, ctx } = props;
+  const { G, ctx, moves, isActive } = props;
 
   return (<>
     <div className='map board col'>
@@ -129,7 +132,7 @@ export const HexMap = ({ props }) => {
               {/* <Text>{ringText(s.ring)}</Text> */}
               {renderWormholes(s.tile)}
               {renderInfluence(ctx, s.tile)}
-              {renderProduction(ctx, s.tile)}
+              {renderProduction(s.tile, moves.colonize)}
             </Hexagon>
           )}
         </Layout>

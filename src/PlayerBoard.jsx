@@ -38,6 +38,8 @@ export const PlayerBoard = ({ props }) => {
   const player = G.data[id];
   const species = G.species.find(s => s.name === player.species);
 
+  const colonyShips = player.colonyShips.map(ship => <button disabled={!isActive || ship.deployed} key={ship.index}>Colony Ship {ship.deployed ? '🎯' : '🚀'}</button>);
+
   const emptyMaterialsSpots = Array(7 - player.research.materials.length).fill(0).map((x, i) => <div key={i} className='techCell' />);
   const emptyScienceSpots = Array(7 - player.research.science.length).fill(0).map((x, i) => <div key={i} className='techCell' />);
   const emptyMoneySpots = Array(7 - player.research.money.length).fill(0).map((x, i) => <div key={i} className='techCell' />);
@@ -55,6 +57,8 @@ export const PlayerBoard = ({ props }) => {
           <div><span className='emoji'>💰</span> <span className='resources'>{player.money}</span>+<span className='production'>{player.production.money}</span></div>
           <div><span className='emoji'>🧬</span> <span className='resources'>{player.science}</span>+<span className='production'>{player.production.science}</span></div>
           <div><span className='emoji'>🛠️</span> <span className='resources'>{player.materials}</span>+<span className='production'>{player.production.materials}</span></div>
+          <hr />
+          <div className='col'>{colonyShips}</div>
         </div>
       </div>
       <div id='rest' className='row'>

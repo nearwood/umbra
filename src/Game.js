@@ -78,6 +78,7 @@ export const Umbra = {
         research: Moves.Research,
         endResearch: Moves.endResearch,
         trade: Moves.Trade,
+        colonize: Moves.Colonize,
         pass: (G, ctx) => {
           G.data[ctx.currentPlayer].hasPassed = true;
           ctx.events.endTurn();
