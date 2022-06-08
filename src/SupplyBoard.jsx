@@ -65,7 +65,7 @@ export const SupplyBoard = ({ props }) => {
   const nanoTech = Array.isArray(G.techTiles) ? G.techTiles.filter(t => t.category === TechCategory.Nano) : [];
 
   return (<>
-    <div className={classNames('board row', { disabled: !isActive })}>
+    <div className={classNames('board', { disabled: !isActive })}>
       <div className='col'>
         <div id='rounds' className='row'>
           <div>Round: <div className='row'><RoundIndicators maxRounds={G.maxRounds} currentRound={G.currentRound} /></div></div>

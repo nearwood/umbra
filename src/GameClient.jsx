@@ -12,9 +12,10 @@ export const GameBoard = (props) => (
     <div>
       <HexMap props={props} />
       <hr />
-      <SupplyBoard props={props} />
-      <hr />
-      <PlayerBoard props={props} />
+      <div className="row">
+        <SupplyBoard props={props} />
+        <PlayerBoard props={props} />
+      </div>
     </div>
 );
 

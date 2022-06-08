@@ -120,7 +120,7 @@ export const HexMap = ({ props }) => {
   const { G, ctx, moves, isActive } = props;
 
   return (<>
-    <div className='map board col'>
+    <div className='map col'>
       <HexGrid width="100%" height={800} viewBox="-50 -80 100 150">
         <Layout size={{ x: 10, y: 10 }} flat={true} spacing={1.1} origin={{ x: 0, y: 0 }}>
           {Array.isArray(G.sectors) && G.sectors.map(s =>

@@ -45,7 +45,7 @@ export const PlayerBoard = ({ props }) => {
   const emptyMoneySpots = Array(7 - player.research.money.length).fill(0).map((x, i) => <div key={i} className='techCell' />);
 
   return (<>
-    <div className={classNames('board col', { disabled: !isActive })}>
+    <div className={classNames('board', { disabled: !isActive })}>
       <div className='row'>
         <div id='shipSection' className='grow row'>
           <img alt="interceptor" src="ships/interceptor.png" className="ship" id="interceptor" />
