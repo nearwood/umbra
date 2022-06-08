@@ -6,8 +6,6 @@ Attempt #2. [Previous attempt](https://github.com/nearwood/eclipsed).
 
 Livestreamed development: https://www.twitch.tv/blozup
 
-Live dev server: https://ludos.dev
-
 
 # DevOps
 
