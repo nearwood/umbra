@@ -37,15 +37,15 @@ const generateHumanProps = ({ name, avatar = "avatars/pilot.png", startingSector
 
 const Species = () => [
   generateHumanProps({ name: 'Terran Directorate', avatar: 'avatars/avatar2.png', startingSector: '221' }),
-  generateHumanProps({ name: 'Terran Federation', startingSector: '223' }),
-  generateHumanProps({ name: 'Terran Union', startingSector: '225' }),
-  generateHumanProps({ name: 'Terran Republic', startingSector: '227' }),
-  generateHumanProps({ name: 'Terran Conglomerate', startingSector: '229' }),
-  generateHumanProps({ name: 'Terran Alliance', startingSector: '231' }),
+  generateHumanProps({ name: 'Terran Federation', avatar: 'avatars/pilot.png', startingSector: '223' }),
+  generateHumanProps({ name: 'Terran Union', avatar: 'avatars/human_leader_3.png', startingSector: '225' }),
+  generateHumanProps({ name: 'Terran Republic', avatar: 'avatars/human_leader_4.png', startingSector: '227' }),
+  generateHumanProps({ name: 'Terran Conglomerate', avatar: 'avatars/human_leader_1.png', startingSector: '229' }),
+  generateHumanProps({ name: 'Terran Alliance', avatar: 'avatars/human_leader_2.png', startingSector: '231' }),
   {
     name: 'Eridani Empire',
     type: SpeciesType.alien,
-    avatar: "avatars/alien-violet.png",
+    avatar: "avatars/eridani.png",
     special: {
       maxInfluence: -2, // starts wit h2 less than terrans
       startingReputation: 2, // starts with 2 random rep tiles
@@ -80,7 +80,7 @@ const Species = () => [
   {
     name: 'Hydran Progress',
     type: SpeciesType.alien,
-    avatar: "avatars/alien-blue-dark.png",
+    avatar: "avatars/hydran.png",
     special: {
       //place cube in advanced spot on starting sector
     },
@@ -113,7 +113,7 @@ const Species = () => [
   }, {
     name: 'Mechanema',
     type: SpeciesType.alien,
-    avatar: "avatars/alien-blue.png",
+    avatar: "avatars/mechanema.png",
     startingSector: '230',
     startingResources: {
       money: 3,
@@ -143,7 +143,7 @@ const Species = () => [
   }, {
     name: 'Planta',
     type: SpeciesType.alien,
-    avatar: "avatars/alien-green.png",
+    avatar: "avatars/planta.png",
     startingSector: '226',
     reputationSpots: [3, 4],
     special: {
@@ -179,7 +179,7 @@ const Species = () => [
   }, {
     name: 'Orion Hegemony',
     type: SpeciesType.alien,
-    avatar: "avatars/alien-yellow.png",
+    avatar: "avatars/orion.png",
     special: {
       //starts with cruiser instead of interceptor
       //ship blueprints
@@ -213,7 +213,7 @@ const Species = () => [
   }, {
     name: 'Descendants of Draco',
     type: SpeciesType.alien,
-    avatar: "avatars/alien-yellow.png",
+    avatar: "avatars/descendants.png",
     special: {
       // ships can be in hexes with ancients, but don't battle them
       // can place influence on ancient ship hexes
