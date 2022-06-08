@@ -9,10 +9,10 @@ Livestreamed development: https://www.twitch.tv/blozup
 
 # DevOps
 
-- [x] Domain? Did I ever figure out CORS issues?
+- [ ] Domain? Did I ever figure out CORS issues?
 - [ ] Lint, prettier, etc.
 - [x] Update hex library to remove react warnings
-- [ ] ECS + domain
+
 # TODO
 
 - [x] Basic game definition.
